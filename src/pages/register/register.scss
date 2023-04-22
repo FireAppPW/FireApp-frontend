@@ -1,0 +1,72 @@
+$body-bg-color: #fafafa;
+
+body {
+  background-color: $body-bg-color;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .left {
+    flex: 1;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 70px;
+    height: 100vh;
+
+    h2 {
+      margin-top: 50px;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 100px;
+      margin-bottom: 100px;
+
+      .formInput {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        label {
+          margin-bottom: 5px;
+          font-family: "Mukta";
+          font-size: 20px;
+          line-height: 33px;
+        }
+
+        input {
+          padding: 10px;
+          border-radius: 5px;
+          border: none;
+          border-bottom: 1px solid #ccc;
+          width: 80%;
+        }
+      }
+
+      button {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #ff4300;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        margin-top: 20px;
+        width: 80%;
+
+        &:hover {
+          background-color: #3e8e41;
+        }
+      }
+    }
+  }
+
+  .right {
+    flex: 2;
+  }
+}
