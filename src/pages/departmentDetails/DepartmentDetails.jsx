@@ -1,8 +1,13 @@
 import React from "react";
 import "./departmentdetails.scss";
+import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 
 const DepartmentDetails = () => {
-  return <div>DepartmentDetails</div>;
+  return (
+      <div>
+        <LeftSidebar/>
+      </div>
+  );
 };
 
 export default DepartmentDetails;

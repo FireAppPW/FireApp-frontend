@@ -1,8 +1,13 @@
 import React from "react";
 import "./updateuser.scss";
+import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 
 const UpdateUser = () => {
-  return <div>UpdateUser</div>;
+  return (
+      <div>
+        <LeftSidebar/>
+      </div>
+  );
 };
 
 export default UpdateUser;

@@ -1,0 +1,144 @@
+@font-face {
+  font-family: Urbanist-Bold;
+  src: url('../../assets/fonts/Urbanist-Bold.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Medium;
+  src: url('../../assets/fonts/Mukta-Medium.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Regular;
+  src: url('../../assets/fonts/Mukta-Regular.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Light;
+  src: url('../../assets/fonts/Mukta-Light.ttf')  format('truetype');
+}
+
+
+.wrapper{
+  display: flex;
+  position: relative;
+}
+
+.leftSidebar{
+  height: 100%;
+  width: 300px;
+  background: #ffffff;
+  position: fixed;
+  overflow: hidden !important;
+
+  .appIcon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+
+    margin: 29px 0 29px 29px;
+
+    img{
+      width: 90px;
+
+    }
+
+    h2{
+      font-family: Urbanist-Bold, serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 27px;
+      line-height: 28px;
+
+      text-align: center;
+      letter-spacing: 0.0025em;
+
+      color: rgba(16, 15, 15, 0.69);
+    }
+  }
+
+  .sidebarItems{
+    width: 100%;
+
+    ul{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      list-style: none;
+      padding: 0;
+      row-gap: 15px;
+
+
+      .sidebarSubItem{
+        width: 51%;
+        overflow: hidden;
+        list-style: none;
+        text-decoration: none;
+        color: #5e5d5d;
+        font-family: Mukta-Light, serif;
+        font-size: 16px;
+        line-height: 20px;
+
+        letter-spacing: 0.0025em;
+
+        &:hover{
+          color: #e86a00;
+        }
+
+      }
+
+      .sidebarItem{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        height: 50px;
+        column-gap: 20px;
+        overflow: hidden;
+        list-style: none;
+        text-decoration: none;
+        color: #5e5d5d;
+
+        .content{
+          width: 80%;
+          display: flex;
+          align-items: center;
+          column-gap: 15px;
+          margin-left: 30px;
+
+          p{
+            font-family: Mukta-Regular, serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 19px;
+
+            letter-spacing: 0.0025em;
+          }
+
+
+
+        }
+
+        .dropdown-content{
+          display: none;
+        }
+
+        &:focus{
+          color: white;
+          background-color: #FF4300;
+        }
+
+        &:hover{
+          overflow: hidden;
+          background-color: #FF4300;
+          color: white;
+          cursor: pointer ;
+        }
+      }
+    }
+
+  }
+}
