@@ -1,5 +1,20 @@
 $body-bg-color: #fafafa;
 
+@font-face {
+  font-family: Mukta-Medium;
+  src: url('../../assets/fonts/Mukta-Medium.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Regular;
+  src: url('../../assets/fonts/Mukta-Regular.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Bold;
+  src: url('../../assets/fonts/Mukta-Bold.ttf')  format('truetype');
+}
+
 body {
   background-color: $body-bg-color;
 }
@@ -10,21 +25,48 @@ body {
   align-items: center;
 
   .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex: 1;
     background-color: #fff;
     box-sizing: border-box;
-    padding: 70px;
     height: 100vh;
 
+    .left-container{
+      width: 60%;
+      overflow: hidden;
+    }
+
     h2 {
+      font-family: Mukta-Regular, serif;
+      font-size: 30px;
+      line-height: 32px;
+      letter-spacing: 0.0025em;
+
+      color: #000000;
       margin-top: 50px;
+    }
+
+    p{
+      font-family: Mukta-Medium, serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      letter-spacing: 0.0015em;
+
+      /* Grey 2 */
+
+      color: #4F4F4F;
+
     }
 
     .form {
       display: flex;
       flex-direction: column;
       margin-top: 100px;
-      margin-bottom: 100px;
 
       .formInput {
         display: flex;
@@ -33,40 +75,112 @@ body {
 
         label {
           margin-bottom: 5px;
-          font-family: "Mukta";
-          font-size: 20px;
-          line-height: 33px;
+
+          font-family: Mukta-Medium, serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 17px;
+          /* identical to box height */
+
+          letter-spacing: 0.001em;
+
+          /* Grey 2 */
+
+          color: #4F4F4F;
         }
 
         input {
-          padding: 10px;
-          border-radius: 5px;
-          border: none;
-          border-bottom: 1px solid #ccc;
-          width: 80%;
+          all: unset;
+          border-color: #434141;
+          border-bottom: 1px solid;
+          width: 100%;
         }
+
+        input:focus{
+          outline: none;
+          color: #5e5d5d;
+        }
+
+        .bar{
+          position: relative;
+          display: block;
+          width: 100%;
+        }
+
+        .bar::before{
+          content: "";
+          height: 2px;
+          width: 0;
+          bottom: 0;
+          position: absolute;
+          background: linear-gradient(to right, #f5c52a, #e86a00);
+          transition: 0.3s ease width;
+          left: 0;
+        }
+
+        input:focus~.bar::before{
+          width: 100%;
+        }
+
+
+
+
       }
 
       button {
         padding: 10px;
         border-radius: 5px;
         border: none;
-        background-color: #ff4300;
+        background-color: #e86a00;
         color: white;
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
         margin-top: 20px;
-        width: 80%;
+        width: 100%;
 
         &:hover {
-          background-color: #3e8e41;
+          background-color: #f5c52a;
         }
       }
     }
   }
 
   .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     flex: 2;
+    box-sizing: border-box;
+    height: 100vh;
+    background-color: #e86a00;
+
+    img{
+      justify-content: center;
+      height: 70%;
+    }
+
+    h2{
+      color: white;
+      font-family: Mukta-Bold, serif;
+
+      font-size: 22px;
+      line-height: 17px;
+    }
+
+    p{
+      font-family: Mukta-Regular, serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 17px;
+      /* identical to box height */
+
+      text-align: center;
+
+      color: #FFFFFF;
+    }
   }
 }
