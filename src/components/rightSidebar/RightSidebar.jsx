@@ -3,6 +3,7 @@ import "./rightSidebar.scss";
 import profilePic from  "../../assets/images/firefighter1.jpg"
 import LogoutIcon from '@mui/icons-material/Logout';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import {NotificationData} from "./NotificationsData";
 
 const RightSidebar = () => {
   return (
@@ -34,13 +35,19 @@ const RightSidebar = () => {
       </div>
       <div className="notifications">
         <h2>Notifications</h2>
-        <div className="notification">
-          <div className="square">
-            <ErrorOutlineOutlinedIcon className="icon"/>
-          </div>
-          <p className="info">Your role has been changed</p>
-          <p className="date">7:00 Pm</p>
-        </div>
+        {
+          NotificationData.map((item, index) =>{
+            return (
+                <div className="notification">
+                  <div className="square" style={{backgroundColor: item.color}}>
+                    <ErrorOutlineOutlinedIcon className="icon" style={{color: item.iconColor}}/>
+                  </div>
+                  <p className="info">{item.info}</p>
+                  <p className="date">{item.date}</p>
+                </div>
+            );
+          })
+        }
       </div>
     </div>
   );
