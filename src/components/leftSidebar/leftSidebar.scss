@@ -18,17 +18,10 @@
   src: url('../../assets/fonts/Mukta-Light.ttf')  format('truetype');
 }
 
-
-.wrapper{
-  display: flex;
-  position: relative;
-}
-
 .leftSidebar{
-  height: 100%;
-  width: 300px;
+  float: left;
+  width: 20%;
   background: #ffffff;
-  position: fixed;
   overflow: hidden !important;
 
   .appIcon{
@@ -116,6 +109,10 @@
             font-size: 19px;
 
             letter-spacing: 0.0025em;
+          }
+
+          .arrow{
+            margin-left: 50px;
           }
 
 

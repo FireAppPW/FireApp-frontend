@@ -1,0 +1,191 @@
+@font-face {
+  font-family: Urbanist-Bold;
+  src: url('../../assets/fonts/Urbanist-Bold.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Medium;
+  src: url('../../assets/fonts/Mukta-Medium.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Regular;
+  src: url('../../assets/fonts/Mukta-Regular.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Light;
+  src: url('../../assets/fonts/Mukta-Light.ttf')  format('truetype');
+}
+
+
+
+.rightSidebar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  float: right;
+  width: 20%;
+  background: #ffffff;
+
+  h2{
+    font-family: Mukta-Bold, serif;
+    font-size: 19px;
+  }
+
+  .top{
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    margin-top: 20px;
+
+    .logoutIcon{
+      color: #828282;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+    }
+  }
+
+  .personalInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+
+
+    .profilePic{
+      width: 150px;
+      height: 150px;
+      border-radius: 113px;
+      overflow: hidden;
+
+      img{
+        max-height: 100%;
+
+      }
+    }
+
+    .profileName{
+      font-family: Mukta-Medium, serif;
+      font-size: 22px;
+      line-height: 32px;
+
+      color: #000000;
+    }
+
+    .profileRole{
+      font-family: Mukta-Light, serif;
+      font-size: 17px;
+
+      color: #8D8888;
+    }
+  }
+
+  .departmentInfo{
+    display: flex;
+    row-gap: 20px;
+    flex-direction: column;
+    width: 80%;
+
+    .departmentCard{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 60px;
+      background-color: #FFAE26;
+      border-radius: 10px;
+
+      .content{
+        display: flex;
+        column-gap: 10px;
+        width: 90%;
+
+        .id{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          background-color: #FFDD71;
+          border-radius: 10px;
+
+          p{
+            color: #FFFFFF;
+            font-family: Mukta-Medium, serif;
+          }
+        }
+
+        .info{
+
+          h2{
+            font-family: Mukta-Light, serif;
+            font-size: 14px;
+            line-height: 23px;
+            letter-spacing: 0.03em;
+            color: #FFFFFF;
+          }
+
+          p{
+            font-family: Mukta-Light, serif;
+            font-size: 8px;
+            color: #FFFFFF;
+          }
+        }
+      }
+
+
+    }
+
+
+  }
+
+  .notifications{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 80%;
+
+    .notification{
+      display: flex;
+      column-gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+
+      .square{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background-color: #96FF71BD;
+        border-radius: 8px;
+
+         .icon{
+           color: #5AFD21;
+         }
+
+
+      }
+
+      .info{
+        font-family: Mukta-Light,serif;
+        font-size: 12px;
+        color: #323232;
+      }
+
+      .date{
+        font-family: Mukta-Light,serif;
+        font-size: 12px;
+        color: #323232;
+      }
+
+    }
+  }
+}

@@ -1,8 +1,6 @@
 import React from "react";
-import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import StoreOutlinedIcon from '@mui/icons-material/StoreOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -30,11 +28,6 @@ export const SideBarData = [
                 path: "/managedepartment"
             }
         ]
-    },
-    {
-        title: "Courses",
-        path: "/courses",
-        icon: <CalendarTodayOutlinedIcon className="icon" />
     },
     {
         title: "Workshops",
