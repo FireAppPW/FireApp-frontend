@@ -1,3 +1,27 @@
+@font-face {
+  font-family: Urbanist-Bold;
+  src: url('../../assets/fonts/Urbanist-Bold.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Medium;
+  src: url('../../assets/fonts/Mukta-Medium.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Regular;
+  src: url('../../assets/fonts/Mukta-Regular.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Light;
+  src: url('../../assets/fonts/Mukta-Light.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Gilroy-Light;
+  src: url('../../assets/fonts/Gilroy-Light.ttf') format('truetype');
+}
 
 
 .wrapper{
@@ -8,5 +32,61 @@
 
   .mid{
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+    background-color: #FAFAFA;
+
+
+    .top{
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+
+      .texts{
+
+        p{
+          font-family: Gilroy-Light, serif;
+        }
+      }
+
+      .create{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: #FF4300;
+
+        p{
+          font-family: Gilroy-Light, serif;
+          font-size: 14px;
+          color: #FFFFFF;
+        }
+      }
+    }
+
+    .smallCards{
+      display: flex;
+      justify-content: space-between;
+      column-gap: 15px;
+      width: 90%;
+      height: 25%;
+
+      .card{
+        width: 33%;
+        background-color: white;
+        border-radius: 5px;
+      }
+    }
+
+    .table{
+      width: 90%;
+      height: 52%;
+      background-color: #FFFFFF;
+    }
   }
 }
