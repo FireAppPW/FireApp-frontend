@@ -6,7 +6,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 
 const Emergencies = () => {
   return (
-      <div className="wrapper">
+      <div className="wrapper emergencies">
           <LeftSidebar/>
           <div className="mid">
               <div className="top">
