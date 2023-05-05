@@ -1,0 +1,208 @@
+
+@font-face {
+  font-family: Gilroy-Light;
+  src: url('../../assets/fonts/Gilroy-Light.ttf') format('truetype');
+}
+
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: fixed;
+
+  .mid {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+    background-color: #FAFAFA;
+
+    .searchSection{
+      display: flex;
+      justify-content: center;
+      width: 90%;
+      height: 200px;
+      background-color: white;
+      border-radius: 10px;
+
+      .right{
+        display: flex;
+        justify-content: center;
+        width: 50%;
+
+        .container{
+
+          display: flex;
+          width: 90%;
+          justify-content: right;
+          column-gap: 10px;
+          height: 50px;
+          padding: 30px;
+
+          .searchContainer{
+            height: 40px;
+            outline: solid #E0E0E0 0.85px;
+            display: flex;
+            cursor: pointer;
+            background: white;
+            align-items: center;
+            border-radius: 5px;
+            padding: 5px 10px;
+
+            input{
+              padding: 0;
+              width: 0;
+              color: black;
+              outline: none;
+              border: none;
+              transition: 0.8s;
+              background: transparent;
+              font-family: Gilroy-Light, serif;
+              font-style: normal;
+              font-weight: 300;
+              font-size: 15px;
+              line-height: 14px;
+            }
+
+            input::placeholder{
+              color: #00000040;
+            }
+
+            .searchIcon{
+              padding-left: 5px;
+              padding-right: 5px;
+              color: #33333399;
+            }
+
+
+
+
+          }
+          .searchContainer:hover input{
+            width: 300px;
+          }
+
+
+
+          .edit{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1/1;
+            height: 100%;
+            background-color: white;
+            border-radius: 5px;
+            outline: solid #E0E0E0 0.85px;
+
+            .icon{
+              color: #33333399;
+            }
+
+
+          }
+
+          .add{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            outline: solid #E0E0E0 0.85px;
+            aspect-ratio: 1/1;
+            height: 100%;
+            background-color: white;
+            border-radius: 5px;
+
+            .icon{
+              font-size: 30px;
+
+              color: #33333399;
+            }
+          }
+
+        }
+
+
+      }
+
+      .left{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+
+        .container{
+          display: flex;
+          flex-direction: column;
+          justify-content: right;
+          row-gap: 20px;
+
+          width: 90%;
+
+          .selectCard{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+
+
+            p{
+              font-family: Gilroy-Light, serif;
+
+            }
+
+            .select {
+              position: relative;
+              display: flex;
+              width: 20em;
+              height: 2.5em;
+              line-height: 3;
+              outline: solid #E0E0E0 0.85px;
+              background: white;
+              overflow: hidden;
+              border-radius: 5px;
+
+              select{
+                -webkit-appearance:none;
+                -moz-appearance:none;
+                appearance:none;
+                outline:0;
+                box-shadow:none;
+
+                border: none;
+                width: 100%;
+                padding: 0 .5em;
+                color:#00000040;
+                cursor:pointer;
+                font-size: 1em;
+                font-family: Gilroy-Light, sans-serif;
+              }
+            }
+            .select::after {
+              content: url("../../assets/icons/arrow_down.svg");
+              color: #33333399;
+              position: absolute;
+              right: 0;
+              top: -0.2em;
+              padding: 0 1em;
+              cursor:pointer;
+              pointer-events:none;
+              transition:.25s all ease;
+            }
+            .select:hover::after {
+              color: #FF4300;
+            }
+
+
+
+          }
+
+        }
+
+
+
+
+      }
+    }
+  }
+}

@@ -30,7 +30,7 @@ export const SideBarData = [
         ]
     },
     {
-        title: "Workshops",
+        title: "Courses",
         path: "/workshops",
         icon: <StoreOutlinedIcon className="icon" />
     }

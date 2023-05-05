@@ -1,6 +1,7 @@
 import React from "react";
 import "./login.scss";
 import screen from "../../assets/images/screen.png";
+import google_logo from "../../assets/icons/google-logo.svg";
 
 const Login = () => {
   return (
@@ -12,19 +13,12 @@ const Login = () => {
               <p>Lorem ipsum dolor sit amet </p>
             </div>
 
-            <form className="form">
-              <div className="formInput">
-                <label htmlFor="">Name</label>
-                <input type="text" />
-                <span className="bar"/>
+            <div className="sign-in">
+              <div className="content">
+                <img src={google_logo} alt=""/>
+                <p>Sign In with google</p>
               </div>
-              <div className="formInput">
-                <label htmlFor="">Password</label>
-                <input type="password"/>
-                <span className="bar"/>
-              </div>
-              <button type="submit">Login</button>
-            </form>
+            </div>
           </div>
         </div>
         <div className="right">

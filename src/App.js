@@ -11,7 +11,7 @@ import NewDepartment from "./pages/newDepartment/NewDepartment.jsx";
 import PostNotificationDepartment from "./pages/postNotificationDepartment/PostNotificationDepartment.jsx";
 import PostNotificationUser from "./pages/postNotificationUser/PostNotificationUser.jsx";
 import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
-import Workshops from "./pages/workshops/Workshops.jsx";
+import Courses from "./pages/courses/Courses.jsx";
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
           element={<PostNotificationDepartment />}
         />
         <Route path="/usernotification" element={<PostNotificationUser />} />
-        <Route path="/workshops" element={<Workshops />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
     </BrowserRouter>
   );

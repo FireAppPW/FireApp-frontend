@@ -1,6 +1,7 @@
 import React from "react";
 import "./register.scss";
 import screen from  "../../assets/images/screen.png"
+import google_logo from  "../../assets/icons/google-logo.svg"
 
 
 const Register = () => {
@@ -13,29 +14,12 @@ const Register = () => {
             <p>Lorem ipsum dolor sit amet </p>
           </div>
 
-          <form className="form">
-            <div className="formInput">
-              <label htmlFor="">Name</label>
-              <input type="text" />
-              <span className="bar"/>
+          <div className="sign-up">
+            <div className="content">
+              <img src={google_logo} alt=""/>
+              <p>Sign Up with google</p>
             </div>
-            <div className="formInput">
-              <label htmlFor="">Username</label>
-              <input type="text" />
-              <span className="bar"/>
-            </div>
-            <div className="formInput">
-              <label htmlFor="">Email</label>
-              <input type="text" />
-              <span className="bar"/>
-            </div>
-            <div className="formInput">
-              <label htmlFor="">Password</label>
-              <input type="password"/>
-              <span className="bar"/>
-            </div>
-            <button type="submit">Register</button>
-          </form>
+          </div>
         </div>
       </div>
       <div className="right">
