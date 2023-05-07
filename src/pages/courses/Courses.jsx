@@ -5,6 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import SearchIcon from '@mui/icons-material/Search';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
+import {CoursesData} from "./CoursesData";
 
 const Courses = () => {
   return (
@@ -56,9 +57,33 @@ const Courses = () => {
 
                           </div>
                       </div>
+                      <div className="submit">
+                          <p>Submit</p>
+                      </div>
                   </div>
 
               </form>
+              <section className="courses">
+                  {
+                      CoursesData.map((item, index) =>{
+                          return (
+                              <div className="courseCard">
+                                  <div className="container">
+                                      <div className="image">
+                                          <img src={item.image} alt=""/>
+                                      </div>
+                                      <div className="texts">
+                                          <h2>{item.category}</h2>
+                                          <p>{item.info}</p>
+
+                                      </div>
+                                  </div>
+                              </div>
+                          );
+                      })
+                  }
+
+              </section>
           </div>
           <RightSidebar/>
       </div>

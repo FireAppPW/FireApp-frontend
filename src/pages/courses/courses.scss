@@ -4,6 +4,17 @@
   src: url('../../assets/fonts/Gilroy-Light.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: Mukta-Regular;
+  src: url('../../assets/fonts/Mukta-Regular.ttf')  format('truetype');
+}
+
+@font-face {
+  font-family: Mukta-Light;
+  src: url('../../assets/fonts/Mukta-Light.ttf')  format('truetype');
+}
+
+
 
 .wrapper {
   width: 100%;
@@ -18,6 +29,7 @@
     align-items: center;
     row-gap: 40px;
     background-color: #FAFAFA;
+    overflow: scroll;
 
     .searchSection{
       display: flex;
@@ -29,8 +41,11 @@
 
       .right{
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: end;
         width: 50%;
+        height: 100%;
 
         .container{
 
@@ -122,6 +137,23 @@
 
         }
 
+        .submit{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 20%;
+          height: 50px;
+          background-color: #FF4300;
+          color:white;
+          border-radius: 5px;
+          margin: 0 30px 20px 0;
+
+
+          p{
+            font-family: Gilroy-Light, serif;
+          }
+        }
+
 
       }
 
@@ -203,6 +235,80 @@
 
 
       }
+    }
+
+    .courses{
+      display: flex;
+      justify-content: start;
+      flex-wrap: wrap;
+      row-gap: 30px;
+      column-gap: 30px;
+      width: 90%;
+      height: 500px;
+
+      .courseCard{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 250px;
+        height: 300px;
+        border-radius: 8px;
+        box-shadow: 0 4px 45px -15px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: 0.4s;
+        position: relative;
+
+        .container{
+          display: flex;
+          justify-content: space-around;
+          flex-direction: column;
+          row-gap: 20px;
+          width: 90%;
+          height: 90%;
+
+          .image{
+            width: 100%;
+            height: 50%;
+
+            img{
+              max-width: 100%;
+              height: 100%;
+              object-fit: cover ;
+              border-radius: 8px;
+
+            }
+          }
+
+          .texts{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 50%;
+            width: 100%;
+
+            h2{
+              font-family: Mukta-Bold, serif;
+              font-size: 16px;
+              color: #FF4300;
+            }
+
+            p{
+              font-family: Mukta-Light, serif;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+
+      .courseCard:hover{
+
+        background-color: #FF4300;
+        .container{
+          display: none;
+        }
+
+      }
+
     }
   }
 }
