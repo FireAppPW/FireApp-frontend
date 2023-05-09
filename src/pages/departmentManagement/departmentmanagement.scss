@@ -1,0 +1,25 @@
+.departmentManagementContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.departmentManagementContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  margin: 30px;
+}
+
+.departmentHeader {
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 30px;
+  width: 100%;
+}
+
+.departmentTableContainer {
+  width: 100%;
+}

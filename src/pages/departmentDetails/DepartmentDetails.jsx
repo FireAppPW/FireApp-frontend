@@ -4,9 +4,9 @@ import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 
 const DepartmentDetails = () => {
   return (
-      <div>
-        <LeftSidebar/>
-      </div>
+    <div>
+      <LeftSidebar />
+    </div>
   );
 };
 

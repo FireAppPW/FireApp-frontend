@@ -1,43 +1,43 @@
 @font-face {
   font-family: Urbanist-Bold;
-  src: url('../../assets/fonts/Urbanist-Bold.ttf')  format('truetype');
+  src: url("../../assets/fonts/Urbanist-Bold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: Mukta-Medium;
-  src: url('../../assets/fonts/Mukta-Medium.ttf')  format('truetype');
+  src: url("../../assets/fonts/Mukta-Medium.ttf") format("truetype");
 }
 
 @font-face {
   font-family: Mukta-Regular;
-  src: url('../../assets/fonts/Mukta-Regular.ttf')  format('truetype');
+  src: url("../../assets/fonts/Mukta-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: Mukta-Light;
-  src: url('../../assets/fonts/Mukta-Light.ttf')  format('truetype');
+  src: url("../../assets/fonts/Mukta-Light.ttf") format("truetype");
 }
 
-.leftSidebar{
+.leftSidebar {
   float: left;
   width: 20%;
   background: #ffffff;
   overflow: hidden !important;
+  height: 100vh;
 
-  .appIcon{
+  .appIcon {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
 
     margin: 29px 0 29px 29px;
 
-    img{
+    img {
       width: 90px;
-
     }
 
-    h2{
+    h2 {
       font-family: Urbanist-Bold, serif;
       font-style: normal;
       font-weight: 700;
@@ -51,10 +51,10 @@
     }
   }
 
-  .sidebarItems{
+  .sidebarItems {
     width: 100%;
 
-    ul{
+    ul {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -64,8 +64,7 @@
       padding: 0;
       row-gap: 15px;
 
-
-      .sidebarSubItem{
+      .sidebarSubItem {
         width: 51%;
         overflow: hidden;
         list-style: none;
@@ -77,13 +76,12 @@
 
         letter-spacing: 0.0025em;
 
-        &:hover{
+        &:hover {
           color: #e86a00;
         }
-
       }
 
-      .sidebarItem{
+      .sidebarItem {
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -95,14 +93,14 @@
         text-decoration: none;
         color: #5e5d5d;
 
-        .content{
+        .content {
           width: 80%;
           display: flex;
           align-items: center;
           column-gap: 15px;
           margin-left: 30px;
 
-          p{
+          p {
             font-family: Mukta-Regular, serif;
             font-style: normal;
             font-weight: 400;
@@ -111,31 +109,27 @@
             letter-spacing: 0.0025em;
           }
 
-          .arrow{
+          .arrow {
             margin-left: 50px;
           }
-
-
-
         }
 
-        .dropdown-content{
+        .dropdown-content {
           display: none;
         }
 
-        &:focus{
+        &:focus {
           color: white;
-          background-color: #FF4300;
+          background-color: #ff4300;
         }
 
-        &:hover{
+        &:hover {
           overflow: hidden;
-          background-color: #FF4300;
+          background-color: #ff4300;
           color: white;
-          cursor: pointer ;
+          cursor: pointer;
         }
       }
     }
-
   }
 }
