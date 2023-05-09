@@ -1,7 +1,7 @@
 import React from "react";
 import "./usermanagement.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
-import UserTable from "../../components/table/UserTable";
+import UserTable from "../../components/userTable/UserTable";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 
 const UserManagement = () => {
