@@ -1,0 +1,41 @@
+name: Deploy project
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          image: clovers1254/fireapp-frontend
+          push: true
+          tags: clovers1254/fireapp-frontend:latest
+      -
+        name: Trigger deployment
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            sudo docker pull clovers1254/fireapp-frontend:latest
+            sudo docker stop fireapp-frontend
+            sudo docker rm fireapp-frontend
+            sudo docker run -d --name fireapp-frontend -p 3000:3000 clovers1254/fireapp-frontend:latest
