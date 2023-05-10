@@ -24,7 +24,8 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          platform: linux/amd64,linux/arm64
+          context: .
+          platforms: linux/amd64,linux/arm64/v8
           image: clovers1254/fireapp-frontend
           push: true
           tags: clovers1254/fireapp-frontend:latest
