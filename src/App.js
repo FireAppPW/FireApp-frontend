@@ -12,6 +12,8 @@ import PostNotificationDepartment from "./pages/postNotificationDepartment/PostN
 import PostNotificationUser from "./pages/postNotificationUser/PostNotificationUser.jsx";
 import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
 import Courses from "./pages/courses/Courses.jsx";
+import NewCourse from "./pages/newCourse/NewCourse.jsx";
+import NewEmergency from "./pages/newEmergency/NewEmergency";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
         />
         <Route path="/usernotification" element={<PostNotificationUser />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/newCourse" element={<NewCourse />} />
+        <Route path="/newEmergency" element={<NewEmergency />} />
       </Routes>
     </BrowserRouter>
   );

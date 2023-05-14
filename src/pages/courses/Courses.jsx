@@ -6,6 +6,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
 import {CoursesData} from "./CoursesData";
+import {Link} from 'react-router-dom';
+
+const CreateCourse = Link
+const EditCourse = Link
+
 
 const Courses = () => {
   return (
@@ -45,16 +50,15 @@ const Courses = () => {
                   <div className="right">
 
                       <div className="container">
-                          <div className="edit">
+                          <EditCourse to="" className="edit">
                               <ModeEditIcon className="icon"/>
-                          </div>
-                          <div className="add">
+                          </EditCourse>
+                          <CreateCourse to="/newCourse" className="add">
                               <AddIcon className="icon"/>
-                          </div>
+                          </CreateCourse>
                           <div className="searchContainer">
                               <input type="text" placeholder="Search"/>
                               <SearchIcon className="searchIcon"/>
-
                           </div>
                       </div>
                       <div className="submit">

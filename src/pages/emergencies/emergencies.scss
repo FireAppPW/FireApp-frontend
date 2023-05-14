@@ -60,6 +60,7 @@
         height: 40px;
         border-radius: 10px;
         background-color: #FF4300;
+        text-decoration: none;
 
         p{
           font-family: Gilroy-Light, serif;
@@ -77,16 +78,118 @@
       height: 25%;
 
       .card{
+        display: flex;
+        justify-content: center;
         width: 33%;
         background-color: white;
         border-radius: 5px;
+        padding-top: 20px;
       }
     }
 
-    .table{
+    .emergenciesTable{
+      display: flex;
+      justify-content: center;
       width: 90%;
       height: 52%;
       background-color: #FFFFFF;
+
+      .container{
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        justify-content: start;
+        align-items: center;
+        width: 93%;
+        margin-top: 30px;
+
+        .emergencyCard{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #FBFBFB;
+          width: 100%;
+          border-radius: 5px;
+
+          .e-container{
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            width: 100%;
+            margin: 20px 0 20px 0;
+
+            .e-top{
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+
+              .e-left{
+                display: flex;
+                flex-direction: column;
+                margin-left: 30px;
+
+                .e-l-top{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  column-gap: 20px;
+
+                  .square{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 8px;
+                  }
+
+                  .e-texts{
+                    h2{
+                      font-family: Mukta-Regular, serif;
+                      font-size: 20px;
+                    }
+
+                    p{
+                      font-family: Mukta-Medium, serif;
+                      font-size: 15px;
+                    }
+                  }
+
+
+                }
+                .e-l-bottom{
+                  p{
+                    font-family: Mukta-Medium, serif;
+                  }
+                }
+
+              }
+              .e-right{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color:#FF4300;
+                border-radius: 5px;
+                margin-right: 30px;
+                cursor: pointer;
+
+                border: solid 1px #FF4300;
+                width: 150px;
+                height: 40px;
+                background-color: white;
+              }
+            }
+            .e-bottom{
+              margin: 0 30px 0 30px;
+              p{
+                font-family: Mukta-Medium, serif;
+                text-align: justify;
+              }
+            }
+
+          }
+        }
+      }
     }
   }
 }
