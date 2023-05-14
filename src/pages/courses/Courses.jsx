@@ -65,7 +65,7 @@ const Courses = () => {
               </form>
               <section className="courses">
                   {
-                      CoursesData.map((item, index) =>{
+                      CoursesData.map((item) =>{
                           return (
                               <div className="courseCard">
                                   <div className="container">
@@ -76,6 +76,15 @@ const Courses = () => {
                                           <h2>{item.category}</h2>
                                           <p>{item.info}</p>
 
+                                      </div>
+                                  </div>
+                                  <div className="displayContainer">
+                                      <div className="text">
+                                          <h2>{item.category}</h2>
+                                      </div>
+                                      <p>{item.display}</p>
+                                      <div className="more">
+                                          <p>Learn more</p>
                                       </div>
                                   </div>
                               </div>

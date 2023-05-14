@@ -31,7 +31,7 @@ export const SideBarData = [
     },
     {
         title: "Courses",
-        path: "/workshops",
+        path: "/courses",
         icon: <StoreOutlinedIcon className="icon" />
     }
 ];
