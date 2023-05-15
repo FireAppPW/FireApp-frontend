@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./courses.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
@@ -13,6 +13,18 @@ const EditCourse = Link
 
 
 const Courses = () => {
+
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const filteredCourses = CoursesData.filter((course) => {
+        return course.info.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+    const handleSearchInputChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+
   return (
       <div className="wrapper">
           <LeftSidebar/>
@@ -57,7 +69,12 @@ const Courses = () => {
                               <AddIcon className="icon"/>
                           </CreateCourse>
                           <div className="searchContainer">
-                              <input type="text" placeholder="Search"/>
+                              <input
+                                  type="text"
+                                  placeholder="Search"
+                                  value={searchQuery}
+                                  onChange={handleSearchInputChange}
+                              />
                               <SearchIcon className="searchIcon"/>
                           </div>
                       </div>
@@ -69,7 +86,7 @@ const Courses = () => {
               </form>
               <section className="courses">
                   {
-                      CoursesData.map((item) =>{
+                      filteredCourses.map((item) =>{
                           return (
                               <div className="courseCard">
                                   <div className="container">
