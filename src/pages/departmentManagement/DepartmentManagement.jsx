@@ -6,11 +6,12 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 
 const DepartmentManagement = () => {
   return (
-    <div className="departmentManagementContainer">
+
+    <div className="wrapper">
       <LeftSidebar />
-      <div className="departmentManagementContent">
+      <div className="mid">
         <div className="departmentHeader">
-          <p>Department Management</p>
+          <h2>Department Management</h2>
         </div>
         <div className="departmentTableContainer">
           <DepartmentTable />

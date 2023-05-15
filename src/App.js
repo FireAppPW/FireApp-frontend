@@ -22,7 +22,6 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/manageuser" element={<UserManagement />} />
-
         <Route exact path="/manageuser/:userId" element={<UpdateUser />} />
         <Route exact path="/emergencies" element={<Emergencies />} />
         <Route
@@ -40,7 +39,7 @@ function App() {
           path="/departmentmanagement/:departmentId/edit"
           element={<UpdateDepartment />}
         />
-        <Route exact path="/createdepartment" element={<NewDepartment />} />
+        <Route exact path="/newDepartment" element={<NewDepartment />} />
         <Route
           exact
           path="/departmentnotification"
