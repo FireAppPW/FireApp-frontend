@@ -22,7 +22,7 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/manageuser" element={<UserManagement />} />
-        <Route exact path="/createuser" element={<NewUser />} />
+
         <Route exact path="/manageuser/:userId" element={<UpdateUser />} />
         <Route exact path="/emergencies" element={<Emergencies />} />
         <Route
@@ -50,6 +50,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/newCourse" element={<NewCourse />} />
         <Route path="/newEmergency" element={<NewEmergency />} />
+        <Route exact path="/newUser" element={<NewUser />} />
       </Routes>
     </BrowserRouter>
   );
