@@ -6,11 +6,11 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 
 const UserManagement = () => {
   return (
-    <div className="userManagementContainer">
+    <div className="wrapper">
       <LeftSidebar />
-      <div className="userManagementContent">
+      <div className="mid">
         <div className="header">
-          <p>User Management</p>
+          <h2>User Management</h2>
         </div>
         <div className="tableContainer">
           <UserTable />

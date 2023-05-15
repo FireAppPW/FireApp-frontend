@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "./userTable.scss";
 import profilePic from "../../assets/images/firefighter1.jpg";
+import AddIcon from "@mui/icons-material/Add";
+import {Link} from 'react-router-dom';
+import SearchIcon from "@mui/icons-material/Search";
+
+const CreateUser = Link
 
 const Table = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -31,43 +36,56 @@ const Table = () => {
   };
 
   return (
-    <div className="userContainer">
-      <div className="topUser">
-        <h3 className="userTitle">Users</h3>
-        <input
-          type="text"
-          placeholder="Search for users"
-          value={searchQuery}
-          onChange={handleSearchInputChange}
-          className="searchBar"
-        />
+      <div className="userWrapper">
+        <div className="userTotal">
+          <div className="uT-container">
+            <h2>Total Users</h2>
+            <div className="userOptions">
+              <div className="userSearchContainer">
+                <input
+                    type="text"
+                    placeholder="Search for users"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                    className="searchBar"
+                />
+                <SearchIcon className="searchIcon"/>
+              </div>
+              <CreateUser to="/newUser" className="userAdd">
+                <AddIcon className="icon"/>
+              </CreateUser>
+            </div>
+          </div>
+        </div>
+        <div className="userContainer">
+          <table className="userTable">
+            <thead>
+            <tr className="userRow">
+              <th className="userTh">Name</th>
+              <th className="userTh">ID</th>
+              <th className="userTh">Role</th>
+              <th className="userTh">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {filteredUsers.map((user, index) => {
+              return (
+                  <tr className="userRow" key={index}>
+                    <td className="userName">
+                      <img src={profilePic} alt="" className="userImg" />
+                      <span>{user.name}</span>
+                    </td>
+                    <td className="widgetLgDate">{user.id}</td>
+                    <td className="widgetLgAmount">{user.role}</td>
+                    <td className="widgetLgStatus">Delete</td>
+                  </tr>
+              );
+            })}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <table className="userTable">
-        <thead>
-          <tr className="userRow">
-            <th className="userTh">Name</th>
-            <th className="userTh">ID</th>
-            <th className="userTh">Role</th>
-            <th className="userTh">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredUsers.map((user, index) => {
-            return (
-              <tr className="userRow" key={index}>
-                <td className="userName">
-                  <img src={profilePic} alt="" className="userImg" />
-                  <span>{user.name}</span>
-                </td>
-                <td className="widgetLgDate">{user.id}</td>
-                <td className="widgetLgAmount">{user.role}</td>
-                <td className="widgetLgStatus">Delete</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+
   );
 };
 
