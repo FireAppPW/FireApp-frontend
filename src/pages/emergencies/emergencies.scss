@@ -1,83 +1,80 @@
 @font-face {
   font-family: Urbanist-Bold;
-  src: url('../../assets/fonts/Urbanist-Bold.ttf')  format('truetype');
+  src: url("../../assets/fonts/Urbanist-Bold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: Mukta-Medium;
-  src: url('../../assets/fonts/Mukta-Medium.ttf')  format('truetype');
+  src: url("../../assets/fonts/Mukta-Medium.ttf") format("truetype");
 }
 
 @font-face {
   font-family: Mukta-Regular;
-  src: url('../../assets/fonts/Mukta-Regular.ttf')  format('truetype');
+  src: url("../../assets/fonts/Mukta-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: Mukta-Light;
-  src: url('../../assets/fonts/Mukta-Light.ttf')  format('truetype');
+  src: url("../../assets/fonts/Mukta-Light.ttf") format("truetype");
 }
 
 @font-face {
   font-family: Gilroy-Light;
-  src: url('../../assets/fonts/Gilroy-Light.ttf') format('truetype');
+  src: url("../../assets/fonts/Gilroy-Light.ttf") format("truetype");
 }
 
-
-.wrapper{
+.wrapper {
   width: 100%;
   height: 100%;
   display: flex;
   position: fixed;
 
-  .mid{
+  .mid {
     width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 40px;
-    background-color: #FAFAFA;
+    background-color: #fafafa;
 
-
-    .top{
+    .top {
       width: 90%;
       display: flex;
       justify-content: space-between;
       margin-top: 40px;
 
-      .texts{
-
-        p{
+      .texts {
+        p {
           font-family: Gilroy-Light, serif;
         }
       }
 
-      .create{
+      .create {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 150px;
         height: 40px;
         border-radius: 10px;
-        background-color: #FF4300;
+        background-color: #ff4300;
         text-decoration: none;
 
-        p{
+        p {
           font-family: Gilroy-Light, serif;
           font-size: 14px;
-          color: #FFFFFF;
+          color: #ffffff;
         }
       }
     }
 
-    .smallCards{
+    .smallCards {
       display: flex;
       justify-content: space-between;
       column-gap: 15px;
       width: 90%;
       height: 25%;
 
-      .card{
+      .card {
         display: flex;
         justify-content: center;
         width: 33%;
@@ -87,54 +84,54 @@
       }
     }
 
-    .emergenciesTable{
+    .emergenciesTable {
       display: flex;
       justify-content: center;
       width: 90%;
       height: 52%;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
 
-      .container{
+      .container {
         display: flex;
         flex-direction: column;
         row-gap: 20px;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         width: 93%;
         margin-top: 30px;
 
-        .emergencyCard{
+        .emergencyCard {
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #FBFBFB;
+          background-color: #fbfbfb;
           width: 100%;
           border-radius: 5px;
 
-          .e-container{
+          .e-container {
             display: flex;
             flex-direction: column;
             row-gap: 10px;
             width: 100%;
             margin: 20px 0 20px 0;
 
-            .e-top{
+            .e-top {
               display: flex;
               align-items: center;
               justify-content: space-between;
 
-              .e-left{
+              .e-left {
                 display: flex;
                 flex-direction: column;
                 margin-left: 30px;
 
-                .e-l-top{
+                .e-l-top {
                   display: flex;
                   justify-content: center;
                   align-items: center;
                   column-gap: 20px;
 
-                  .square{
+                  .square {
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -143,50 +140,46 @@
                     border-radius: 8px;
                   }
 
-                  .e-texts{
-                    h2{
+                  .e-texts {
+                    h2 {
                       font-family: Mukta-Regular, serif;
                       font-size: 20px;
                     }
 
-                    p{
+                    p {
                       font-family: Mukta-Medium, serif;
                       font-size: 15px;
                     }
                   }
-
-
                 }
-                .e-l-bottom{
-                  p{
+                .e-l-bottom {
+                  p {
                     font-family: Mukta-Medium, serif;
                   }
                 }
-
               }
-              .e-right{
+              .e-right {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                color:#FF4300;
+                color: #ff4300;
                 border-radius: 5px;
                 margin-right: 30px;
                 cursor: pointer;
 
-                border: solid 1px #FF4300;
+                border: solid 1px #ff4300;
                 width: 150px;
                 height: 40px;
                 background-color: white;
               }
             }
-            .e-bottom{
+            .e-bottom {
               margin: 0 30px 0 30px;
-              p{
+              p {
                 font-family: Mukta-Medium, serif;
                 text-align: justify;
               }
             }
-
           }
         }
       }

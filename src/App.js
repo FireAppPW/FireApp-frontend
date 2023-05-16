@@ -5,16 +5,15 @@ import UpdateUser from "./pages/updateUser/UpdateUser.jsx";
 import NewUser from "./pages/newUser/NewUser.jsx";
 import Emergencies from "./pages/emergencies/Emergencies.jsx";
 import DepartmentManagement from "./pages/departmentManagement/DepartmentManagement.jsx";
-import DepartmentDetails from "./pages/departmentDetails/DepartmentDetails.jsx";
 import UserManagement from "./pages/userManagement/UserManagement.jsx";
 import NewDepartment from "./pages/newDepartment/NewDepartment.jsx";
 import PostNotificationDepartment from "./pages/postNotificationDepartment/PostNotificationDepartment.jsx";
 import PostNotificationUser from "./pages/postNotificationUser/PostNotificationUser.jsx";
-import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
 import Courses from "./pages/courses/Courses.jsx";
 import NewCourse from "./pages/newCourse/NewCourse.jsx";
 import NewEmergency from "./pages/newEmergency/NewEmergency";
 import NewNotification from "./pages/newNotification/NewNotification";
+import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
 
 function App() {
   return (
@@ -32,12 +31,7 @@ function App() {
         />
         <Route
           exact
-          path="/departmentmanagement/:departmentId"
-          element={<DepartmentDetails />}
-        />
-        <Route
-          exact
-          path="/departmentmanagement/:departmentId/edit"
+          path="/managedepartment/:departmentId"
           element={<UpdateDepartment />}
         />
         <Route exact path="/newDepartment" element={<NewDepartment />} />

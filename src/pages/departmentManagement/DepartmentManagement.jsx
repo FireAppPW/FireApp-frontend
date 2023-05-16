@@ -6,7 +6,6 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 
 const DepartmentManagement = () => {
   return (
-
     <div className="wrapper">
       <LeftSidebar />
       <div className="mid">
