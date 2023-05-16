@@ -4,6 +4,11 @@ import profilePic from  "../../assets/images/firefighter1.jpg"
 import LogoutIcon from '@mui/icons-material/Logout';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import {NotificationData} from "./NotificationsData";
+import AddIcon from "@mui/icons-material/Add";
+import {Link} from 'react-router-dom';
+
+
+const CreateNotification = Link
 
 const RightSidebar = () => {
   return (
@@ -34,9 +39,15 @@ const RightSidebar = () => {
         </div>
       </div>
       <div className="notifications">
-        <h2>Notifications</h2>
+        <div className="notification-top">
+          <h2>Notifications</h2>
+          <CreateNotification to="/newNotification" className="addNotification">
+            <AddIcon className="icon"/>
+          </CreateNotification>
+        </div>
+
         {
-          NotificationData.map((item, index) =>{
+          NotificationData.map((item) =>{
             return (
                 <div className="notification">
                   <div className="square" style={{backgroundColor: item.color}}>

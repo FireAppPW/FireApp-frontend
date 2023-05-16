@@ -14,6 +14,7 @@ import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
 import Courses from "./pages/courses/Courses.jsx";
 import NewCourse from "./pages/newCourse/NewCourse.jsx";
 import NewEmergency from "./pages/newEmergency/NewEmergency";
+import NewNotification from "./pages/newNotification/NewNotification";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/newCourse" element={<NewCourse />} />
         <Route path="/newEmergency" element={<NewEmergency />} />
         <Route exact path="/newUser" element={<NewUser />} />
+        <Route exact path="/newNotification" element={<NewNotification />} />
       </Routes>
     </BrowserRouter>
   );
