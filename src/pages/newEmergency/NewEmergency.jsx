@@ -33,6 +33,29 @@ const NewEmergency = () => {
                             <p>Title</p>
                             <input type="text"/>
                         </div>
+                        <div className="fillCard">
+                            <p>Description</p>
+                            <input type="text"/>
+                        </div>
+                        <div className="fillCard">
+                            <p>Importance</p>
+                            <input type="text"/>
+                        </div>
+                        <div className="fillCard">
+                            <p>Additional info</p>
+                            <input type="text"/>
+                        </div>
+                        <div className="fillCard">
+                            <p>Notify: </p>
+                            <div className="userSelect">
+                                <select name="department" id="department">
+                                    <option value="All">All</option>
+                                    <option value="Specific">Specific</option>
+                                    <option value="Specific">Users</option>
+                                    <option value="Specific">External Department</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

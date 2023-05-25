@@ -30,8 +30,25 @@ const NewCourse = () => {
                 <form action="" className="formSection">
                     <div className="container">
                         <div className="fillCard">
-                            <p>Name</p>
+                            <p>Title</p>
                             <input type="text"/>
+                        </div>
+                        <div className="fillCard">
+                            <p>Description</p>
+                            <input type="text"/>
+                        </div>
+                        <div className="fillCard">
+                            <p>Additional Info</p>
+                            <input type="text"/>
+                        </div>
+                        <div className="fillCard">
+                            <p>Public/private</p>
+                            <div className="courseSelect">
+                                <select name="department" id="department">
+                                    <option value="Public">Public</option>
+                                    <option value="Private">Private</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </form>

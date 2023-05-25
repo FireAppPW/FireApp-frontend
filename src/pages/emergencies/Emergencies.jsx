@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 
 const Emergencies = () => {
 
-    const [info, setInfo] = useState(false);
+    const [info, setInfo] = useState(true);
     const showInfo = () => {
         setInfo(!info)
         console.log(info)
@@ -45,7 +45,7 @@ const Emergencies = () => {
         <div className="emergenciesTable">
           <div className="container">
                   {
-                      EmergenciesData.map((item, index) =>{
+                      EmergenciesData.map((item) =>{
                           return (
                               <div className="emergencyCard">
                                   <div className="e-container">
