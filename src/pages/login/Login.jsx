@@ -3,14 +3,18 @@ import "./login.scss";
 import screen from "../../assets/images/screen.png";
 import google_logo from "../../assets/icons/google-logo.svg";
 import { useGoogleLogin } from '@react-oauth/google';
+import { useNavigate } from "react-router-dom";
 
 
 
 
 const Login = () => {
-
+    const navigate = useNavigate();
     const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
+        onSuccess: (codeResponse) => {
+            navigate("/emergencies", {state:{user:codeResponse}})
+        },
+        onError: (error) => console.log('Login Failed:', error)
     });
 
   return (

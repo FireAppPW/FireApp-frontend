@@ -1,27 +1,58 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./rightSidebar.scss";
-import profilePic from  "../../assets/images/firefighter1.jpg"
+import axios from "axios";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import {NotificationData} from "./NotificationsData";
 import AddIcon from "@mui/icons-material/Add";
-import {Link} from 'react-router-dom';
+import {googleLogout} from "@react-oauth/google";
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 
 
 const CreateNotification = Link
 
 const RightSidebar = () => {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [ profile, setProfile ] = useState([]);
+  useEffect(
+      () => {
+        if (location.state.user) {
+          axios
+              .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${location.state.user.access_token}`, {
+                headers: {
+                  Authorization: `Bearer ${location.state.user.access_token}`,
+                  Accept: 'application/json'
+                }
+              })
+              .then((res) => {
+                setProfile(res.data);
+              })
+              .catch((err) => console.log(err));
+        }
+      },
+      [ location.state.user ]
+  );
+
+  const logOut = () => {
+    googleLogout();
+    setProfile(null);
+    navigate("/")
+  };
+
+
   return (
     <div className="rightSidebar">
     <div className="top">
-        <LogoutIcon className="logoutIcon"/>
+        <LogoutIcon onClick={logOut} className="logoutIcon"/>
     </div>
 
       <div className="personalInfo">
         <div className="profilePic">
-            <img src={profilePic} alt=""/>
+            <img src={profile.picture} alt=""/>
         </div>
-        <div className="profileName">John Doe</div>
+        <div className="profileName">{profile.name}</div>
         <div className="profileRole">SysAdmin</div>
       </div>
       <div className="departmentInfo">
