@@ -4,6 +4,7 @@ import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import {Link, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
+import {Button} from "@mui/material";
 
 const NewUser = () => {
 
@@ -54,9 +55,9 @@ const NewUser = () => {
             <Link to="/manageuser" className="cancel">
               <p>Cancel</p>
             </Link>
-            <Link to="/manageuser" className="save">
+            <Button onClick={handleClick} className="save">
               <p>Save</p>
-            </Link>
+            </Button>
           </div>
         </div>
         <form action="" className="formSection">
@@ -65,6 +66,12 @@ const NewUser = () => {
               <p>Name</p>
               <input type="text" value={firstName} onChange={
                 (e)=> setFirstName(e.target.value)
+              }/>
+            </div>
+            <div className="fillCard">
+              <p>Email</p>
+              <input type="text" value={email} onChange={
+                (e)=> setEmail(e.target.value)
               }/>
             </div>
             <div className="fillCard">
@@ -77,6 +84,30 @@ const NewUser = () => {
               <p>Date of Birth</p>
               <input type="date" value={birthDate} onChange={
                 (e)=> setBirthDate(e.target.value)
+              }/>
+            </div>
+            <div className="fillCard">
+              <p>Address Line 1</p>
+              <input type="text" value={addressLine1} onChange={
+                (e)=> setAddressLine1(e.target.value)
+              }/>
+            </div>
+            <div className="fillCard">
+              <p>Address Line 2</p>
+              <input type="text" value={addressLine2} onChange={
+                (e)=> setAddressLine2(e.target.value)
+              }/>
+            </div>
+            <div className="fillCard">
+              <p>City</p>
+              <input type="text" value={city} onChange={
+                (e)=> setCity(e.target.value)
+              }/>
+            </div>
+            <div className="fillCard">
+              <p>Country</p>
+              <input type="text" value={country} onChange={
+                (e)=> setCountry(e.target.value)
               }/>
             </div>
             <div className="fillCard">
