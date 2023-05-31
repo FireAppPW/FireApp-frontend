@@ -14,24 +14,40 @@ const EditCourse = Link
 
 
 const Courses = () => {
-
+    //const [courseData, setCourseData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-
-    const filteredCourses = CoursesData.filter((course) => {
-        return course.info.toLowerCase().includes(searchQuery.toLowerCase());
+    //EXAMPLE
+    const courseData = [{
+        "id": 1,
+        "title": "What is fire",
+        "description": "Fire 101",
+        "isPublic": false,
+        "dateTimeCreated": "2022-05-30T15:11:24.061",
+        "dateTimeApplicationDeadline": "2023-12-30T15:11:24.061",
+        "dateTimeStart": "2022-05-30T15:11:24.061",
+        "places": 1,
+        "isRemote": false,
+        "addressLine1": "Centrum",
+        "addressLine2": "7A",
+        "city": "Warsaw",
+        "country": "Poland",
+        "picture": "https://media.istockphoto.com/id/113494458/photo/fire-isolated-over-black-background.jpg",
+        "isDeleted": false
+    }]
+    const filteredCourses = courseData.filter((course) => {
+        return course.description.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     const handleSearchInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
 
-    const [courseData, setCourseData] = useState([]);
 
     useEffect(() => {
         axios
-            .get('http://20.238.194.113/course')
+            .get('https://course.fireapp.website/course')
             .then((response) => {
-                setCourseData(response.data.data);
+                //setCourseData(response.data.data);
                 console.log(response.data.data)
 
             })
@@ -101,24 +117,24 @@ const Courses = () => {
               </form>
               <section className="courses">
                   {
-                      filteredCourses.map((item) =>{
+                      filteredCourses.map((course) =>{
                           return (
                               <div className="courseCard">
                                   <div className="container">
                                       <div className="image">
-                                          <img src={item.image} alt=""/>
+                                          <img src={course.picture} alt=""/>
                                       </div>
                                       <div className="texts">
-                                          <h2>{item.category}</h2>
-                                          <p>{item.info}</p>
+                                          <h2>{course.title}</h2>
+                                          <p>{course.description}</p>
 
                                       </div>
                                   </div>
                                   <div className="displayContainer">
                                       <div className="text">
-                                          <h2>{item.category}</h2>
+                                          <h2>{course.title}</h2>
                                       </div>
-                                      <p>{item.display}</p>
+                                      <p>{course.description}</p>
                                       <div className="more">
                                           <p>Learn more</p>
                                       </div>
