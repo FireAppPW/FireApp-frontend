@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./emergencies.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar.jsx";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import {EmergenciesData} from "./EmergenciesData";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 
 
@@ -16,6 +17,20 @@ const Emergencies = () => {
         setInfo(!info)
         console.log(info)
     }
+
+    const [emergencyData, setEmergencyData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get('http://20.238.194.113/emergency')
+            .then((response) => {
+                setEmergencyData(response.data.data);
+                console.log(response.data.data)
+
+            })
+            .catch((error) => console.log(error))
+
+    }, []);
 
 
     return (

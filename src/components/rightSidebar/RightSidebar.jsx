@@ -6,23 +6,25 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import {NotificationData} from "./NotificationsData";
 import AddIcon from "@mui/icons-material/Add";
 import {googleLogout} from "@react-oauth/google";
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 
 const CreateNotification = Link
 
 const RightSidebar = () => {
 
-  const location = useLocation();
   const navigate = useNavigate();
   const [ profile, setProfile ] = useState([]);
+
   useEffect(
       () => {
-        if (location.state.user) {
+        const cookieValue = JSON.parse(Cookies.get('googleAuth'));
+        if (cookieValue) {
           axios
-              .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${location.state.user.access_token}`, {
+              .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${cookieValue.access_token}`, {
                 headers: {
-                  Authorization: `Bearer ${location.state.user.access_token}`,
+                  Authorization: `Bearer ${cookieValue.access_token}`,
                   Accept: 'application/json'
                 }
               })
@@ -32,7 +34,8 @@ const RightSidebar = () => {
               .catch((err) => console.log(err));
         }
       },
-      [ location.state.user ]
+
+      []
   );
 
   const logOut = () => {

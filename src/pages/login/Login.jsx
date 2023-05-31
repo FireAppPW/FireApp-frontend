@@ -4,6 +4,7 @@ import screen from "../../assets/images/screen.png";
 import google_logo from "../../assets/icons/google-logo.svg";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 
 
@@ -12,7 +13,8 @@ const Login = () => {
     const navigate = useNavigate();
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => {
-            navigate("/emergencies", {state:{user:codeResponse}})
+            Cookies.set('googleAuth', JSON.stringify(codeResponse));
+            navigate("/emergencies")
         },
         onError: (error) => console.log('Login Failed:', error)
     });

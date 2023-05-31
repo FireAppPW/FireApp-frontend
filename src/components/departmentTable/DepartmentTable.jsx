@@ -1,39 +1,44 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./departmentTable.scss";
-import profilePic from "../../assets/images/firefighter1.jpg";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const CreateDepartment = Link
 
 const DepartmentTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const departments = [
-    {
-      name: "Polish Department",
-      id: "1234",
-      totalEmployee: "2634",
-    },
-    {
-      name: "Spanish Department",
-      id: "1234",
-      totalEmployee: "2634",
-    },
-    {
-      name: "Polish Department",
-      id: "1234",
-      totalEmployee: "2634",
-    },
-  ];
+  const [departmentData, setDepartmentData] = useState([]);
 
-  const filteredDepartments = departments.filter((department) => {
+  useEffect(() => {
+      axios
+          .get('https://department.fireapp.website/department')
+          .then((response) => {
+            setDepartmentData(response.data.data);
+            console.log(response.data.data)
+
+          })
+          .catch((error) => console.log(error))
+
+  }, []);
+
+
+  const filteredDepartments = departmentData.filter((department) => {
     return department.name.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
+
+  const handleClick=(e, id)=>{
+    e.preventDefault()
+    axios
+        .delete("https://department.fireapp.website/department/"+ id.toString())
+        .then(res => window.location.reload())
+        .catch(err => console.log(err))
+  }
 
   return (
       <div className="departmentWrapper">
@@ -63,7 +68,8 @@ const DepartmentTable = () => {
             <tr className="departmentRow">
               <th className="departmentTh">Name</th>
               <th className="departmentTh">ID</th>
-              <th className="departmentTh">Total Employee</th>
+              <th className="departmentTh">Email</th>
+              <th className="departmentTh">Phone</th>
               <th className="departmentTh">Actions</th>
             </tr>
             </thead>
@@ -72,12 +78,17 @@ const DepartmentTable = () => {
               return (
                   <tr className="departmentRow" key={index}>
                     <td className="departmentName">
-                      <img src={profilePic} alt="" className="departmentImg" />
+                      <img src={department.logoPicture} alt="" className="departmentImg" />
                       <span>{department.name}</span>
                     </td>
                     <td className="departmentCell">{department.id}</td>
-                    <td className="departmentCell">{department.totalEmployee}</td>
-                    <td className="departmentCell">Delete</td>
+                    <td className="departmentCell">{department.email}</td>
+                    <td className="departmentCell">{department.phone}</td>
+                    <td onClick={
+                      (e) => {
+                        handleClick(e, department.id)
+                      }
+                    } className="departmentCell" style={{cursor:"pointer"}}>Delete</td>
                   </tr>
               );
             })}

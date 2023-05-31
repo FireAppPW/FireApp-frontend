@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./courses.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
@@ -7,6 +7,7 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
 import {CoursesData} from "./CoursesData";
 import {Link} from 'react-router-dom';
+import axios from "axios";
 
 const CreateCourse = Link
 const EditCourse = Link
@@ -23,6 +24,20 @@ const Courses = () => {
     const handleSearchInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
+
+    const [courseData, setCourseData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get('http://20.238.194.113/course')
+            .then((response) => {
+                setCourseData(response.data.data);
+                console.log(response.data.data)
+
+            })
+            .catch((error) => console.log(error))
+
+    }, []);
 
 
   return (
