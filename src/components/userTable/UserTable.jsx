@@ -12,19 +12,25 @@ const Table = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const userData = [
     {
-      name: "Ekin Kar",
-      id: "1234",
-      role: "Admin",
-    },
-    {
-      name: "John Marcus",
-      id: "5678",
-      role: "User",
-    },
-    {
-      name: "Anej Doer",
-      id: "9101",
-      role: "Admin",
+      id: 0,
+      email: "string",
+      firstName: "string",
+      lastName: "string",
+      birthDate: "2023-05-31",
+      fireDepartmentId: 0,
+      position: "string",
+      role: {
+        "id": 0,
+        "name": "string",
+        "accounts": [
+          "string"
+        ]
+      },
+      addressLine1: "string",
+      addressLine2: "string",
+      city: "string",
+      country: "string",
+      profilePicture: "string",
     },
   ];
 
@@ -43,7 +49,7 @@ const Table = () => {
   }, []);
 
   const filteredUsers = userData.filter((user) => {
-    return user.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return user.firstName.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
   const handleSearchInputChange = (event) => {
@@ -103,7 +109,7 @@ const Table = () => {
                       <span>{user.firstName}</span>
                     </td>
                     <td className="widgetLgDate">{user.id}</td>
-                    <td className="widgetLgAmount">{user.role}</td>
+                    <td className="widgetLgAmount">{user.email}</td>
                     <td className="widgetLgStatus" style={{cursor: "pointer"}}
                         onClick={
                       (e) => {
