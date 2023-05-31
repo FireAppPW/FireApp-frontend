@@ -7,6 +7,6 @@ export const EmergenciesData = [
         description: "Description",
         color: "#96FF71BD",
         iconColor: "#5AFD21",
-        date: "24 oct 2023"
+        dateTimeCreated: "24 oct 2023"
     }
 ];

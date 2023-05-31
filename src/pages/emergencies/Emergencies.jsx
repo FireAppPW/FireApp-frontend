@@ -22,16 +22,15 @@ const Emergencies = () => {
 
     useEffect(() => {
         axios
-            .get('http://20.238.194.113/emergency')
+            .get('https://emergency.fireapp.website/emergency')
             .then((response) => {
-                setEmergencyData(response.data.data);
+                //setEmergencyData(response.data.data);
                 console.log(response.data.data)
 
             })
             .catch((error) => console.log(error))
 
     }, []);
-
 
     return (
     <div className="wrapper">
@@ -60,23 +59,22 @@ const Emergencies = () => {
         <div className="emergenciesTable">
           <div className="container">
                   {
-                      EmergenciesData.map((item) =>{
+                      EmergenciesData.map((emergency) =>{
                           return (
                               <div className="emergencyCard">
                                   <div className="e-container">
                                       <div className="e-top">
                                           <div className="e-left">
                                               <div className="e-l-top">
-                                                  <div className="square" style={{backgroundColor: item.color}}>
-                                                      <ErrorOutlineOutlinedIcon className="icon" style={{color: item.iconColor}}/>
+                                                  <div className="square" style={{backgroundColor: emergency.color}}>
+                                                      <ErrorOutlineOutlinedIcon className="icon" style={{color: emergency.iconColor}}/>
                                                   </div>
                                                   <div className="e-texts">
-                                                      <h2>{item.title}</h2>
-                                                      <p>{item.description}</p>
+                                                      <h2>{emergency.title}</h2>
                                                   </div>
                                               </div>
                                               <div className="e-l-bottom">
-                                                  <p>{item.date}</p>
+                                                  <p>{emergency.dateTimeCreated}</p>
                                               </div>
                                           </div>
                                           <div className="e-right" onClick={showInfo} style={
@@ -89,7 +87,7 @@ const Emergencies = () => {
                                       {
                                           info && (
                                           <div className="e-bottom">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut neque purus, luctus ut ullamcorper facilisis, ullamcorper ac dolor. Cras porttitor nulla ac posuere aliquam. Nunc ex turpis, aliquam sed molestie quis, bibendum ac nulla. Fusce mollis id tellus ac commodo. Proin varius non neque iaculis convallis. Fusce posuere eros libero, vitae interdum nunc consectetur id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse vel pulvinar ipsum. Fusce et molestie lacus, at rutrum velit. Nunc a neque aliquet, consectetur ligula quis, maximus tortor. In varius sit amet erat vitae ultricies.</p>
+                                            <p>{emergency.description}</p>
                                           </div>)
                                       }
 
