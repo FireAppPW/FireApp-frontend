@@ -4,9 +4,12 @@ import profilePic from "../../assets/images/firefighter1.jpg";
 import AddIcon from "@mui/icons-material/Add";
 import {Link} from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import axios from "axios";
 
 const CreateUser = Link
+const UpdateUser = Link
 
 const Table = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -56,7 +59,7 @@ const Table = () => {
     setSearchQuery(event.target.value);
   };
 
-  const handleClick=(e, id)=>{
+  const handleDeleteClick=(e, id)=>{
     e.preventDefault()
     console.log(id)
     /*
@@ -96,6 +99,7 @@ const Table = () => {
             <tr className="userRow">
               <th className="userTh">Name</th>
               <th className="userTh">ID</th>
+              <th className="userTh">Fire Department</th>
               <th className="userTh">Role</th>
               <th className="userTh">Actions</th>
             </tr>
@@ -109,13 +113,19 @@ const Table = () => {
                       <span>{user.firstName}</span>
                     </td>
                     <td className="widgetLgDate">{user.id}</td>
+                    <td className="widgetLgAmount">{user.fireDepartmentId}</td>
                     <td className="widgetLgAmount">{user.email}</td>
-                    <td className="widgetLgStatus" style={{cursor: "pointer"}}
-                        onClick={
-                      (e) => {
-                        handleClick(e, user.id)
-                      }}
-                    >Delete</td>
+                    <td className="widgetLgStatus">
+                      <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
+                        (e) => {
+                          handleDeleteClick(e, user.id)
+                        }}>
+                        <DeleteForeverIcon className="deleteIcon"/>
+                      </div>
+                      <UpdateUser to={"/manageuser/" + user.id} className="borderIcon" style={{outlineColor: "#53daf1"}}>
+                        <EditIcon className="editIcon"/>
+                      </UpdateUser>
+                    </td>
                   </tr>
               );
             })}

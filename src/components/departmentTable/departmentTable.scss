@@ -123,6 +123,31 @@
       font-family: Gilroy-Light, serif;
     }
 
+    .departmentOptions{
+      display: flex;
+      column-gap: 10px;
+      font-family: Gilroy-Light, serif;
+
+      .borderIcon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        outline: solid #e0e0e0 0.85px;
+        aspect-ratio: 1/1;
+        height: 40px;
+        border-radius: 4px;
+        cursor: pointer;
+        .deleteIcon{
+          color: #F65B4F;
+        }
+
+        .editIcon{
+          color: #53daf1;;
+        }
+      }
+    }
+
+
     .departmentImg {
       width: 40px;
       height: 40px;

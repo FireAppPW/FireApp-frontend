@@ -4,8 +4,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
 
 const CreateDepartment = Link
+const UpdateDepartment = Link
 
 const DepartmentTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,12 +35,16 @@ const DepartmentTable = () => {
     setSearchQuery(event.target.value);
   };
 
-  const handleClick=(e, id)=>{
+  const handleDeleteClick=(e, id)=>{
     e.preventDefault()
+    console.log(id)
+    /*
     axios
         .delete("https://department.fireapp.website/department/"+ id.toString())
         .then(res => window.location.reload())
         .catch(err => console.log(err))
+
+     */
   }
 
   return (
@@ -84,11 +91,17 @@ const DepartmentTable = () => {
                     <td className="departmentCell">{department.id}</td>
                     <td className="departmentCell">{department.email}</td>
                     <td className="departmentCell">{department.phone}</td>
-                    <td onClick={
-                      (e) => {
-                        handleClick(e, department.id)
-                      }
-                    } className="departmentCell" style={{cursor:"pointer"}}>Delete</td>
+                    <td className="departmentCell departmentOptions">
+                      <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
+                        (e) => {
+                          handleDeleteClick(e, department.id)
+                        }}>
+                        <DeleteForeverIcon className="deleteIcon"/>
+                      </div>
+                      <UpdateDepartment to={"/managedepartment/" + department.id} className="borderIcon" style={{outlineColor: "#53daf1"}}>
+                        <EditIcon className="editIcon"/>
+                      </UpdateDepartment>
+                    </td>
                   </tr>
               );
             })}

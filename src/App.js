@@ -10,6 +10,7 @@ import NewDepartment from "./pages/newDepartment/NewDepartment.jsx";
 import PostNotificationDepartment from "./pages/postNotificationDepartment/PostNotificationDepartment.jsx";
 import PostNotificationUser from "./pages/postNotificationUser/PostNotificationUser.jsx";
 import Courses from "./pages/courses/Courses.jsx";
+import Course from "./pages/course/Course.jsx";
 import NewCourse from "./pages/newCourse/NewCourse.jsx";
 import NewEmergency from "./pages/newEmergency/NewEmergency";
 import NewNotification from "./pages/newNotification/NewNotification";
@@ -42,6 +43,7 @@ function App() {
         />
         <Route path="/usernotification" element={<PostNotificationUser />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/:courseId" element={<Course/>} />
         <Route path="/newCourse" element={<NewCourse />} />
         <Route path="/newEmergency" element={<NewEmergency />} />
         <Route exact path="/newUser" element={<NewUser />} />
