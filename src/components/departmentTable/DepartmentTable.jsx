@@ -5,6 +5,10 @@ import AddIcon from "@mui/icons-material/Add";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import department1 from "../../assets/images/department1.jpg";
+import department2 from "../../assets/images/department2.jpg";
+import department3 from "../../assets/images/department3.jpg";
+
 import EditIcon from "@mui/icons-material/Edit";
 
 const CreateDepartment = Link
@@ -14,8 +18,7 @@ const Department = Link
 const DepartmentTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [departmentData, setDepartmentData] = useState([]);
-
-
+  const departmentPictures = [department1, department2, department3]
 
   useEffect(() => {
       axios
@@ -88,7 +91,7 @@ const DepartmentTable = () => {
               return (
                   <tr className="departmentRow" key={index}>
                     <Department to={"/managedepartment/" + department.id} className="departmentName">
-                      <img src={department.logoPicture} alt="" className="departmentImg" />
+                      <img src={departmentPictures[Math.floor(Math.random() * departmentPictures.length)]} alt="" className="departmentImg" />
                       <span>{department.name}</span>
                     </Department>
                     <td className="departmentCell">{department.id}</td>

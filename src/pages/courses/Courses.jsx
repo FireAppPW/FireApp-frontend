@@ -5,6 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import SearchIcon from '@mui/icons-material/Search';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
+import course1 from "../../assets/images/course1.jpg";
 import {CoursesData} from "./CoursesData";
 import {Link} from 'react-router-dom';
 import axios from "axios";
@@ -123,7 +124,7 @@ const Courses = () => {
                               <Course to={"/courses/" + course.id} className="courseCard">
                                   <div className="container">
                                       <div className="image">
-                                          <img src={course.picture} alt=""/>
+                                          <img src={course1} alt=""/>
                                       </div>
                                       <div className="texts">
                                           <h2>{course.title}</h2>

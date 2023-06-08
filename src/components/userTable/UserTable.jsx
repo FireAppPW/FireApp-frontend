@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import "./userTable.scss";
-import profilePic from "../../assets/images/firefighter1.jpg";
 import AddIcon from "@mui/icons-material/Add";
 import {Link, useLocation} from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import person1 from "../../assets/images/person1.jpg";
+import person2 from "../../assets/images/person2.jpg";
+import person3 from "../../assets/images/person3.jpg";
 import axios, {Axios} from "axios";
 
 const CreateUser = Link
@@ -15,6 +17,8 @@ const Table = () => {
   const [searchQuery, setSearchQuery] = useState("");
   let location = useLocation();
   const departmentId = location.pathname.split('/')[2]
+  const profileImages = [person1, person2, person3]
+
 
   const userData = [
     {
@@ -164,7 +168,7 @@ const Table = () => {
               return (
                   <tr className="userRow" key={index}>
                     <td className="userName">
-                      <img src={user.profilePicture} alt="" className="userImg" />
+                      <img src={profileImages[Math.floor(Math.random() * profileImages.length)]} alt="" className="userImg" />
                       <span>{user.firstName}</span>
                     </td>
                     <td className="widgetLgDate">{user.id}</td>
