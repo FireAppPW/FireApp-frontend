@@ -11,6 +11,7 @@ import axios from "axios";
 
 const CreateCourse = Link
 const EditCourse = Link
+const Course = Link
 
 
 const Courses = () => {
@@ -119,7 +120,7 @@ const Courses = () => {
                   {
                       filteredCourses.map((course) =>{
                           return (
-                              <div className="courseCard">
+                              <Course to={"/courses/" + course.id} className="courseCard">
                                   <div className="container">
                                       <div className="image">
                                           <img src={course.picture} alt=""/>
@@ -139,7 +140,7 @@ const Courses = () => {
                                           <p>Learn more</p>
                                       </div>
                                   </div>
-                              </div>
+                              </Course>
                           );
                       })
                   }

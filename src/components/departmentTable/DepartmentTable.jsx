@@ -9,17 +9,20 @@ import EditIcon from "@mui/icons-material/Edit";
 
 const CreateDepartment = Link
 const UpdateDepartment = Link
+const Department = Link
 
 const DepartmentTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [departmentData, setDepartmentData] = useState([]);
+
+
 
   useEffect(() => {
       axios
           .get('https://department.fireapp.website/department')
           .then((response) => {
             setDepartmentData(response.data.data);
-            console.log(response.data.data)
+            console.log(response)
 
           })
           .catch((error) => console.log(error))
@@ -51,7 +54,7 @@ const DepartmentTable = () => {
       <div className="departmentWrapper">
         <div className="departmentTotal">
           <div className="dT-container">
-            <h2>Total Departments</h2>
+            <h2>Total Departments: {filteredDepartments.length}</h2>
             <div className="depOptions">
               <div className="depSearchContainer">
                 <input
@@ -84,10 +87,10 @@ const DepartmentTable = () => {
             {filteredDepartments.map((department, index) => {
               return (
                   <tr className="departmentRow" key={index}>
-                    <td className="departmentName">
+                    <Department to={"/managedepartment/" + department.id} className="departmentName">
                       <img src={department.logoPicture} alt="" className="departmentImg" />
                       <span>{department.name}</span>
-                    </td>
+                    </Department>
                     <td className="departmentCell">{department.id}</td>
                     <td className="departmentCell">{department.email}</td>
                     <td className="departmentCell">{department.phone}</td>
@@ -98,7 +101,7 @@ const DepartmentTable = () => {
                         }}>
                         <DeleteForeverIcon className="deleteIcon"/>
                       </div>
-                      <UpdateDepartment to={"/managedepartment/" + department.id} className="borderIcon" style={{outlineColor: "#53daf1"}}>
+                      <UpdateDepartment to={"/managedepartment/update/" + department.id} className="borderIcon" style={{outlineColor: "#53daf1"}}>
                         <EditIcon className="editIcon"/>
                       </UpdateDepartment>
                     </td>

@@ -18,7 +18,7 @@ const UpdateDepartment = () => {
   const[email,setEmail]=useState('')
   const[picture,setPicture]=useState('')
   let location = useLocation();
-  const departmentId = location.pathname.split('/')[2]
+  const departmentId = location.pathname.split('/')[3]
   const [departmentData, setDepartmentData] = useState([]);
 
   /*
@@ -39,7 +39,7 @@ const UpdateDepartment = () => {
 
   const handleClick=(e)=>{
     e.preventDefault()
-    const user={
+    const department={
       addressLine1,
       addressLine2,
       city,
@@ -49,11 +49,11 @@ const UpdateDepartment = () => {
       name,
       phone
     }
-    console.log(user)
+    console.log(department)
     /*
     axios
-        .put("https://account.fireapp.website/account/" + userId, user)
-        .then(navigate("/manageuser"))
+        .put("https://department.fireapp.website/department/" + departmentId, department)
+        .then(navigate("/managedepartment"))
         .catch(err => console.log(err))
 
      */

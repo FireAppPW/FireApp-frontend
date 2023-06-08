@@ -15,6 +15,8 @@ import NewCourse from "./pages/newCourse/NewCourse.jsx";
 import NewEmergency from "./pages/newEmergency/NewEmergency";
 import NewNotification from "./pages/newNotification/NewNotification";
 import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
+import Department from "./components/department/Department";
+import UpdateCourse from "./pages/updateCourse/UpdateCourse";
 
 function App() {
   return (
@@ -32,8 +34,13 @@ function App() {
         />
         <Route
           exact
-          path="/managedepartment/:departmentId"
+          path="/managedepartment/update/:departmentId"
           element={<UpdateDepartment />}
+        />
+        <Route
+            exact
+            path="/managedepartment/:departmentId"
+            element={<Department />}
         />
         <Route exact path="/newDepartment" element={<NewDepartment />} />
         <Route
@@ -44,6 +51,7 @@ function App() {
         <Route path="/usernotification" element={<PostNotificationUser />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:courseId" element={<Course/>} />
+        <Route path="/courses/update/:courseId" element={<UpdateCourse/>} />
         <Route path="/newCourse" element={<NewCourse />} />
         <Route path="/newEmergency" element={<NewEmergency />} />
         <Route exact path="/newUser" element={<NewUser />} />

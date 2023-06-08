@@ -20,6 +20,8 @@ const Emergencies = () => {
 
     const [emergencyData, setEmergencyData] = useState([]);
 
+
+
     useEffect(() => {
         axios
             .get('https://emergency.fireapp.website/emergency')

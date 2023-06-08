@@ -2,25 +2,70 @@ import React, {useEffect, useState} from "react";
 import "./userTable.scss";
 import profilePic from "../../assets/images/firefighter1.jpg";
 import AddIcon from "@mui/icons-material/Add";
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import axios from "axios";
+import axios, {Axios} from "axios";
 
 const CreateUser = Link
 const UpdateUser = Link
 
 const Table = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  let location = useLocation();
+  const departmentId = location.pathname.split('/')[2]
+
   const userData = [
     {
       id: 0,
       email: "string",
-      firstName: "string",
+      firstName: "test1",
       lastName: "string",
       birthDate: "2023-05-31",
-      fireDepartmentId: 0,
+      fireDepartmentId: 2,
+      position: "string",
+      role: {
+        "id": 0,
+        "name": "string",
+        "accounts": [
+          "string"
+        ]
+      },
+      addressLine1: "string",
+      addressLine2: "string",
+      city: "string",
+      country: "string",
+      profilePicture: "string",
+    },
+    {
+      id: 1,
+      email: "string",
+      firstName: "tets2",
+      lastName: "string",
+      birthDate: "2023-05-31",
+      fireDepartmentId: 2,
+      position: "string",
+      role: {
+        "id": 0,
+        "name": "string",
+        "accounts": [
+          "string"
+        ]
+      },
+      addressLine1: "string",
+      addressLine2: "string",
+      city: "string",
+      country: "string",
+      profilePicture: "string",
+    },
+    {
+      id: 2,
+      email: "string",
+      firstName: "test3",
+      lastName: "string",
+      birthDate: "2023-05-31",
+      fireDepartmentId: 3,
       position: "string",
       role: {
         "id": 0,
@@ -40,6 +85,7 @@ const Table = () => {
   //const [userData, setUserData] = useState([]);
 
   useEffect(() => {
+
     axios
         .get('https://account.fireapp.website/account')
         .then((response) => {
@@ -49,13 +95,22 @@ const Table = () => {
         })
         .catch((error) => console.log(error))
 
+
   }, []);
 
-  const filteredUsers = userData.filter((user) => {
-    return user.firstName.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredUsers = userData.filter((user) =>
+  {
+    if (departmentId !== undefined){
+      return  user.fireDepartmentId.toString().toLowerCase().includes(departmentId) &&
+              user.firstName.toLowerCase().includes(searchQuery.toLowerCase());
+    }else {
+      return user.firstName.toLowerCase().includes(searchQuery.toLowerCase());
+    }
+
   });
 
   const handleSearchInputChange = (event) => {
+
     setSearchQuery(event.target.value);
   };
 
@@ -75,7 +130,7 @@ const Table = () => {
       <div className="userWrapper">
         <div className="userTotal">
           <div className="uT-container">
-            <h2>Total Users</h2>
+            <h2>Total Users: {filteredUsers.length}</h2>
             <div className="userOptions">
               <div className="userSearchContainer">
                 <input
