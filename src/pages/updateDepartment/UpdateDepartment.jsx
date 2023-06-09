@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from "react";
 import "./updatedepartment.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
-import {Link, useNavigate, useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
 
 const UpdateDepartment = () => {
 
-  const navigate = useNavigate();
   const[name,setName]=useState('')
   const[addressLine1,setAddressLine1]=useState('')
   const[addressLine2,setAddressLine2]=useState('')
@@ -72,7 +71,6 @@ const UpdateDepartment = () => {
   }, []);
 
   useEffect(() => {
-
     setName(departmentData.name)
     setAddressLine1(departmentData.addressLine1)
     setAddressLine2(departmentData.addressLine2)
@@ -80,6 +78,7 @@ const UpdateDepartment = () => {
     setCountry(departmentData.country)
     setPhone(departmentData.phone)
     setEmail(departmentData.email)
+
   })
 
   return (

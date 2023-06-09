@@ -3,7 +3,6 @@ import "./emergencies.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar.jsx";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
-import {EmergenciesData} from "./EmergenciesData";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
@@ -24,10 +23,10 @@ const Emergencies = () => {
 
     useEffect(() => {
         axios
-            .get('https://emergency.fireapp.website/emergency')
+            .get('https://api.fireapp.website/emergency')
             .then((response) => {
-                //setEmergencyData(response.data.data);
-                console.log(response.data.data)
+                setEmergencyData(response.data);
+                console.log(response.data)
 
             })
             .catch((error) => console.log(error))
@@ -61,7 +60,7 @@ const Emergencies = () => {
         <div className="emergenciesTable">
           <div className="container">
                   {
-                      EmergenciesData.map((emergency) =>{
+                      emergencyData.map((emergency) =>{
                           return (
                               <div className="emergencyCard">
                                   <div className="e-container">

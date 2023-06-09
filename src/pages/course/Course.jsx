@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./course.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import coursePicture from  "../../assets/images/firefighter1.jpg"
 import axios from "axios";
 
@@ -10,7 +10,7 @@ const Course = () => {
     let location = useLocation();
     const courseId = location.pathname.split('/')[2]
     const navigate = useNavigate();
-
+    /*
     const courseData = {
         "id": 1,
         "title": "What is fire",
@@ -29,15 +29,17 @@ const Course = () => {
         "isDeleted": false
     }
 
-    //const [courseData, setCourseData] = useState([])
+     */
+
+    const [courseData, setCourseData] = useState([])
 
     useEffect(() => {
 
         axios
-            .get('https://course.fireapp.website/course/' + courseId)
+            .get('https://api.fireapp.website/course/' + courseId)
             .then((response) => {
-                //setCourseData(response.data.data);
-                console.log(response.data.data)
+                setCourseData(response.data);
+                console.log(response.data)
 
             })
             .catch((error) => console.log(error))

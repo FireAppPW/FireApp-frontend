@@ -6,7 +6,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
 import course1 from "../../assets/images/course1.jpg";
-import {CoursesData} from "./CoursesData";
 import {Link} from 'react-router-dom';
 import axios from "axios";
 
@@ -16,9 +15,10 @@ const Course = Link
 
 
 const Courses = () => {
-    //const [courseData, setCourseData] = useState([]);
+    const [courseData, setCourseData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     //EXAMPLE
+    /*
     const courseData = [{
         "id": 1,
         "title": "What is fire",
@@ -36,6 +36,8 @@ const Courses = () => {
         "picture": "https://media.istockphoto.com/id/113494458/photo/fire-isolated-over-black-background.jpg",
         "isDeleted": false
     }]
+
+     */
     const filteredCourses = courseData.filter((course) => {
         return course.description.toLowerCase().includes(searchQuery.toLowerCase());
     });
@@ -47,10 +49,10 @@ const Courses = () => {
 
     useEffect(() => {
         axios
-            .get('https://course.fireapp.website/course')
+            .get('https://api.fireapp.website/course')
             .then((response) => {
-                //setCourseData(response.data.data);
-                console.log(response.data.data)
+                setCourseData(response.data);
+                console.log(response.data)
 
             })
             .catch((error) => console.log(error))

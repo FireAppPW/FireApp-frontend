@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./newuser.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import {Link, useNavigate} from "react-router-dom";
@@ -13,24 +13,50 @@ const NewUser = () => {
   const[firstName,setFirstName]=useState('')
   const[lastName,setLastName]=useState('')
   const[birthDate,setBirthDate]=useState('')
+  const[fireDepartmentId,setFireDepartmentId]=useState('')
   const[addressLine1,setAddressLine1]=useState('')
   const[addressLine2,setAddressLine2]=useState('')
   const[city,setCity]=useState('')
   const[country,setCountry]=useState('')
+  const[role,setRole]=useState('')
   const[profilePicture,setProfilePicture]=useState('')
+  const[departmentData, setDepartmentData] = useState([]);
+
+  useEffect(() => {
+    axios
+        .get('https://department.fireapp.website/department')
+        .then((response) => {
+          setDepartmentData(response.data.data);
+
+        })
+        .catch((error) => console.log(error))
+
+  }, []);
 
   const handleClick=(e)=>{
     e.preventDefault()
     const user={
+      id: 0,
       email,
       firstName,
       lastName,
       birthDate,
+      fireDepartmentId,
+      shift: 0,
+      position: "string",
+      "role": {
+        id: role.split(':')[1],
+        name: role.split(':')[0],
+        accounts: []
+      },
       addressLine1,
       addressLine2,
       city,
       country,
-      profilePicture
+      profilePicture,
+      isActivated: true,
+      activationCode: "string",
+      isDeleted: true
     }
     console.log(user)
     axios
@@ -113,16 +139,26 @@ const NewUser = () => {
             <div className="fillCard">
               <p>Fire Department</p>
               <div className="userSelect">
-                <select name="department" id="department">
-                  <option value="Any" >Any</option>
+                <select name="department" id="department" onChange={
+                  (e)=> setFireDepartmentId(e.target.value)
+                }>
+                  {departmentData.map((department, index) => {
+                    return (<option value={department.id} >{"Name: " +department.name + ", Id:" + department.id}</option>)
+                  })}
+
                 </select>
               </div>
             </div>
             <div className="fillCard">
               <p>Role</p>
               <div className="userSelect">
-                <select name="role" id="role">
-                  <option value="Any">Any</option>
+                <select name="role" id="role" onChange={
+                  (e)=> setRole(e.target.value)
+                }>
+                  <option value="User:0">User</option>
+                  <option value="SysAdmin:1">SysAdmin</option>
+                  <option value="FireAdmin:2">FireAdmin</option>
+                  <option value="Commandant:3">Commandant</option>
                 </select>
               </div>
             </div>
@@ -131,7 +167,7 @@ const NewUser = () => {
               <input type="file" id="images" accept="image/*" value={profilePicture}
                      onChange={
                        (e)=>setProfilePicture(e.target.value)
-                     }required />
+                     } required />
             </div>
           </div>
         </form>

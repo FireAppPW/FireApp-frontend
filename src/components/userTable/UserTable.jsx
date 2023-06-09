@@ -8,7 +8,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import person1 from "../../assets/images/person1.jpg";
 import person2 from "../../assets/images/person2.jpg";
 import person3 from "../../assets/images/person3.jpg";
-import axios, {Axios} from "axios";
+import axios from "axios";
 
 const CreateUser = Link
 const UpdateUser = Link
@@ -20,7 +20,7 @@ const Table = () => {
   const profileImages = [person1, person2, person3]
 
 
-  const userData = [
+  /*const userData = [
     {
       id: 0,
       email: "string",
@@ -35,66 +35,20 @@ const Table = () => {
         "accounts": [
           "string"
         ]
-      },
-      addressLine1: "string",
-      addressLine2: "string",
-      city: "string",
-      country: "string",
-      profilePicture: "string",
-    },
-    {
-      id: 1,
-      email: "string",
-      firstName: "tets2",
-      lastName: "string",
-      birthDate: "2023-05-31",
-      fireDepartmentId: 2,
-      position: "string",
-      role: {
-        "id": 0,
-        "name": "string",
-        "accounts": [
-          "string"
-        ]
-      },
-      addressLine1: "string",
-      addressLine2: "string",
-      city: "string",
-      country: "string",
-      profilePicture: "string",
-    },
-    {
-      id: 2,
-      email: "string",
-      firstName: "test3",
-      lastName: "string",
-      birthDate: "2023-05-31",
-      fireDepartmentId: 3,
-      position: "string",
-      role: {
-        "id": 0,
-        "name": "string",
-        "accounts": [
-          "string"
-        ]
-      },
-      addressLine1: "string",
-      addressLine2: "string",
-      city: "string",
-      country: "string",
-      profilePicture: "string",
-    },
+      }
   ];
 
-  //const [userData, setUserData] = useState([]);
+   */
+
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
 
     axios
-        .get('https://account.fireapp.website/account')
+        .get('https://api.fireapp.website/account')
         .then((response) => {
-          //setUserData(response.data.data);
-          console.log(response.data.data)
+          setUserData(response.data);
+          console.log("Response:",response.data)
 
         })
         .catch((error) => console.log(error))
@@ -120,14 +74,11 @@ const Table = () => {
 
   const handleDeleteClick=(e, id)=>{
     e.preventDefault()
-    console.log(id)
-    /*
     axios
-        .delete("https://account.fireapp.website/account/"+ id.toString())
+        .delete("https://account.fireapp.website/account/"+ id)
         .then(res => window.location.reload())
         .catch(err => console.log(err))
 
-     */
   }
 
   return (
@@ -159,6 +110,7 @@ const Table = () => {
               <th className="userTh">Name</th>
               <th className="userTh">ID</th>
               <th className="userTh">Fire Department</th>
+              <th className="userTh">Email</th>
               <th className="userTh">Role</th>
               <th className="userTh">Actions</th>
             </tr>
@@ -174,6 +126,7 @@ const Table = () => {
                     <td className="widgetLgDate">{user.id}</td>
                     <td className="widgetLgAmount">{user.fireDepartmentId}</td>
                     <td className="widgetLgAmount">{user.email}</td>
+                    <td className="widgetLgAmount">{user.role.name}</td>
                     <td className="widgetLgStatus">
                       <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
                         (e) => {
