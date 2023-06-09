@@ -10,27 +10,6 @@ const Course = () => {
     let location = useLocation();
     const courseId = location.pathname.split('/')[2]
     const navigate = useNavigate();
-    /*
-    const courseData = {
-        "id": 1,
-        "title": "What is fire",
-        "description": "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        "isPublic": false,
-        "dateTimeCreated": "2022-05-30",
-        "dateTimeApplicationDeadline": "2023-12-30",
-        "dateTimeStart": "2022-05-30",
-        "places": 1,
-        "isRemote": false,
-        "addressLine1": "Centrum",
-        "addressLine2": "7A",
-        "city": "Warsaw",
-        "country": "Poland",
-        "picture": "https://media.istockphoto.com/id/113494458/photo/fire-isolated-over-black-background.jpg",
-        "isDeleted": false
-    }
-
-     */
-
     const [courseData, setCourseData] = useState([])
 
     useEffect(() => {
@@ -50,13 +29,12 @@ const Course = () => {
     const handleDeleteClick=(e)=>{
         e.preventDefault()
         console.log(courseId)
-        /*
+
         axios
             .delete("https://course.fireapp.website/course/"+ courseId)
-            .then(res => window.location.reload())
+            .then(res => navigate("/courses"))
             .catch(err => console.log(err))
 
-         */
     }
 
     const handleUpdateClick=(e)=>{

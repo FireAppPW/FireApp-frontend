@@ -16,17 +16,37 @@ const NewCourse = () => {
     const[country,setCountry]=useState('')
     const[city,setCity]=useState('')
     const[places,setPlaces]=useState('')
-    const[mode,setMode]=useState('')
+    const[isPublic,setIsPublic]=useState(true)
+    const[dateTimeApplicationDeadline,setDateTimeApplicationDeadline]=useState('')
+    const[dateTimeStart,setDateTimeStart]=useState('')
     const[picture,setPicture]=useState('')
 
     const handleClick=(e)=>{
         e.preventDefault()
-        const course={title, description, addressLine1, addressLine2, country, city, places, mode, picture}
+        const course = {
+            "id": 0,
+            title,
+            description,
+            isPublic,
+            "dateTimeCreated": new Date().toJSON(),
+            "dateTimeApplicationDeadline": new Date(dateTimeApplicationDeadline).toJSON(),
+            "dateTimeStart": new Date(dateTimeStart).toJSON(),
+            places,
+            "isRemote": true,
+            addressLine1,
+            addressLine2,
+            city,
+            country,
+            picture,
+            "isDeleted": true
+        }
         console.log(course)
         axios
             .post("https://course.fireapp.website/course", course)
             .then(navigate("/courses"))
             .catch(err => console.log(err))
+
+
     }
 
 
@@ -100,12 +120,31 @@ const NewCourse = () => {
                             <p>Public/private</p>
                             <div className="courseSelect">
                                 <select name="department" id="department" onChange={
-                                    (e) => setMode(e.target.value)
+                                    (e) => {
+                                        if (e.target.value === "false"){
+                                            setIsPublic(false)
+                                        }else{
+                                            setIsPublic(true)
+                                        }
+
+                                    }
                                 }>
-                                    <option value="Public">Public</option>
-                                    <option value="Private">Private</option>
+                                    <option value="true">Public</option>
+                                    <option value="false">Private</option>
                                 </select>
                             </div>
+                        </div>
+                        <div className="fillCard">
+                            <p>Start Date</p>
+                            <input type="date" value={dateTimeStart} onChange={
+                                (e)=> setDateTimeStart(e.target.value)
+                            } required/>
+                        </div>
+                        <div className="fillCard">
+                            <p>Application Deadline</p>
+                            <input type="date" value={dateTimeApplicationDeadline} onChange={
+                                (e)=> setDateTimeApplicationDeadline(e.target.value)
+                            } required/>
                         </div>
                         <div className="userPhoto">
                             <p>Photo</p>

@@ -39,7 +39,7 @@ const UpdateUser = () => {
     axios
         .get('https://account.fireapp.website/account/' + userId)
         .then((response) => {
-          setUserData(response.data);
+          setUserData(response.data.data);
         })
         .catch((error) => console.log(error))
 

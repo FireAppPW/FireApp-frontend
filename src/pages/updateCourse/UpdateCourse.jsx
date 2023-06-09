@@ -12,7 +12,7 @@ const NewCourse = () => {
     let location = useLocation();
     const navigate = useNavigate();
     const courseId = location.pathname.split('/')[3]
-    //const[courseData, setCourseData] = useState({})
+    const[courseData, setCourseData] = useState({})
     const[title,setTitle]=useState('')
     const[description,setDescription]=useState('')
     const[addressLine1,setAddressLine1]=useState('')
@@ -20,30 +20,31 @@ const NewCourse = () => {
     const[country,setCountry]=useState('')
     const[city,setCity]=useState('')
     const[places,setPlaces]=useState('')
-    const[mode,setMode]=useState('')
+    const[isPublic,setIsPublic]=useState(true)
+    const[dateTimeApplicationDeadline,setDateTimeApplicationDeadline]=useState('')
+    const[dateTimeStart,setDateTimeStart]=useState('')
     const[picture,setPicture]=useState('')
 
-    const courseData = {
-        "id": 1,
-        "title": "What is fire",
-        "description": "Fire 101",
-        "isPublic": false,
-        "dateTimeCreated": "2022-05-30T15:11:24.061",
-        "dateTimeApplicationDeadline": "2023-12-30T15:11:24.061",
-        "dateTimeStart": "2022-05-30T15:11:24.061",
-        "places": 1,
-        "isRemote": false,
-        "addressLine1": "Centrum",
-        "addressLine2": "7A",
-        "city": "Warsaw",
-        "country": "Poland",
-        "picture": "https://media.istockphoto.com/id/113494458/photo/fire-isolated-over-black-background.jpg",
-        "isDeleted": false
-    }
 
     const handleClick=(e)=>{
         e.preventDefault()
-        const course={title, description, addressLine1, addressLine2, country, city, places, mode, picture}
+        const course = {
+            "id": courseId,
+            title,
+            description,
+            isPublic,
+            "dateTimeCreated": courseData.dateTimeCreated,
+            dateTimeApplicationDeadline,
+            dateTimeStart,
+            places,
+            "isRemote": true,
+            addressLine1,
+            addressLine2,
+            city,
+            country,
+            picture,
+            "isDeleted": true
+        }
         console.log(course)
         axios
             .put("https://course.fireapp.website/course/" + courseId, course)
@@ -55,27 +56,25 @@ const NewCourse = () => {
         axios
             .get('https://course.fireapp.website/course/' + courseId)
             .then((response) => {
-                //setCourseData(response.data.data);
-                console.log(response.data.data)
+                console.log("COURSE: ",response.data)
+                setTitle(response.data.title)
+                setDescription(response.data.description)
+                setIsPublic(response.data.isPublic)
+                setDateTimeApplicationDeadline(response.data.dateTimeApplicationDeadline)
+                setDateTimeStart(response.data.dateTimeStart)
+                setPlaces(response.data.places)
+                setAddressLine1(response.data.addressLine1)
+                setAddressLine2(response.data.addressLine2)
+                setCity(response.data.city)
+                setCountry(response.data.country)
+                setCourseData(response.data);
 
             })
             .catch((error) => console.log(error))
 
+
+
     }, []);
-
-    useEffect(() => {
-
-        setTitle(courseData.title)
-        setDescription(courseData.description)
-        setAddressLine1(courseData.addressLine1)
-        setAddressLine2(courseData.addressLine2)
-        setCountry(courseData.country)
-        setCity(courseData.city)
-        setPlaces(courseData.places)
-        setMode(courseData.isPublic)
-
-    })
-
 
     return (
         <div className="wrapper">
@@ -109,7 +108,7 @@ const NewCourse = () => {
                         </div>
                         <div className="fillCard">
                             <p>Description</p>
-                            <textarea type="text" value={description} onChange={
+                            <input type="text" value={description} onChange={
                                 (e)=> setDescription(e.target.value)
                             }/>
                         </div>
@@ -147,12 +146,31 @@ const NewCourse = () => {
                             <p>Public/private</p>
                             <div className="courseSelect">
                                 <select name="department" id="department" onChange={
-                                    (e) => setMode(e.target.value)
+                                    (e) => {
+                                        if (e.target.value === "false"){
+                                            setIsPublic(false)
+                                        }else{
+                                            setIsPublic(true)
+                                        }
+
+                                    }
                                 }>
-                                    <option value="Public">Public</option>
-                                    <option value="Private">Private</option>
+                                    <option value="true">Public</option>
+                                    <option value="false">Private</option>
                                 </select>
                             </div>
+                        </div>
+                        <div className="fillCard">
+                            <p>Start Date</p>
+                            <input type="date" value={dateTimeStart} onChange={
+                                (e)=> setDateTimeStart(e.target.value)
+                            } required/>
+                        </div>
+                        <div className="fillCard">
+                            <p>Application Deadline</p>
+                            <input type="date" value={dateTimeApplicationDeadline} onChange={
+                                (e)=> setDateTimeApplicationDeadline(e.target.value)
+                            } required/>
                         </div>
                         <div className="userPhoto">
                             <p>Photo</p>

@@ -17,27 +17,7 @@ const Course = Link
 const Courses = () => {
     const [courseData, setCourseData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    //EXAMPLE
-    /*
-    const courseData = [{
-        "id": 1,
-        "title": "What is fire",
-        "description": "Fire 101",
-        "isPublic": false,
-        "dateTimeCreated": "2022-05-30T15:11:24.061",
-        "dateTimeApplicationDeadline": "2023-12-30T15:11:24.061",
-        "dateTimeStart": "2022-05-30T15:11:24.061",
-        "places": 1,
-        "isRemote": false,
-        "addressLine1": "Centrum",
-        "addressLine2": "7A",
-        "city": "Warsaw",
-        "country": "Poland",
-        "picture": "https://media.istockphoto.com/id/113494458/photo/fire-isolated-over-black-background.jpg",
-        "isDeleted": false
-    }]
 
-     */
     const filteredCourses = courseData.filter((course) => {
         return course.description.toLowerCase().includes(searchQuery.toLowerCase());
     });
@@ -97,9 +77,6 @@ const Courses = () => {
                   <div className="right">
 
                       <div className="container">
-                          <EditCourse to="" className="edit">
-                              <ModeEditIcon className="icon"/>
-                          </EditCourse>
                           <CreateCourse to="/newCourse" className="add">
                               <AddIcon className="icon"/>
                           </CreateCourse>
