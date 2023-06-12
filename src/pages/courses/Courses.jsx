@@ -5,8 +5,12 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import course1 from "../../assets/images/course1.jpg";
+import course2 from  "../../assets/images/course2.jpg"
+import course3 from  "../../assets/images/course3.jpg"
+import course4 from  "../../assets/images/course4.jpg"
 import {Link} from 'react-router-dom';
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const CreateCourse = Link
 const Course = Link
@@ -15,9 +19,19 @@ const Course = Link
 const Courses = () => {
     const [courseData, setCourseData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [isRemoteQuery, setIsRemoteQuery] = useState(false);
+    const token = JSON.parse(Cookies.get('token')).accessToken
+    const coursesPictures = [course1, course2, course3, course4]
+    const config = {
+        headers: {
+            Authorization : `Bearer ${token}`
+        }
+    }
 
     const filteredCourses = courseData.filter((course) => {
-        return course.description.toLowerCase().includes(searchQuery.toLowerCase());
+        console.log(isRemoteQuery)
+        return  course.description.toLowerCase().includes(searchQuery.toLowerCase()) &&
+                course.isRemote === isRemoteQuery;
     });
 
     const handleSearchInputChange = (event) => {
@@ -26,12 +40,6 @@ const Courses = () => {
 
 
     useEffect(() => {
-        const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyLG1hcmNlbGlub2Zlcm5hbmRlemNhYmVsbG9AZ21haWwuY29tIiwicm9sZXMiOiJTeXNBZG1pbiIsImlzcyI6IkZpcmVBcHAiLCJpYXQiOjE2ODY0ODE5MDQsImV4cCI6MTY4NjU2ODMwNH0.F75XjPPb98h_pCuTMoQK1MJXquRJVQ12N7Lsp9ydFeOVrK_XBLuG4NE4-F4yOwe8Hfv7zWSDxHO0QTOzrSJxUA"
-        const config = {
-            headers: {
-                Authorization : `Bearer ${token}`
-            }
-        }
         axios
             .get('https://course.fireapp.website/course', config)
             .then((response) => {
@@ -56,18 +64,19 @@ const Courses = () => {
                   <div className="left">
                       <div className="container">
                           <div className="selectCard">
-                              <p>Category</p>
-                              <div className="select">
-                                  <select name="category" id="category">
-                                      <option value="Any">Any</option>
-                                  </select>
-                              </div>
-
-                          </div>
-                          <div className="selectCard">
                               <p>Remote</p>
                               <div className="select">
-                                  <select name="category" id="category">
+                                  <select
+                                      name="category"
+                                      id="category"
+                                      onChange={(e) => {
+                                          if (e.target.value === "true"){
+                                              setIsRemoteQuery(true)
+                                          }else{
+                                              setIsRemoteQuery(false)
+                                          }
+
+                                      }}>
                                       <option value="Any">Any</option>
                                       <option value="true">Yes</option>
                                       <option value="false">No</option>
@@ -94,9 +103,6 @@ const Courses = () => {
                               <SearchIcon className="searchIcon"/>
                           </div>
                       </div>
-                      <div className="submit">
-                          <p>Submit</p>
-                      </div>
                   </div>
 
               </form>
@@ -107,7 +113,7 @@ const Courses = () => {
                               <Course key={index} to={"/courses/" + course.id} className="courseCard">
                                   <div className="container">
                                       <div className="image">
-                                          <img src={course1} alt=""/>
+                                          <img src={coursesPictures[Math.floor(Math.random() * coursesPictures.length)]} alt=""/>
                                       </div>
                                       <div className="texts">
                                           <h2>{course.title}</h2>

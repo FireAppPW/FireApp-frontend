@@ -5,6 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {useLocation, useNavigate} from 'react-router-dom';
 import coursePicture from  "../../assets/images/firefighter1.jpg"
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Course = () => {
     let location = useLocation();
@@ -12,10 +13,17 @@ const Course = () => {
     const navigate = useNavigate();
     const [courseData, setCourseData] = useState([])
 
+    const token = JSON.parse(Cookies.get('token')).accessToken
+    const config = {
+        headers: {
+            Authorization : `Bearer ${token}`
+        }
+    }
+
     useEffect(() => {
 
         axios
-            .get('https://api.fireapp.website/course/' + courseId)
+            .get('https://course.fireapp.website/course/' + courseId, config)
             .then((response) => {
                 setCourseData(response.data);
                 console.log(response.data)
@@ -73,13 +81,13 @@ const Course = () => {
                         <div className="short-info-card" style={{backgroundColor: "#FFDD71BD"}}>
                             <div className="card-content">
                                 <p>Date Time start</p>
-                                <h2>{courseData.dateTimeStart}</h2>
+                                <h2>{courseData.dateTimeStart.slice(0,10)}</h2>
                             </div>
                         </div>
                         <div className="short-info-card" style={{backgroundColor: "rgba(4,191,138,0.49)"}}>
                             <div className="card-content">
                                 <p>Date Time End</p>
-                                <h2>{courseData.dateTimeApplicationDeadline}</h2>
+                                <h2>{courseData.dateTimeApplicationDeadline.slice(0,10)}</h2>
                             </div>
                         </div>
                         <div className="short-info-card" style={{backgroundColor: "rgba(245,114,114,0.55)"}}>
@@ -95,7 +103,9 @@ const Course = () => {
                         <h2>Other info</h2>
                         <p>Address: {courseData.addressLine1 + courseData.addressLine2}</p>
                         <p>Remote: {courseData.isRemote ? "Yes" : "No"}</p>
-                        <p>Date Created: {courseData.dateTimeCreated}</p>
+                        <p>Date Created: {courseData.dateTimeCreated.slice(0,10) + " at " +
+                            courseData.dateTimeCreated.slice(11,20)}
+                        </p>
                     </div>
                 </div>
                 <div className="course-options">
