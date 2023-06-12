@@ -18,8 +18,8 @@ const Login = () => {
             axios
                 .post("https://account.fireapp.website/account/login", {"code": tokenResponse.access_token})
                 .then((response) => {
-                    Cookies.set('google-auth', JSON.stringify(tokenResponse));
-                    Cookies.set('token', JSON.stringify(response.data));
+                    Cookies.set('google-auth', JSON.stringify(tokenResponse),{ expires: 1 });
+                    Cookies.set('token', JSON.stringify(response.data), { expires: 1 });
                     navigate("/emergencies")
                 })
                 .catch(err => console.log(err))
