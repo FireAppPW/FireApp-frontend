@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
+import Cookies from "js-cookie";
 
 const NewUser = () => {
 
@@ -22,11 +23,19 @@ const NewUser = () => {
   const[profilePicture,setProfilePicture]=useState('')
   const[departmentData, setDepartmentData] = useState([]);
 
+  const token = JSON.parse(Cookies.get('token')).accessToken;
+  const config = {
+    headers: {
+      Authorization : `Bearer ${token}`
+    }
+  }
   useEffect(() => {
+
     axios
-        .get('https://department.fireapp.website/department')
+        .get('https://department.fireapp.website/department',  config)
         .then((response) => {
           setDepartmentData(response.data.data);
+          console.log(response.data.data)
 
         })
         .catch((error) => console.log(error))
@@ -35,34 +44,32 @@ const NewUser = () => {
 
   const handleClick=(e)=>{
     e.preventDefault()
-    const user={
-      id: 0,
-      email,
-      firstName,
-      lastName,
-      birthDate,
-      fireDepartmentId,
-      shift: 0,
-      position: "string",
+    const user=
+    {
+      "activationCode": "123456",
+      "addressLine1": addressLine1,
+      "addressLine2": addressLine2,
+      "birthDate": birthDate,
+      "city": city,
+      "country": country,
+      "email": email,
+      "fireDepartmentId": parseInt(fireDepartmentId),
+      "firstName": firstName,
+      "lastName": lastName,
+      "isActivated": true,
+      "isDeleted": false,
+      "position": "CEO",
+      "shift": 1,
       "role": {
-        id: role.split(':')[1],
-        name: role.split(':')[0],
-        accounts: []
-      },
-      addressLine1,
-      addressLine2,
-      city,
-      country,
-      profilePicture,
-      isActivated: true,
-      activationCode: "string",
-      isDeleted: true
+        "id": parseInt(role)
+      }
     }
     console.log(user)
     axios
-        .post("https://account.fireapp.website/account", user)
+        .post("https://account.fireapp.website/account", user, config)
         .then(navigate("/manageuser"))
         .catch(err => console.log(err))
+
   }
 
   return (
@@ -139,11 +146,11 @@ const NewUser = () => {
             <div className="fillCard">
               <p>Fire Department</p>
               <div className="userSelect">
-                <select name="department" id="department" onChange={
+                <select value={fireDepartmentId} name="department" id="department" onChange={
                   (e)=> setFireDepartmentId(e.target.value)
                 }>
                   {departmentData.map((department, index) => {
-                    return (<option value={department.id} >{"Name: " +department.name + ", Id:" + department.id}</option>)
+                    return (<option key={index} value={department.id} >{"Name: " +department.name + ", Id:" + department.id}</option>)
                   })}
 
                 </select>
@@ -154,11 +161,11 @@ const NewUser = () => {
               <div className="userSelect">
                 <select name="role" id="role" onChange={
                   (e)=> setRole(e.target.value)
-                }>
-                  <option value="User:0">User</option>
-                  <option value="SysAdmin:1">SysAdmin</option>
-                  <option value="FireAdmin:2">FireAdmin</option>
-                  <option value="Commandant:3">Commandant</option>
+                } value={role.id}>
+                  <option value="3">User</option>
+                  <option value="1">SysAdmin</option>
+                  <option value="2">FireAdmin</option>
+                  <option value="4">Commandant</option>
                 </select>
               </div>
             </div>

@@ -5,6 +5,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
+import Cookies from "js-cookie";
 
 const UpdateUser = () => {
 
@@ -24,66 +25,65 @@ const UpdateUser = () => {
   let location = useLocation();
   const userId = location.pathname.split('/')[2]
 
-  const [userData, setUserData] = useState([]);
-
-
+  const token = JSON.parse(Cookies.get('token')).accessToken;
+  const config = {
+    headers: {
+      Authorization : `Bearer ${token}`
+    }
+  }
 
   useEffect(() => {
 
     axios
-        .get('https://department.fireapp.website/department')
+        .get('https://department.fireapp.website/department', config)
         .then((response) => {
           setDepartmentData(response.data.data);
         })
         .catch((error) => console.log(error))
     axios
-        .get('https://account.fireapp.website/account/' + userId)
+        .get('https://account.fireapp.website/account/' + userId, config)
         .then((response) => {
-          setUserData(response.data.data);
+          setEmail(response.data.email)
+          setFirstName(response.data.firstName)
+          setLastName(response.data.lastName)
+          setBirthDate(response.data.birthDate)
+          setFireDepartmentId(response.data.fireDepartmentId)
+          setAddressLine1(response.data.addressLine1)
+          setAddressLine2(response.data.addressLine2)
+          setCity(response.data.city)
+          setCountry(response.data.country)
+          setRole(response.data.role.id)
         })
         .catch((error) => console.log(error))
-
-    setEmail(userData.email)
-    setFirstName(userData.firstName)
-    setLastName(userData.lastName)
-    setBirthDate(userData.birthDate)
-    setFireDepartmentId(userData.fireDepartmentId)
-    setAddressLine1(userData.addressLine1)
-    setAddressLine2(userData.addressLine2)
-    setCity(userData.city)
-    setCountry(userData.country)
-    setRole(userData.role)
-
-
   }, []);
 
   const handleClick=(e)=>{
     e.preventDefault()
-    const user={
-      id: 0,
-      email,
-      firstName,
-      lastName,
-      birthDate,
-      fireDepartmentId,
-      shift: 0,
-      position: "string",
-      role,
-      addressLine1,
-      addressLine2,
-      city,
-      country,
-      profilePicture,
-      isActivated: true,
-      activationCode: "string",
-      isDeleted: true
+    const user=
+    {
+      "activationCode": "123456",
+      "addressLine1": addressLine1,
+      "addressLine2": addressLine2,
+      "birthDate": birthDate,
+      "city": city,
+      "country": country,
+      "email": email,
+      "fireDepartmentId": parseInt(fireDepartmentId),
+      "firstName": firstName,
+      "lastName": lastName,
+      "isActivated": true,
+      "isDeleted": false,
+      "position": "CEO",
+      "shift": 1,
+      "role": {
+        "id": parseInt(role)
+      }
     }
-    console.log(user)
-
     axios
-        .put("https://account.fireapp.website/account/" + userId, user)
+        .put("https://account.fireapp.website/account/" + userId, user, config)
         .then(navigate("/manageuser"))
         .catch(err => console.log(err))
+
 
   }
 
@@ -161,11 +161,11 @@ const UpdateUser = () => {
             <div className="fillCard">
               <p>Fire Department</p>
               <div className="userSelect">
-                <select name="department" id="department" onChange={
+                <select value={fireDepartmentId} name="department" id="department" onChange={
                   (e)=> setFireDepartmentId(e.target.value)
                 }>
                   {departmentData.map((department, index) => {
-                    return (<option value={department.id} >{"Name: " +department.name + ", Id:" + department.id}</option>)
+                    return (<option key={index} value={department.id} >{"Name: " +department.name + ", Id:" + department.id}</option>)
                   })}
 
                 </select>
@@ -176,11 +176,11 @@ const UpdateUser = () => {
               <div className="userSelect">
                 <select name="role" id="role" onChange={
                   (e)=> setRole(e.target.value)
-                }>
-                  <option value="User:0">User</option>
-                  <option value="SysAdmin:1">SysAdmin</option>
-                  <option value="FireAdmin:2">FireAdmin</option>
-                  <option value="Commandant:3">Commandant</option>
+                } value={role.id}>
+                  <option value="3">User</option>
+                  <option value="1">SysAdmin</option>
+                  <option value="2">FireAdmin</option>
+                  <option value="4">Commandant</option>
                 </select>
               </div>
             </div>

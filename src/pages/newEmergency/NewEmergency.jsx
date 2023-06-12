@@ -1,24 +1,56 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./newemergency.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import {Button} from "@mui/material";
+import Cookies from "js-cookie";
 
 const NewEmergency = () => {
 
     const navigate = useNavigate();
-    const[dangerousLevel,setDangerousLevel]=useState('')
+    const[fireDepartmentId,setFireDepartmentId]=useState(null)
+    const[fireDepartmentName,setFireDepartmentName]=useState('')
+    const[dangerousLevel,setDangerousLevel]=useState(null)
+    const[authorId,setAuthorId]=useState('')
+    const[dateTimeCreated,setDateTimeCreated]=useState('')
     const[addressLine1,setAddressLine1]=useState('')
     const[addressLine2,setAddressLine2]=useState('')
     const[city,setCity]=useState('')
     const[country,setCountry]=useState('')
     const[description,setDescription]=useState('')
+    const[departmentData, setDepartmentData] = useState([]);
+
+    const token = JSON.parse(Cookies.get('token')).accessToken;
+    const config = {
+        headers: {
+            Authorization : `Bearer ${token}`
+        }
+    }
+
+    useEffect(() => {
+        axios
+            .get('https://department.fireapp.website/department', config)
+            .then((response) => {
+                setDepartmentData(response.data.data);
+            })
+            .catch((error) => console.log(error))
+    }, []);
+
 
     const handleClick=(e)=>{
         e.preventDefault()
         const emergency={
+            fireDepartmentId,
+            fireDepartmentName,
+            "classification": {
+                "id": 1,
+                "classField": "1",
+                "classDescription": "fire"
+            },
+            "authorId": 2,
+            "dateTimeCreated": new Date().toJSON(),
             dangerousLevel,
             addressLine1,
             addressLine2,
@@ -27,10 +59,12 @@ const NewEmergency = () => {
             description
         }
         console.log(emergency)
+
         axios
             .post("https://emergency.fireapp.website/emergency", emergency)
             .then(navigate("/emergencies"))
             .catch(err => console.log(err))
+
     }
 
     return (
@@ -58,9 +92,25 @@ const NewEmergency = () => {
                 <form action="" className="formSection">
                     <div className="container">
                         <div className="fillCard">
+                            <p>Fire Department</p>
+                            <div className="userSelect">
+                                <select name="department" id="department" onChange={
+                                    (e)=> {
+                                        setFireDepartmentId(parseInt(e.target.value.split(":")[0]))
+                                        setFireDepartmentName(e.target.value.split(":")[1])
+                                    }
+                                }>
+                                    {departmentData.map((department, index) => {
+                                        return (<option key={index} value={department.id + ":" + department.name} >{"Name: " +department.name + ", Id:" + department.id}</option>)
+                                    })}
+
+                                </select>
+                            </div>
+                        </div>
+                        <div className="fillCard">
                             <p>Dangerous Level</p>
                             <input type="number" value={dangerousLevel} onChange={
-                                (e)=> setDangerousLevel(e.target.value)
+                                (e)=> setDangerousLevel(parseInt(e.target.value))
                             }/>
                         </div>
                         <div className="fillCard">
@@ -70,7 +120,7 @@ const NewEmergency = () => {
                             }/>
                         </div>
                         <div className="fillCard">
-                            <p>Address Line 2</p>
+                            <p>Address Line 2 (Optional)</p>
                             <input type="text" value={addressLine2} onChange={
                                 (e)=> setAddressLine2(e.target.value)
                             }/>

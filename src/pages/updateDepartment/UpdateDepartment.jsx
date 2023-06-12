@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import "./updatedepartment.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
 
 const UpdateDepartment = () => {
 
+  const navigate = useNavigate();
   const[name,setName]=useState('')
   const[addressLine1,setAddressLine1]=useState('')
   const[addressLine2,setAddressLine2]=useState('')
@@ -19,22 +20,6 @@ const UpdateDepartment = () => {
   let location = useLocation();
   const departmentId = location.pathname.split('/')[3]
   const [departmentData, setDepartmentData] = useState([]);
-
-  /*
-  const departmentData =
-      {
-        id: departmentId,
-        addressLine1: "string",
-        addressLine2: "string",
-        city: "string",
-        country: "string",
-        email: "alfa@warsawfire@gmail.com",
-        profilePicture: "string",
-        name: "Alfa",
-        phone: "112"
-      }
-
-   */
 
   const handleClick=(e)=>{
     e.preventDefault()
@@ -49,13 +34,11 @@ const UpdateDepartment = () => {
       phone
     }
     console.log(department)
-    /*
     axios
         .put("https://department.fireapp.website/department/" + departmentId, department)
         .then(navigate("/managedepartment"))
         .catch(err => console.log(err))
 
-     */
   }
 
   useEffect(() => {
@@ -63,23 +46,19 @@ const UpdateDepartment = () => {
         .get('https://department.fireapp.website/department/' + departmentId)
         .then((response) => {
           setDepartmentData(response.data.data);
+          setName(response.data.data.name)
+          setAddressLine1(response.data.data.addressLine1)
+          setAddressLine2(response.data.data.addressLine2)
+          setCity(response.data.data.city)
+          setCountry(response.data.data.country)
+          setPhone(response.data.data.phone)
+          setEmail(response.data.data.email)
           console.log(response.data.data)
 
         })
         .catch((error) => console.log(error))
 
   }, []);
-
-  useEffect(() => {
-    setName(departmentData.name)
-    setAddressLine1(departmentData.addressLine1)
-    setAddressLine2(departmentData.addressLine2)
-    setCity(departmentData.city)
-    setCountry(departmentData.country)
-    setPhone(departmentData.phone)
-    setEmail(departmentData.email)
-
-  })
 
   return (
     <>

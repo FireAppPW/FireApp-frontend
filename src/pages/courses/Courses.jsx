@@ -3,14 +3,12 @@ import "./courses.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import SearchIcon from '@mui/icons-material/Search';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import AddIcon from '@mui/icons-material/Add';
 import course1 from "../../assets/images/course1.jpg";
 import {Link} from 'react-router-dom';
 import axios from "axios";
 
 const CreateCourse = Link
-const EditCourse = Link
 const Course = Link
 
 
@@ -28,12 +26,16 @@ const Courses = () => {
 
 
     useEffect(() => {
+        const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyLG1hcmNlbGlub2Zlcm5hbmRlemNhYmVsbG9AZ21haWwuY29tIiwicm9sZXMiOiJTeXNBZG1pbiIsImlzcyI6IkZpcmVBcHAiLCJpYXQiOjE2ODY0ODE5MDQsImV4cCI6MTY4NjU2ODMwNH0.F75XjPPb98h_pCuTMoQK1MJXquRJVQ12N7Lsp9ydFeOVrK_XBLuG4NE4-F4yOwe8Hfv7zWSDxHO0QTOzrSJxUA"
+        const config = {
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        }
         axios
-            .get('https://api.fireapp.website/course')
+            .get('https://course.fireapp.website/course', config)
             .then((response) => {
                 setCourseData(response.data);
-                console.log(response.data)
-
             })
             .catch((error) => console.log(error))
 
@@ -63,10 +65,12 @@ const Courses = () => {
 
                           </div>
                           <div className="selectCard">
-                              <p>Fire Department</p>
+                              <p>Remote</p>
                               <div className="select">
                                   <select name="category" id="category">
                                       <option value="Any">Any</option>
+                                      <option value="true">Yes</option>
+                                      <option value="false">No</option>
                                   </select>
                               </div>
                           </div>
@@ -98,9 +102,9 @@ const Courses = () => {
               </form>
               <section className="courses">
                   {
-                      filteredCourses.map((course) =>{
+                      filteredCourses.map((course, index) =>{
                           return (
-                              <Course to={"/courses/" + course.id} className="courseCard">
+                              <Course key={index} to={"/courses/" + course.id} className="courseCard">
                                   <div className="container">
                                       <div className="image">
                                           <img src={course1} alt=""/>

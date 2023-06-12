@@ -90,6 +90,7 @@
       width: 90%;
       height: 52%;
       background-color: #ffffff;
+      overflow: scroll;
 
       .container {
         display: flex;
@@ -127,7 +128,6 @@
 
                 .e-l-top {
                   display: flex;
-                  justify-content: center;
                   align-items: center;
                   column-gap: 20px;
 

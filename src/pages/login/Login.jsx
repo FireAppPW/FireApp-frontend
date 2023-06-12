@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import "./login.scss";
 import screen from "../../assets/images/screen.png";
 import google_logo from "../../assets/icons/google-logo.svg";
@@ -14,9 +14,15 @@ const Login = () => {
     const navigate = useNavigate();
 
     const login = useGoogleLogin({
-        onSuccess: (codeResponse) => {
-            Cookies.set('googleAuth', JSON.stringify(codeResponse));
-            navigate("/emergencies")
+        onSuccess: async tokenResponse => {
+            axios
+                .post("https://account.fireapp.website/account/login", {"code": tokenResponse.access_token})
+                .then((response) => {
+                    Cookies.set('google-auth', JSON.stringify(tokenResponse));
+                    Cookies.set('token', JSON.stringify(response.data));
+                    navigate("/emergencies")
+                })
+                .catch(err => console.log(err))
         },
         onError: (error) => console.log('Login Failed:', error)
     });

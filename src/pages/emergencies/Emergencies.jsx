@@ -10,24 +10,39 @@ import axios from "axios";
 
 
 const Emergencies = () => {
+    const [emergencyData, setEmergencyData] = useState([]);
+    const emergencyColors = ["#96FF71BD", "#FFDD71BD", "#FF7971BD"]
+    const emergencyIconColors = ["#5AFD21", "#F9BE00", "#FE564C"]
 
-    const [info, setInfo] = useState(true);
-    const showInfo = () => {
-        setInfo(!info)
-        console.log(info)
+    function sortNull() {
+        return function (a, b) {
+            if (a.dateTimeClosed === null) {
+                return -1;
+            }
+            if (b.dateTimeClosed === null) {
+                return 1;
+            }
+        };
     }
 
-    const [emergencyData, setEmergencyData] = useState([]);
+    const handleClick=(e, emergency)=>{
+        e.preventDefault()
+        emergency.dateTimeClosed = new Date().toJSON()
+        axios
+            .put("https://emergency.fireapp.website/emergency/" + emergency.id, emergency)
+            .then(res => {
+                console.log(res)
+                window.location.reload()
 
-
+            })
+            .catch(err => console.log(err))
+    }
 
     useEffect(() => {
         axios
-            .get('https://api.fireapp.website/emergency')
+            .get('https://emergency.fireapp.website/emergency')
             .then((response) => {
-                setEmergencyData(response.data);
-                console.log(response.data)
-
+                setEmergencyData(response.data.sort(sortNull()));
             })
             .catch((error) => console.log(error))
 
@@ -60,38 +75,34 @@ const Emergencies = () => {
         <div className="emergenciesTable">
           <div className="container">
                   {
-                      emergencyData.map((emergency) =>{
+                      emergencyData.map((emergency, index) =>{
                           return (
-                              <div className="emergencyCard">
+                              <div key={emergency.id} className="emergencyCard">
                                   <div className="e-container">
                                       <div className="e-top">
                                           <div className="e-left">
                                               <div className="e-l-top">
-                                                  <div className="square" style={{backgroundColor: emergency.color}}>
-                                                      <ErrorOutlineOutlinedIcon className="icon" style={{color: emergency.iconColor}}/>
+                                                  <div className="square" style={{backgroundColor: emergencyColors[emergency.dangerousLevel]}}>
+                                                      <ErrorOutlineOutlinedIcon className="icon" style={{color: emergencyIconColors[emergency.dangerousLevel]}}/>
                                                   </div>
                                                   <div className="e-texts">
-                                                      <h2>{emergency.title}</h2>
+                                                      <h2>{emergency.city + ", " + emergency.country}</h2>
                                                   </div>
                                               </div>
                                               <div className="e-l-bottom">
-                                                  <p>{emergency.dateTimeCreated}</p>
+                                                  <p>{emergency.dateTimeCreated.slice(0, 10)}</p>
                                               </div>
                                           </div>
-                                          <div className="e-right" onClick={showInfo} style={
-                                              info ? {backgroundColor: "white"} : {backgroundColor: "#FF4300", color: "white"}}>
+                                          <div className="e-right" onClick={(e) => handleClick(e, emergency)} style={
+                                              emergency.dateTimeClosed === null ? {backgroundColor: "white"} : {backgroundColor: "#FF4300", color: "white"}}>
                                               <p>{
-                                                  info ? "Close Incident" : "Closed"
+                                                  emergency.dateTimeClosed === null ? "Close Incident" : "Closed"
                                               }</p>
                                           </div>
                                       </div>
-                                      {
-                                          info && (
-                                          <div className="e-bottom">
-                                            <p>{emergency.description}</p>
-                                          </div>)
-                                      }
-
+                                      <div className="e-bottom" style={{display: emergency.dateTimeClosed === null ? "block":"none"}}>
+                                        <p>{emergency.description}</p>
+                                      </div>
                                   </div>
                               </div>
                           );

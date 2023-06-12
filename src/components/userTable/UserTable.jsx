@@ -9,6 +9,7 @@ import person1 from "../../assets/images/person1.jpg";
 import person2 from "../../assets/images/person2.jpg";
 import person3 from "../../assets/images/person3.jpg";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const CreateUser = Link
 const UpdateUser = Link
@@ -18,42 +19,28 @@ const Table = () => {
   let location = useLocation();
   const departmentId = location.pathname.split('/')[2]
   const profileImages = [person1, person2, person3]
-
-
-  /*const userData = [
-    {
-      id: 0,
-      email: "string",
-      firstName: "test1",
-      lastName: "string",
-      birthDate: "2023-05-31",
-      fireDepartmentId: 2,
-      position: "string",
-      role: {
-        "id": 0,
-        "name": "string",
-        "accounts": [
-          "string"
-        ]
-      }
-  ];
-
-   */
-
   const [userData, setUserData] = useState([]);
 
-  useEffect(() => {
+  const token = JSON.parse(Cookies.get('token')).accessToken;
+  const config = {
+    headers: {
+      Authorization : `Bearer ${token}`
+    }
+  }
 
+  useEffect(() => {
+    const token = JSON.parse(Cookies.get('token')).accessToken;
+    const config = {
+      headers: {
+        Authorization : `Bearer ${token}`
+      }
+    }
     axios
-        .get('https://api.fireapp.website/account')
+        .get('https://account.fireapp.website/account', config)
         .then((response) => {
           setUserData(response.data);
-          console.log("Response:",response.data)
-
         })
         .catch((error) => console.log(error))
-
-
   }, []);
 
   const filteredUsers = userData.filter((user) =>
@@ -68,14 +55,14 @@ const Table = () => {
   });
 
   const handleSearchInputChange = (event) => {
-
     setSearchQuery(event.target.value);
   };
+
 
   const handleDeleteClick=(e, id)=>{
     e.preventDefault()
     axios
-        .delete("https://account.fireapp.website/account/"+ id)
+        .delete("https://account.fireapp.website/account/"+ id, config)
         .then(res => window.location.reload())
         .catch(err => console.log(err))
 
@@ -118,7 +105,7 @@ const Table = () => {
             <tbody>
             {filteredUsers.map((user, index) => {
               return (
-                  <tr className="userRow" key={index}>
+                  <tr className="userRow" key={user.id}>
                     <td className="userName">
                       <img src={profileImages[Math.floor(Math.random() * profileImages.length)]} alt="" className="userImg" />
                       <span>{user.firstName}</span>

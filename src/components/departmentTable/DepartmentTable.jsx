@@ -10,6 +10,7 @@ import department2 from "../../assets/images/department2.jpg";
 import department3 from "../../assets/images/department3.jpg";
 
 import EditIcon from "@mui/icons-material/Edit";
+import Cookies from "js-cookie";
 
 const CreateDepartment = Link
 const UpdateDepartment = Link
@@ -21,12 +22,16 @@ const DepartmentTable = () => {
   const departmentPictures = [department1, department2, department3]
 
   useEffect(() => {
+      const token = JSON.parse(Cookies.get('token')).accessToken
+      const config = {
+        headers: {
+          Authorization : `Bearer ${token}`
+        }
+      }
       axios
-          .get('https://department.fireapp.website/department')
+          .get('https://department.fireapp.website/department', config)
           .then((response) => {
             setDepartmentData(response.data.data);
-            console.log(response)
-
           })
           .catch((error) => console.log(error))
 
@@ -43,7 +48,6 @@ const DepartmentTable = () => {
 
   const handleDeleteClick=(e, id)=>{
     e.preventDefault()
-    console.log(id)
     /*
     axios
         .delete("https://department.fireapp.website/department/"+ id.toString())
@@ -87,30 +91,30 @@ const DepartmentTable = () => {
             </tr>
             </thead>
             <tbody>
-            {filteredDepartments.map((department, index) => {
-              return (
-                  <tr className="departmentRow" key={index}>
-                    <Department to={"/managedepartment/" + department.id} className="departmentName">
-                      <img src={departmentPictures[Math.floor(Math.random() * departmentPictures.length)]} alt="" className="departmentImg" />
-                      <span>{department.name}</span>
-                    </Department>
-                    <td className="departmentCell">{department.id}</td>
-                    <td className="departmentCell">{department.email}</td>
-                    <td className="departmentCell">{department.phone}</td>
-                    <td className="departmentCell departmentOptions">
-                      <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
-                        (e) => {
-                          handleDeleteClick(e, department.id)
-                        }}>
-                        <DeleteForeverIcon className="deleteIcon"/>
-                      </div>
-                      <UpdateDepartment to={"/managedepartment/update/" + department.id} className="borderIcon" style={{outlineColor: "#53daf1"}}>
-                        <EditIcon className="editIcon"/>
-                      </UpdateDepartment>
-                    </td>
-                  </tr>
-              );
-            })}
+                {filteredDepartments.map((department, index) => {
+                  return (
+                      <tr className="departmentRow" key={index}>
+                        <Department to={"/managedepartment/" + department.id} className="departmentName">
+                          <img src={departmentPictures[Math.floor(Math.random() * departmentPictures.length)]} alt="" className="departmentImg" />
+                          <span>{department.name}</span>
+                        </Department>
+                        <td className="departmentCell">{department.id}</td>
+                        <td className="departmentCell">{department.email}</td>
+                        <td className="departmentCell">{department.phone}</td>
+                        <td className="departmentCell departmentOptions">
+                          <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
+                            (e) => {
+                              handleDeleteClick(e, department.id)
+                            }}>
+                            <DeleteForeverIcon className="deleteIcon"/>
+                          </div>
+                          <UpdateDepartment to={"/managedepartment/update/" + department.id} className="borderIcon" style={{outlineColor: "#53daf1"}}>
+                            <EditIcon className="editIcon"/>
+                          </UpdateDepartment>
+                        </td>
+                      </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

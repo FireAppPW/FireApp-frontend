@@ -19,7 +19,7 @@ const RightSidebar = () => {
 
   useEffect(
       () => {
-        const cookieValue = JSON.parse(Cookies.get('googleAuth'));
+        const cookieValue = JSON.parse(Cookies.get('google-auth'));
         if (cookieValue) {
           axios
               .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${cookieValue.access_token}`, {
@@ -40,6 +40,8 @@ const RightSidebar = () => {
 
   const logOut = () => {
     googleLogout();
+    Cookies.remove('token')
+    Cookies.remove('google-auth')
     setProfile(null);
     navigate("/")
   };
@@ -83,7 +85,7 @@ const RightSidebar = () => {
         {
           NotificationData.map((item) =>{
             return (
-                <div className="notification">
+                <div key={item.id} className="notification">
                   <div className="square" style={{backgroundColor: item.color}}>
                     <ErrorOutlineOutlinedIcon className="icon" style={{color: item.iconColor}}/>
                   </div>
