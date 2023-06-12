@@ -21,13 +21,15 @@ const DepartmentTable = () => {
   const [departmentData, setDepartmentData] = useState([]);
   const departmentPictures = [department1, department2, department3]
 
+  const token = JSON.parse(Cookies.get('token')).accessToken
+  const config = {
+    headers: {
+      Authorization : `Bearer ${token}`
+    }
+  }
+
   useEffect(() => {
-      const token = JSON.parse(Cookies.get('token')).accessToken
-      const config = {
-        headers: {
-          Authorization : `Bearer ${token}`
-        }
-      }
+
       axios
           .get('https://department.fireapp.website/department', config)
           .then((response) => {
@@ -48,13 +50,11 @@ const DepartmentTable = () => {
 
   const handleDeleteClick=(e, id)=>{
     e.preventDefault()
-    /*
     axios
-        .delete("https://department.fireapp.website/department/"+ id.toString())
+        .delete("https://department.fireapp.website/department/"+ id, config)
         .then(res => window.location.reload())
         .catch(err => console.log(err))
 
-     */
   }
 
   return (
