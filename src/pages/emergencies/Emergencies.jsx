@@ -13,6 +13,7 @@ const Emergencies = () => {
     const [emergencyData, setEmergencyData] = useState([]);
     const emergencyColors = ["#96FF71BD", "#FFDD71BD", "#FF7971BD"]
     const emergencyIconColors = ["#5AFD21", "#F9BE00", "#FE564C"]
+    const [modalData, setModalData] = useState({})
 
     function sortNull() {
         return function (a, b) {
@@ -28,6 +29,7 @@ const Emergencies = () => {
     const handleClick=(e, emergency)=>{
         e.preventDefault()
         emergency.dateTimeClosed = new Date().toJSON()
+        console.log(emergency)
         axios
             .put("https://emergency.fireapp.website/emergency/" + emergency.id, emergency)
             .then(res => {
@@ -36,6 +38,7 @@ const Emergencies = () => {
 
             })
             .catch(err => console.log(err))
+
     }
 
     useEffect(() => {
@@ -86,18 +89,54 @@ const Emergencies = () => {
                                                       <ErrorOutlineOutlinedIcon className="icon" style={{color: emergencyIconColors[emergency.dangerousLevel]}}/>
                                                   </div>
                                                   <div className="e-texts">
-                                                      <h2>{emergency.city + ", " + emergency.country}</h2>
+                                                      <h2>{emergency.city + ", " + emergency.country + ", " + emergency.id}</h2>
                                                   </div>
                                               </div>
                                               <div className="e-l-bottom">
                                                   <p>{emergency.dateTimeCreated.slice(0, 10)}</p>
                                               </div>
                                           </div>
-                                          <div className="e-right" onClick={(e) => handleClick(e, emergency)} style={
-                                              emergency.dateTimeClosed === null ? {backgroundColor: "white"} : {backgroundColor: "#FF4300", color: "white"}}>
+                                          <a href="#target-content" className="e-right"
+                                             style={
+                                              emergency.dateTimeClosed === null ?
+                                                  {backgroundColor: "white"}
+                                                  :
+                                                  {backgroundColor: "#FF4300", color: "white"}}
+                                             onClick={
+                                                 () => setModalData(emergency)
+                                             }
+                                          >
                                               <p>{
                                                   emergency.dateTimeClosed === null ? "Close Incident" : "Closed"
                                               }</p>
+                                          </a>
+                                          <div id="target-content">
+                                              <a href="#" className="close"></a>
+                                              <div id="target-inner">
+                                                  <div className="target-inner__content">
+                                                      <p>{modalData.dateTimeClosed === null ?
+                                                          "Do you want to close this emergency?"
+                                                          :
+                                                          "Emergency closed at " + modalData.dateTimeClosed
+                                                      }</p>
+                                                      <div className="target-inner__buttons"
+                                                           style={
+                                                               modalData.dateTimeClosed === null ?
+                                                                   {display: "flex"}
+                                                                   :
+                                                                   {display: "none"}
+                                                           }>
+                                                          <a href="#" className="e-right">
+                                                              <p>No</p>
+                                                          </a>
+                                                          <div className="e-right" style={
+                                                              {backgroundColor: "#FF4300", color: "white"}
+                                                          } onClick={(e) => handleClick(e, modalData)}>
+                                                              <p>Yes</p>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
                                           </div>
                                       </div>
                                       <div className="e-bottom" style={{display: emergency.dateTimeClosed === null ? "block":"none"}}>
