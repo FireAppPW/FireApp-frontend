@@ -6,14 +6,36 @@ import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import {Link} from "react-router-dom";
 import axios from "axios";
 
-
+const Emergency = Link
 
 
 const Emergencies = () => {
-    const [emergencyData, setEmergencyData] = useState([]);
+    //const [emergencyData, setEmergencyData] = useState([]);
     const emergencyColors = ["#96FF71BD", "#FFDD71BD", "#FF7971BD"]
     const emergencyIconColors = ["#5AFD21", "#F9BE00", "#FE564C"]
     const [modalData, setModalData] = useState({})
+
+    const emergencyData = [
+    {
+        id: 3,
+        fireDepartmentId: "4",
+        fireDepartmentName: "Alfa",
+        "classification": {
+            "id": 1,
+            "classField": "1",
+            "classDescription": "fire"
+        },
+        "authorId": 2,
+        "dateTimeCreated": new Date().toJSON(),
+        dateTimeClosed: null,
+        dangerousLevel: 2,
+        addressLine1: "Alameda",
+        addressLine2: "",
+        city: "Madrid",
+        country: "Spain",
+        description: "Fire in sector 3"
+    }
+    ]
 
     function sortNull() {
         return function (a, b) {
@@ -45,7 +67,7 @@ const Emergencies = () => {
         axios
             .get('https://emergency.fireapp.website/emergency')
             .then((response) => {
-                setEmergencyData(response.data.sort(sortNull()));
+                //setEmergencyData(response.data.sort(sortNull()));
             })
             .catch((error) => console.log(error))
 
@@ -88,9 +110,9 @@ const Emergencies = () => {
                                                   <div className="square" style={{backgroundColor: emergencyColors[emergency.dangerousLevel]}}>
                                                       <ErrorOutlineOutlinedIcon className="icon" style={{color: emergencyIconColors[emergency.dangerousLevel]}}/>
                                                   </div>
-                                                  <div className="e-texts">
+                                                  <Emergency to={"/emergencies/" + emergency.id} className="e-texts">
                                                       <h2>{emergency.city + ", " + emergency.country + ", " + emergency.id}</h2>
-                                                  </div>
+                                                  </Emergency>
                                               </div>
                                               <div className="e-l-bottom">
                                                   <p>{emergency.dateTimeCreated.slice(0, 10)}</p>

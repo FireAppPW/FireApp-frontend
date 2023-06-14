@@ -18,6 +18,7 @@ import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
 import Department from "./components/department/Department";
 import UpdateCourse from "./pages/updateCourse/UpdateCourse";
 import User from "./pages/user/User";
+import Emergency from "./pages/emergency/Emergency";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/manageuser/:userId" element={<User />} />
         <Route exact path="/manageuser/update/:userId" element={<UpdateUser />} />
         <Route exact path="/emergencies" element={<Emergencies />} />
+        <Route exact path="/emergencies/:emergencyId" element={<Emergency />} />
         <Route
           exact
           path="/managedepartment"
