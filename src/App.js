@@ -19,6 +19,7 @@ import Department from "./components/department/Department";
 import UpdateCourse from "./pages/updateCourse/UpdateCourse";
 import User from "./pages/user/User";
 import Emergency from "./pages/emergency/Emergency";
+import Error from "./pages/error/Error";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
         <Route path="/newEmergency" element={<NewEmergency />} />
         <Route exact path="/newUser" element={<NewUser />} />
         <Route exact path="/newNotification" element={<NewNotification />} />
+        <Route exact path="/error" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );

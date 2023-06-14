@@ -1,0 +1,82 @@
+@font-face {
+  font-family: Mukta-Medium;
+  src: url("../../assets/fonts/Mukta-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Mukta-Regular;
+  src: url("../../assets/fonts/Mukta-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Mukta-Light;
+  src: url("../../assets/fonts/Mukta-Light.ttf") format("truetype");
+}
+
+
+.wrapper{
+  display: flex;
+
+  .error__left{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+
+    .error__left-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      row-gap: 30px;
+      width: 70%;
+      height: 100%;
+
+
+      h2{
+        font-family: Mukta-Regular, serif;
+
+        em{
+          font-style: normal;
+          font-family: Mukta-Regular, serif;
+          color: #F65B4F;
+        }
+      }
+
+      h1{
+        font-family: Mukta-Medium, serif;
+        font-size: 50px;
+      }
+
+      p{
+        font-family: Mukta-Light, serif;
+        text-align: justify;
+      }
+    }
+  }
+
+  svg{
+    position: absolute;
+    left: -20%;
+    transform: rotate(-90deg);
+  }
+
+  .error__right{
+    width: 50%;
+
+
+    .error__right-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      background-color: #F65B4F;
+
+      img{
+        width: 600px;
+        transform: scaleX(-1);
+      }
+    }
+
+  }
+}
