@@ -23,7 +23,7 @@ const UpdateUser = () => {
   const[profilePicture,setProfilePicture]=useState('')
   const[departmentData, setDepartmentData] = useState([]);
   let location = useLocation();
-  const userId = location.pathname.split('/')[2]
+  const userId = location.pathname.split('/')[3]
 
   const token = JSON.parse(Cookies.get('token')).accessToken;
   const config = {

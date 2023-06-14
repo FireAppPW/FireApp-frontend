@@ -17,6 +17,7 @@ import NewNotification from "./pages/newNotification/NewNotification";
 import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
 import Department from "./components/department/Department";
 import UpdateCourse from "./pages/updateCourse/UpdateCourse";
+import User from "./pages/user/User";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/manageuser" element={<UserManagement />} />
-        <Route exact path="/manageuser/:userId" element={<UpdateUser />} />
+        <Route path="/manageuser/:userId" element={<User />} />
+        <Route exact path="/manageuser/update/:userId" element={<UpdateUser />} />
         <Route exact path="/emergencies" element={<Emergencies />} />
         <Route
           exact

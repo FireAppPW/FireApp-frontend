@@ -13,13 +13,14 @@ import Cookies from "js-cookie";
 
 const CreateUser = Link
 const UpdateUser = Link
+const User = Link
 
 const Table = () => {
   const [searchQuery, setSearchQuery] = useState("");
   let location = useLocation();
   const departmentId = location.pathname.split('/')[2]
   const profileImages = [person1, person2, person3]
-  const [userData, setUserData] = useState([]);
+  //const [userData, setUserData] = useState([]);
 
   const token = JSON.parse(Cookies.get('token')).accessToken;
   const config = {
@@ -28,17 +29,23 @@ const Table = () => {
     }
   }
 
-  useEffect(() => {
-    const token = JSON.parse(Cookies.get('token')).accessToken;
-    const config = {
-      headers: {
-        Authorization : `Bearer ${token}`
-      }
+  const userData  = [{
+    id : 4,
+    fireDepartmentId: 4,
+    email: "marcelinofernandezcabello@gmail.com",
+    firstName: "Marce",
+    role: {
+      id: 1,
+      name: "SysAdmin"
     }
+
+  }]
+
+  useEffect(() => {
     axios
         .get('https://account.fireapp.website/account', config)
         .then((response) => {
-          setUserData(response.data);
+          //setUserData(response.data);
         })
         .catch((error) => console.log(error))
   }, []);
@@ -106,10 +113,10 @@ const Table = () => {
             {filteredUsers.map((user, index) => {
               return (
                   <tr className="userRow" key={user.id}>
-                    <td className="userName">
+                    <User to={"/manageuser/" + user.id} className="userName">
                       <img src={profileImages[Math.floor(Math.random() * profileImages.length)]} alt="" className="userImg" />
                       <span>{user.firstName}</span>
-                    </td>
+                    </User>
                     <td className="widgetLgDate">{user.id}</td>
                     <td className="widgetLgAmount">{user.fireDepartmentId}</td>
                     <td className="widgetLgAmount">{user.email}</td>
@@ -121,7 +128,7 @@ const Table = () => {
                         }}>
                         <DeleteForeverIcon className="deleteIcon"/>
                       </div>
-                      <UpdateUser to={"/manageuser/" + user.id} className="borderIcon" style={{outlineColor: "#53daf1"}}>
+                      <UpdateUser to={"/manageuser/update/" + user.id} className="borderIcon" style={{outlineColor: "#53daf1"}}>
                         <EditIcon className="editIcon"/>
                       </UpdateUser>
                     </td>
