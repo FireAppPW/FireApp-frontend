@@ -12,6 +12,7 @@ const Course = () => {
     const courseId = location.pathname.split('/')[2]
     const navigate = useNavigate();
     const [courseData, setCourseData] = useState([])
+    const profileRole = localStorage.getItem("role")
 
     const token = JSON.parse(Cookies.get('token')).accessToken
     const config = {
@@ -81,13 +82,13 @@ const Course = () => {
                         <div className="short-info-card" style={{backgroundColor: "#FFDD71BD"}}>
                             <div className="card-content">
                                 <p>Date Time start</p>
-                                <h2>{courseData.dateTimeStart.slice(0,10)}</h2>
+                                <h2>{courseData.dateTimeStart}</h2>
                             </div>
                         </div>
                         <div className="short-info-card" style={{backgroundColor: "rgba(4,191,138,0.49)"}}>
                             <div className="card-content">
                                 <p>Date Time End</p>
-                                <h2>{courseData.dateTimeApplicationDeadline.slice(0,10)}</h2>
+                                <h2>{courseData.dateTimeApplicationDeadline}</h2>
                             </div>
                         </div>
                         <div className="short-info-card" style={{backgroundColor: "rgba(245,114,114,0.55)"}}>
@@ -103,12 +104,14 @@ const Course = () => {
                         <h2>Other info</h2>
                         <p>Address: {courseData.addressLine1 + courseData.addressLine2}</p>
                         <p>Remote: {courseData.isRemote ? "Yes" : "No"}</p>
-                        <p>Date Created: {courseData.dateTimeCreated.slice(0,10) + " at " +
-                            courseData.dateTimeCreated.slice(11,20)}
+                        <p>Date Created: {courseData.dateTimeCreated + " at " +
+                            courseData.dateTimeCreated}
                         </p>
                     </div>
                 </div>
-                <div className="course-options">
+                <div className="course-options" style={
+                    profileRole === "User" || "Commandant" ? {display: "none"} : null
+                }>
                     <button className="option-button" role="button" onClick={handleDeleteClick}
                             style={{backgroundImage: "linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%)"}}
                     >

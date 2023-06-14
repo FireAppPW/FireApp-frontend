@@ -22,6 +22,7 @@ const Courses = () => {
     const [isRemoteQuery, setIsRemoteQuery] = useState(false);
     const token = JSON.parse(Cookies.get('token')).accessToken
     const coursesPictures = [course1, course2, course3, course4]
+    const profileRole = localStorage.getItem("role")
     const config = {
         headers: {
             Authorization : `Bearer ${token}`
@@ -90,7 +91,9 @@ const Courses = () => {
                   <div className="right">
 
                       <div className="container">
-                          <CreateCourse to="/newCourse" className="add">
+                          <CreateCourse to="/newCourse" className="add" style={
+                              profileRole === "User" || "Commandant" ? {display: "none"} : null
+                          }>
                               <AddIcon className="icon"/>
                           </CreateCourse>
                           <div className="searchContainer">

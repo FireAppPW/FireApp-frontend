@@ -12,6 +12,7 @@ import axios from "axios";
 
 const Login = () => {
     const navigate = useNavigate();
+    localStorage.setItem("role", "User")
 
     const login = useGoogleLogin({
         onSuccess: async tokenResponse => {
@@ -20,6 +21,7 @@ const Login = () => {
                 .then((response) => {
                     Cookies.set('google-auth', JSON.stringify(tokenResponse),{ expires: 1 });
                     Cookies.set('token', JSON.stringify(response.data), { expires: 1 });
+
                     navigate("/emergencies")
                 })
                 .catch(err => console.log(err))

@@ -20,6 +20,7 @@ const Table = () => {
   let location = useLocation();
   const departmentId = location.pathname.split('/')[2]
   const profileImages = [person1, person2, person3]
+  const profileRole = localStorage.getItem("role")
   //const [userData, setUserData] = useState([]);
 
   const token = JSON.parse(Cookies.get('token')).accessToken;
@@ -91,7 +92,9 @@ const Table = () => {
                 />
                 <SearchIcon className="searchIcon"/>
               </div>
-              <CreateUser to="/newUser" className="userAdd">
+              <CreateUser to="/newUser" className="userAdd" style={
+                profileRole === "User" || "Commandant" ? {display: "none"} : null
+              }>
                 <AddIcon className="icon"/>
               </CreateUser>
             </div>
@@ -106,14 +109,22 @@ const Table = () => {
               <th className="userTh">Fire Department</th>
               <th className="userTh">Email</th>
               <th className="userTh">Role</th>
-              <th className="userTh">Actions</th>
+              <th className="userTh"
+                  style={
+                    profileRole === "User" || "Commandant " ? {display: "none"} : null
+                  } >Actions</th>
             </tr>
             </thead>
             <tbody>
             {filteredUsers.map((user, index) => {
               return (
                   <tr className="userRow" key={user.id}>
-                    <User to={"/manageuser/" + user.id} className="userName">
+                    <User to={
+                      profileRole !== "User" ?
+                        "/manageuser/" + user.id
+                        :
+                        null
+                    } className="userName">
                       <img src={profileImages[Math.floor(Math.random() * profileImages.length)]} alt="" className="userImg" />
                       <span>{user.firstName}</span>
                     </User>
@@ -121,7 +132,10 @@ const Table = () => {
                     <td className="widgetLgAmount">{user.fireDepartmentId}</td>
                     <td className="widgetLgAmount">{user.email}</td>
                     <td className="widgetLgAmount">{user.role.name}</td>
-                    <td className="widgetLgStatus">
+                    <td className="widgetLgStatus"
+                        style={
+                          profileRole === "User" || "Commandant" ? {display: "none"} : null
+                        }>
                       <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
                         (e) => {
                           handleDeleteClick(e, user.id)

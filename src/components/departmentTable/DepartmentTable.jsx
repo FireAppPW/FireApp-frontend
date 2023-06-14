@@ -20,6 +20,7 @@ const DepartmentTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [departmentData, setDepartmentData] = useState([]);
   const departmentPictures = [department1, department2, department3]
+  const profileRole = localStorage.getItem("role")
 
   const token = JSON.parse(Cookies.get('token')).accessToken
   const config = {
@@ -73,7 +74,9 @@ const DepartmentTable = () => {
                 />
                 <SearchIcon className="searchIcon"/>
               </div>
-              <CreateDepartment to="/newDepartment" className="depAdd">
+              <CreateDepartment to="/newDepartment" className="depAdd" style={
+                profileRole === "User" || "Commandant" ? {display: "none"} : null
+              }>
                 <AddIcon className="icon"/>
               </CreateDepartment>
             </div>

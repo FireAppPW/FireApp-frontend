@@ -14,6 +14,7 @@ const Emergencies = () => {
     const emergencyColors = ["#96FF71BD", "#FFDD71BD", "#FF7971BD"]
     const emergencyIconColors = ["#5AFD21", "#F9BE00", "#FE564C"]
     const [modalData, setModalData] = useState({})
+    const profileRole = localStorage.getItem("role")
 
     const emergencyData = [
     {
@@ -82,7 +83,7 @@ const Emergencies = () => {
             <h2>Emergencies</h2>
             <p>List of all emergencies</p>
           </div>
-          <Link to="/newEmergency" className="create">
+          <Link to="/newEmergency" className="create" style={profileRole === "User" ? {display: "none"} : null}>
             <p>Create Emergency</p>
           </Link>
         </div>
@@ -120,10 +121,14 @@ const Emergencies = () => {
                                           </div>
                                           <a href="#target-content" className="e-right"
                                              style={
-                                              emergency.dateTimeClosed === null ?
-                                                  {backgroundColor: "white"}
-                                                  :
-                                                  {backgroundColor: "#FF4300", color: "white"}}
+                                                 profileRole === "User" ?
+                                                     {display: "none"}
+                                                     :
+                                                      emergency.dateTimeClosed === null ?
+                                                          {backgroundColor: "white"}
+                                                          :
+                                                          {backgroundColor: "#FF4300", color: "white"}
+                                             }
                                              onClick={
                                                  () => setModalData(emergency)
                                              }
