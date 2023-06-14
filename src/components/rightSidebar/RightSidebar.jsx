@@ -3,6 +3,7 @@ import "./rightSidebar.scss";
 import axios from "axios";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import {NotificationData} from "./NotificationsData";
 import AddIcon from "@mui/icons-material/Add";
 import {googleLogout} from "@react-oauth/google";
@@ -11,11 +12,14 @@ import Cookies from 'js-cookie';
 
 
 const CreateNotification = Link
+const UserUpdate = Link
+const User = Link
 
 const RightSidebar = () => {
 
   const navigate = useNavigate();
   const [ profile, setProfile ] = useState([]);
+  const userId = localStorage.getItem("userId")
 
   useEffect(
       () => {
@@ -50,13 +54,16 @@ const RightSidebar = () => {
   return (
     <div className="rightSidebar">
     <div className="top">
+        <UserUpdate to={"/manageuser/update/" + userId}>
+            <EditOutlinedIcon className="logoutIcon"/>
+        </UserUpdate>
         <LogoutIcon onClick={logOut} className="logoutIcon"/>
     </div>
 
       <div className="personalInfo">
-        <div className="profilePic">
+        <User to={"/manageuser/" + userId} className="profilePic">
             <img src={profile.picture} alt=""/>
-        </div>
+        </User>
         <div className="profileName">{profile.name}</div>
         <div className="profileRole">SysAdmin</div>
       </div>

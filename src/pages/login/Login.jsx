@@ -13,6 +13,7 @@ import axios from "axios";
 const Login = () => {
     const navigate = useNavigate();
     localStorage.setItem("role", "User")
+    localStorage.setItem("userId", "3")
 
     const login = useGoogleLogin({
         onSuccess: async tokenResponse => {
