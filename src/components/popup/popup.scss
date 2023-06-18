@@ -1,0 +1,83 @@
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  width: 400px;
+
+  .popup-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .popup-header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      background-color: #007bff;
+      color: #ffffff;
+      padding: 15px 0;
+      border-radius: 4px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .popup-message {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      .button {
+        margin-right: 10px;
+        flex-grow: 1;
+      }
+    }
+
+    .button {
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background-color 0.3s;
+      width: 100%;
+
+      &.button-yes {
+        background-color: #4caf50;
+        color: #ffffff;
+
+        &:hover {
+          background-color: #45a049;
+        }
+      }
+
+      &.button-no {
+        background-color: #f44336;
+        color: #ffffff;
+
+        &:hover {
+          background-color: #d32f2f;
+        }
+      }
+
+      &.button-maybe {
+        background-color: #ffeb3b;
+        color: #000000;
+
+        &:hover {
+          background-color: #fdd835;
+        }
+      }
+    }
+  }
+}

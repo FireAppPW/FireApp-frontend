@@ -17,11 +17,33 @@ import NewNotification from "./pages/newNotification/NewNotification";
 import UpdateDepartment from "./pages/updateDepartment/UpdateDepartment.jsx";
 import Department from "./components/department/Department";
 import UpdateCourse from "./pages/updateCourse/UpdateCourse";
+import Popup from "./components/popup/Popup.jsx";
+import { useEffect, useState } from "react";
 import User from "./pages/user/User";
 import Emergency from "./pages/emergency/Emergency";
 import Error from "./pages/error/Error";
 
 function App() {
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:8080/emergency");
+    socket.onmessage = (event) => {
+      setShowPopup(true);
+      setPopupMessage(event.data);
+    };
+
+    return () => {
+      socket.close();
+    };
+  }, []);
+
+  const closePopup = () => {
+    setShowPopup(false);
+    setPopupMessage("");
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -43,9 +65,9 @@ function App() {
           element={<UpdateDepartment />}
         />
         <Route
-            exact
-            path="/managedepartment/:departmentId"
-            element={<Department />}
+          exact
+          path="/managedepartment/:departmentId"
+          element={<Department />}
         />
         <Route exact path="/newDepartment" element={<NewDepartment />} />
         <Route
@@ -55,14 +77,15 @@ function App() {
         />
         <Route path="/usernotification" element={<PostNotificationUser />} />
         <Route path="/courses" element={<Courses />} />
-        <Route path="/courses/:courseId" element={<Course/>} />
-        <Route path="/courses/update/:courseId" element={<UpdateCourse/>} />
+        <Route path="/courses/:courseId" element={<Course />} />
+        <Route path="/courses/update/:courseId" element={<UpdateCourse />} />
         <Route path="/newCourse" element={<NewCourse />} />
         <Route path="/newEmergency" element={<NewEmergency />} />
         <Route exact path="/newUser" element={<NewUser />} />
         <Route exact path="/newNotification" element={<NewNotification />} />
         <Route exact path="/error" element={<Error />} />
       </Routes>
+      {showPopup && <Popup message={popupMessage} onClose={closePopup} />}
     </BrowserRouter>
   );
 }
