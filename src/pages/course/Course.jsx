@@ -5,7 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {useLocation, useNavigate} from 'react-router-dom';
 import coursePicture from  "../../assets/images/firefighter1.jpg"
 import axios from "axios";
-import {CONFIG} from "../../constants";
+import {CONFIG, PROFILE_ROLE} from "../../constants";
 
 const Course = () => {
     let location = useLocation();
@@ -102,7 +102,7 @@ const Course = () => {
                     </div>
                 </div>
                 <div className="course-options" style={
-                    profileRole === "User" || "Commandant" ? {display: "none"} : null
+                    PROFILE_ROLE === "User" || "Commandant" ? {display: "none"} : null
                 }>
                     <button className="option-button" onClick={handleDeleteClick}
                             style={{backgroundImage: "linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%)"}}

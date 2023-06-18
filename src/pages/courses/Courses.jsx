@@ -11,7 +11,7 @@ import course4 from  "../../assets/images/course4.jpg"
 import {Link} from 'react-router-dom';
 import axios from "axios";
 
-import {CONFIG} from "../../constants";
+import {CONFIG, PROFILE_ROLE} from "../../constants";
 
 const CreateCourse = Link
 const Course = Link
@@ -87,7 +87,7 @@ const Courses = () => {
 
                       <div className="container">
                           <CreateCourse to="/newCourse" className="add" style={
-                              profileRole === ("User" || "Commandant") ?
+                              PROFILE_ROLE === ("User" || "Commandant") ?
                                   {display: "none"}
                                   : null
                           }>
