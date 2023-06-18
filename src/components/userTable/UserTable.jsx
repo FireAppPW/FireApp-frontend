@@ -37,7 +37,7 @@ const Table = () => {
 
   useEffect(() => {
     axios
-        .get(`https://account.fireapp.website/account/${profileDepartmentId}`, config)
+        .get(`https://account.fireapp.website/account`, config)
         .then((response) => {
           setUserData(response.data);
         })

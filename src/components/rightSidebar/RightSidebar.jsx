@@ -23,7 +23,7 @@ const RightSidebar = () => {
     const profileUser = JSON.parse(localStorage.getItem("user"))
     const profileRole = profileUser.roles
     const profileDepartmentId = profileUser.departmentId
-    const userId = localStorage.getItem("userId")
+    const profileUserId = profileUser.userId
 
     const [departmentData, setDepartmentData] = useState([]);
 
@@ -74,14 +74,14 @@ const RightSidebar = () => {
   return (
     <div className="rightSidebar">
     <div className="top">
-        <UserUpdate to={"/manageuser/update/" + userId}>
+        <UserUpdate to={"/manageuser/update/" + profileUserId}>
             <EditOutlinedIcon className="logoutIcon"/>
         </UserUpdate>
         <LogoutIcon onClick={logOut} className="logoutIcon"/>
     </div>
 
       <div className="personalInfo">
-        <User to={"/manageuser/" + userId} className="profilePic">
+        <User to={"/manageuser/" + profileUserId} className="profilePic">
             <img src={profile.picture} alt=""/>
         </User>
         <div className="profileName">{profile.name}</div>

@@ -24,8 +24,7 @@ const Login = () => {
                     Cookies.set('token', JSON.stringify(response.data), { expires: 1 });
                     console.log(jwt(response.data.accessToken))
                     localStorage.setItem("user", JSON.stringify(jwt(response.data.accessToken)))
-                    localStorage.setItem("userId", "2")
-                    console.log(response)
+                    console.log(response.data.accessToken)
                     navigate("/emergencies")
                 })
                 .catch(err => console.log(err))
