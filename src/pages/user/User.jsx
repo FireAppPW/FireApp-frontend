@@ -9,7 +9,6 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -17,8 +16,12 @@ import Cookies from "js-cookie";
 const User = () => {
     let location = useLocation();
     const userId = location.pathname.split('/')[2]
+    const [userRole, setUserRole] = useState({})
     const navigate = useNavigate();
-    //const [userData, setUserData] = useState([])
+    const [userData, setUserData] = useState([])
+
+    const profileUser = JSON.parse(localStorage.getItem("user"))
+    const profileDepartmentId = profileUser.departmentId
 
     const token = JSON.parse(Cookies.get('token')).accessToken
     const config = {
@@ -27,29 +30,13 @@ const User = () => {
         }
     }
 
-    const userData = {
-        id : 4,
-        fireDepartmentId: 4,
-        email: "marcelinofernandezcabello@gmail.com",
-        firstName: "Marce",
-        lastName: "Fernandez",
-        role: {
-            id: 1,
-            name: "SysAdmin"
-        },
-        birthDate: "1990-01-01",
-        addressLine1: "Road 1",
-        city: "Madrid",
-        country: "Spain"
-    }
-
     useEffect(() => {
 
         axios
-            .get('https://account.fireapp.website/account/' + userId, config)
+            .get(`https://account.fireapp.website/account/${profileDepartmentId}/${userId}`, config)
             .then((response) => {
-                //setUserData(response.data);
-                console.log(response.data)
+                setUserData(response.data);
+                setUserRole(response.data.role)
 
             })
             .catch((error) => console.log(error))
@@ -61,8 +48,8 @@ const User = () => {
         e.preventDefault()
         console.log(userId)
         axios
-            .delete("https://account.fireapp.website/account/"+ userId)
-            .then(res => navigate("/manageuser"))
+            .delete(`https://account.fireapp.website/account/${profileDepartmentId}/${userId}`, config)
+            .then(() => navigate("/manageuser"))
             .catch(err => console.log(err))
 
     }
@@ -91,9 +78,9 @@ const User = () => {
                                     <img src={coursePicture} alt=""/>
                                 </div>
                                 <div className="user-info__name">
-                                    <h2>{userData.firstName.toUpperCase() + " " + userData.lastName.toUpperCase()}</h2>
+                                    <h2>{userData.firstName + " " + userData.lastName}</h2>
                                 </div>
-                                <div className="user-info__role">{userData.role.name}</div>
+                                <div className="user-info__role">{userRole.name}</div>
                             </div>
                             <div className="user-info__options">
                                 <button className="user-info__options__option-button" role="button" onClick={handleDeleteClick}
@@ -150,7 +137,7 @@ const User = () => {
                                     <KeyOutlinedIcon  className="user-info__icon"/>
                                     <p>Role</p>
                                 </div>
-                                <p>{userData.fireDepartmentId}</p>
+                                <p>{userRole.name}</p>
                             </div>
 
                         </div>

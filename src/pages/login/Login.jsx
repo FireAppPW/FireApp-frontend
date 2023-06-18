@@ -6,26 +6,29 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import axios from "axios";
+import jwt from "jwt-decode";
 
 
 
 
 const Login = () => {
     const navigate = useNavigate();
-    localStorage.setItem("role", "User")
-    localStorage.setItem("userId", "3")
+
 
     const login = useGoogleLogin({
         onSuccess: async tokenResponse => {
+            Cookies.set('google-auth', JSON.stringify(tokenResponse),{ expires: 1 });
             axios
-                .post("https://account.fireapp.website/account/login", {"code": tokenResponse.access_token})
+                .post("https://api.fireapp.website/account/login", {"code": tokenResponse.access_token})
                 .then((response) => {
-                    Cookies.set('google-auth', JSON.stringify(tokenResponse),{ expires: 1 });
                     Cookies.set('token', JSON.stringify(response.data), { expires: 1 });
-
+                    localStorage.setItem("user", JSON.stringify(jwt(response.data.accessToken)))
+                    localStorage.setItem("userId", "3")
+                    console.log(response)
                     navigate("/emergencies")
                 })
                 .catch(err => console.log(err))
+
         },
         onError: (error) => console.log('Login Failed:', error)
     });

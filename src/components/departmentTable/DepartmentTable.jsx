@@ -20,7 +20,9 @@ const DepartmentTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [departmentData, setDepartmentData] = useState([]);
   const departmentPictures = [department1, department2, department3]
-  const profileRole = localStorage.getItem("role")
+
+  const profileUser = JSON.parse(localStorage.getItem("user"))
+  const profileRole = profileUser.roles
 
   const token = JSON.parse(Cookies.get('token')).accessToken
   const config = {
@@ -53,7 +55,7 @@ const DepartmentTable = () => {
     e.preventDefault()
     axios
         .delete("https://department.fireapp.website/department/"+ id, config)
-        .then(res => window.location.reload())
+        .then(() => window.location.reload())
         .catch(err => console.log(err))
 
   }
@@ -75,7 +77,9 @@ const DepartmentTable = () => {
                 <SearchIcon className="searchIcon"/>
               </div>
               <CreateDepartment to="/newDepartment" className="depAdd" style={
-                profileRole === "User" || "Commandant" ? {display: "none"} : null
+                profileRole === ("User" || "Commandant") ?
+                    {display: "none"}
+                    : null
               }>
                 <AddIcon className="icon"/>
               </CreateDepartment>

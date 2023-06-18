@@ -20,33 +20,26 @@ const Table = () => {
   let location = useLocation();
   const departmentId = location.pathname.split('/')[2]
   const profileImages = [person1, person2, person3]
-  const profileRole = localStorage.getItem("role")
-  //const [userData, setUserData] = useState([]);
+
+  const profileUser = JSON.parse(localStorage.getItem("user"))
+  const profileRole = profileUser.roles
+  const profileDepartmentId = profileUser.departmentId
+
+  const [userData, setUserData] = useState([]);
 
   const token = JSON.parse(Cookies.get('token')).accessToken;
+  //const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGFuZWoudm92Y2FrQGdtYWlsLmNvbSIsInJvbGVzIjoiU3lzQWRtaW4iLCJkZXBhcnRtZW50SWQiOjIsImlzcyI6IkZpcmVBcHAiLCJpYXQiOjE2ODY5MTgzMzEsImV4cCI6MTY4NzAwNDczMX0.C9BHspB4a5061eKTBiJf-2twx752LqX9xewyldLQRPwg_5xjkdBCnxeNrRMDFLp64D0jISx8VWjB-iq8nVeZPw"
   const config = {
     headers: {
       Authorization : `Bearer ${token}`
     }
   }
 
-  const userData  = [{
-    id : 4,
-    fireDepartmentId: 4,
-    email: "marcelinofernandezcabello@gmail.com",
-    firstName: "Marce",
-    role: {
-      id: 1,
-      name: "SysAdmin"
-    }
-
-  }]
-
   useEffect(() => {
     axios
-        .get('https://account.fireapp.website/account', config)
+        .get(`https://account.fireapp.website/account/${profileDepartmentId}`, config)
         .then((response) => {
-          //setUserData(response.data);
+          setUserData(response.data);
         })
         .catch((error) => console.log(error))
   }, []);
@@ -70,8 +63,8 @@ const Table = () => {
   const handleDeleteClick=(e, id)=>{
     e.preventDefault()
     axios
-        .delete("https://account.fireapp.website/account/"+ id, config)
-        .then(res => window.location.reload())
+        .delete(`https://account.fireapp.website/account/${profileDepartmentId}/${id}`, config)
+        .then(() => window.location.reload())
         .catch(err => console.log(err))
 
   }
@@ -93,7 +86,10 @@ const Table = () => {
                 <SearchIcon className="searchIcon"/>
               </div>
               <CreateUser to="/newUser" className="userAdd" style={
-                profileRole === "User" || "Commandant" ? {display: "none"} : null
+                profileRole === ("User" || "Commandant") ?
+                    {display: "none"}
+                    :
+                    null
               }>
                 <AddIcon className="icon"/>
               </CreateUser>
@@ -111,12 +107,15 @@ const Table = () => {
               <th className="userTh">Role</th>
               <th className="userTh"
                   style={
-                    profileRole === "User" || "Commandant " ? {display: "none"} : null
+                    profileRole === ("User" || "Commandant ") ?
+                        {display: "none"}
+                        :
+                        null
                   } >Actions</th>
             </tr>
             </thead>
             <tbody>
-            {filteredUsers.map((user, index) => {
+            {filteredUsers.map((user) => {
               return (
                   <tr className="userRow" key={user.id}>
                     <User to={
@@ -134,7 +133,10 @@ const Table = () => {
                     <td className="widgetLgAmount">{user.role.name}</td>
                     <td className="widgetLgStatus"
                         style={
-                          profileRole === "User" || "Commandant" ? {display: "none"} : null
+                          profileRole === ("User" || "Commandant") ?
+                              {display: "none"}
+                              :
+                              null
                         }>
                       <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
                         (e) => {

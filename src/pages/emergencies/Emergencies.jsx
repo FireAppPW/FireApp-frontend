@@ -10,12 +10,13 @@ const Emergency = Link
 
 
 const Emergencies = () => {
-    //const [emergencyData, setEmergencyData] = useState([]);
+    const [emergencyData, setEmergencyData] = useState([]);
     const emergencyColors = ["#96FF71BD", "#FFDD71BD", "#FF7971BD"]
     const emergencyIconColors = ["#5AFD21", "#F9BE00", "#FE564C"]
     const [modalData, setModalData] = useState({})
     const profileRole = localStorage.getItem("role")
 
+    /*
     const emergencyData = [
     {
         id: 3,
@@ -37,6 +38,8 @@ const Emergencies = () => {
         description: "Fire in sector 3"
     }
     ]
+
+     */
 
     function sortNull() {
         return function (a, b) {
@@ -68,7 +71,7 @@ const Emergencies = () => {
         axios
             .get('https://emergency.fireapp.website/emergency')
             .then((response) => {
-                //setEmergencyData(response.data.sort(sortNull()));
+                setEmergencyData(response.data.sort(sortNull()));
             })
             .catch((error) => console.log(error))
 
@@ -101,7 +104,7 @@ const Emergencies = () => {
         <div className="emergenciesTable">
           <div className="container">
                   {
-                      emergencyData.map((emergency, index) =>{
+                      emergencyData.map((emergency) =>{
                           return (
                               <div key={emergency.id} className="emergencyCard">
                                   <div className="e-container">

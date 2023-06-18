@@ -21,6 +21,7 @@ const RightSidebar = () => {
   const [ profile, setProfile ] = useState([]);
   const userId = localStorage.getItem("userId")
 
+
   useEffect(
       () => {
         const cookieValue = JSON.parse(Cookies.get('google-auth'));
@@ -46,6 +47,7 @@ const RightSidebar = () => {
     googleLogout();
     Cookies.remove('token')
     Cookies.remove('google-auth')
+      localStorage.clear()
     setProfile(null);
     navigate("/")
   };

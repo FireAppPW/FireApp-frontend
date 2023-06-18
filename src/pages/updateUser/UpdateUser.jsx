@@ -25,6 +25,10 @@ const UpdateUser = () => {
   let location = useLocation();
   const userId = location.pathname.split('/')[3]
 
+  const profileUser = JSON.parse(localStorage.getItem("user"))
+  const profileDepartmentId = profileUser.departmentId
+
+
   const token = JSON.parse(Cookies.get('token')).accessToken;
   const config = {
     headers: {
@@ -41,7 +45,7 @@ const UpdateUser = () => {
         })
         .catch((error) => console.log(error))
     axios
-        .get('https://account.fireapp.website/account/' + userId, config)
+        .get(`https://account.fireapp.website/account/${profileDepartmentId}/${userId}`, config)
         .then((response) => {
           setEmail(response.data.email)
           setFirstName(response.data.firstName)
