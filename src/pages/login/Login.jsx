@@ -22,8 +22,9 @@ const Login = () => {
                 .post("https://api.fireapp.website/account/login", {"code": tokenResponse.access_token})
                 .then((response) => {
                     Cookies.set('token', JSON.stringify(response.data), { expires: 1 });
+                    console.log(jwt(response.data.accessToken))
                     localStorage.setItem("user", JSON.stringify(jwt(response.data.accessToken)))
-                    localStorage.setItem("userId", "3")
+                    localStorage.setItem("userId", "2")
                     console.log(response)
                     navigate("/emergencies")
                 })

@@ -16,31 +16,6 @@ const Emergencies = () => {
     const [modalData, setModalData] = useState({})
     const profileRole = localStorage.getItem("role")
 
-    /*
-    const emergencyData = [
-    {
-        id: 3,
-        fireDepartmentId: "4",
-        fireDepartmentName: "Alfa",
-        "classification": {
-            "id": 1,
-            "classField": "1",
-            "classDescription": "fire"
-        },
-        "authorId": 2,
-        "dateTimeCreated": new Date().toJSON(),
-        dateTimeClosed: null,
-        dangerousLevel: 2,
-        addressLine1: "Alameda",
-        addressLine2: "",
-        city: "Madrid",
-        country: "Spain",
-        description: "Fire in sector 3"
-    }
-    ]
-
-     */
-
     function sortNull() {
         return function (a, b) {
             if (a.dateTimeClosed === null) {

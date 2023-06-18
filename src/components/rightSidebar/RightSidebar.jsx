@@ -17,14 +17,33 @@ const User = Link
 
 const RightSidebar = () => {
 
-  const navigate = useNavigate();
-  const [ profile, setProfile ] = useState([]);
-  const userId = localStorage.getItem("userId")
+    const navigate = useNavigate();
+    const [ profile, setProfile ] = useState([])
 
+    const profileUser = JSON.parse(localStorage.getItem("user"))
+    const profileRole = profileUser.roles
+    const profileDepartmentId = profileUser.departmentId
+    const userId = localStorage.getItem("userId")
+
+    const [departmentData, setDepartmentData] = useState([]);
+
+    const token = JSON.parse(Cookies.get('token')).accessToken;
+    //const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGFuZWoudm92Y2FrQGdtYWlsLmNvbSIsInJvbGVzIjoiU3lzQWRtaW4iLCJkZXBhcnRtZW50SWQiOjIsImlzcyI6IkZpcmVBcHAiLCJpYXQiOjE2ODY5MTgzMzEsImV4cCI6MTY4NzAwNDczMX0.C9BHspB4a5061eKTBiJf-2twx752LqX9xewyldLQRPwg_5xjkdBCnxeNrRMDFLp64D0jISx8VWjB-iq8nVeZPw"
+    const config = {
+        headers: {
+            Authorization : `Bearer ${token}`
+        }
+    }
 
   useEffect(
       () => {
         const cookieValue = JSON.parse(Cookies.get('google-auth'));
+          axios
+              .get(`https://department.fireapp.website/department/${profileDepartmentId}`, config)
+              .then((response) => {
+                  setDepartmentData(response.data.data);
+              })
+              .catch((error) => console.log(error))
         if (cookieValue) {
           axios
               .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${cookieValue.access_token}`, {
@@ -39,7 +58,6 @@ const RightSidebar = () => {
               .catch((err) => console.log(err));
         }
       },
-
       []
   );
 
@@ -67,18 +85,18 @@ const RightSidebar = () => {
             <img src={profile.picture} alt=""/>
         </User>
         <div className="profileName">{profile.name}</div>
-        <div className="profileRole">SysAdmin</div>
+        <div className="profileRole">{profileRole}</div>
       </div>
       <div className="departmentInfo">
         <h2>Fire Department</h2>
         <div className="departmentCard">
           <div className="content">
             <div className="id">
-              <p>ID</p>
+              <p>{profileDepartmentId}</p>
             </div>
             <div className="info">
-                <h2>Fire Department Name</h2>
-                <p>Total Applications</p>
+                <h2>{departmentData.name}</h2>
+                <p>{departmentData.email}</p>
             </div>
           </div>
         </div>
