@@ -92,7 +92,9 @@ const Courses = () => {
 
                       <div className="container">
                           <CreateCourse to="/newCourse" className="add" style={
-                              profileRole === "User" || "Commandant" ? {display: "none"} : null
+                              profileRole === ("User" || "Commandant") ?
+                                  {display: "none"}
+                                  : null
                           }>
                               <AddIcon className="icon"/>
                           </CreateCourse>

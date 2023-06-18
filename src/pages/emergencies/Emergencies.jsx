@@ -61,7 +61,7 @@ const Emergencies = () => {
             <h2>Emergencies</h2>
             <p>List of all emergencies</p>
           </div>
-          <Link to="/newEmergency" className="create" style={profileRole === "User" ? {display: "none"} : null}>
+          <Link to="/newEmergency" className="create" style={profileRole === ("User") ? {display: "none"} : null}>
             <p>Create Emergency</p>
           </Link>
         </div>

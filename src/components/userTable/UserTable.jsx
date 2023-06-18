@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./userTable.scss";
 import AddIcon from "@mui/icons-material/Add";
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -16,6 +16,7 @@ const UpdateUser = Link
 const User = Link
 
 const Table = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   let location = useLocation();
   const departmentId = location.pathname.split('/')[2]
@@ -35,14 +36,29 @@ const Table = () => {
     }
   }
 
-  useEffect(() => {
-    axios
-        .get(`https://account.fireapp.website/account`, config)
-        .then((response) => {
-          setUserData(response.data);
-        })
-        .catch((error) => console.log(error))
-  }, []);
+  useEffect(
+      () => {
+
+        if (profileRole === "SysAdmin"){
+          axios
+              .get(`https://account.fireapp.website/account`, config)
+              .then((response) => {
+                setUserData(response.data);
+              })
+              .catch((error) => console.log(error))
+        }else if (profileRole === "FireAdmin"){
+            axios
+                .get(`https://account.fireapp.website/account/${profileDepartmentId}`, config)
+                .then((response) => {
+                  setUserData(response.data);
+                })
+                .catch((error) => console.log(error))
+          }else{
+          navigate("/error")
+        }
+
+    }, []
+  );
 
   const filteredUsers = userData.filter((user) =>
   {
