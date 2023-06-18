@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
 import "./usermanagement.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import UserTable from "../../components/userTable/UserTable";

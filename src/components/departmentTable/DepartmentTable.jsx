@@ -33,13 +33,14 @@ const DepartmentTable = () => {
 
   useEffect(() => {
 
-      axios
-          .get('https://department.fireapp.website/department', config)
-          .then((response) => {
-            setDepartmentData(response.data.data);
-          })
-          .catch((error) => console.log(error))
+    axios
+        .get('https://department.fireapp.website/department', config)
+        .then((response) => {
+          setDepartmentData(response.data.data);
+        })
+        .catch((error) => console.log(error))
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

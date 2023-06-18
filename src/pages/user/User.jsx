@@ -41,7 +41,7 @@ const User = () => {
             })
             .catch((error) => console.log(error))
 
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleDeleteClick=(e)=>{
@@ -83,12 +83,12 @@ const User = () => {
                                 <div className="user-info__role">{userRole.name}</div>
                             </div>
                             <div className="user-info__options">
-                                <button className="user-info__options__option-button" role="button" onClick={handleDeleteClick}
+                                <button className="user-info__options__option-button" onClick={handleDeleteClick}
                                         style={{backgroundImage: "linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%)"}}
                                 >
                                     Delete
                                 </button>
-                                <button className="user-info__options__option-button" role="button" onClick={handleUpdateClick}
+                                <button className="user-info__options__option-button" onClick={handleUpdateClick}
                                         style={{backgroundImage: "linear-gradient(45deg, #2fffe7 0%, #1996f0 51%, #2fffe7  100%)"}}
                                 >
                                     Modify

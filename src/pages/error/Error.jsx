@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "./error.scss";
 import errorImage from "../../assets/images/error3.png"
 

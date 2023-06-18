@@ -32,7 +32,7 @@ const Course = () => {
             })
             .catch((error) => console.log(error))
 
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleDeleteClick=(e)=>{
@@ -41,7 +41,7 @@ const Course = () => {
 
         axios
             .delete("https://course.fireapp.website/course/"+ courseId)
-            .then(res => navigate("/courses"))
+            .then(() => navigate("/courses"))
             .catch(err => console.log(err))
 
     }
@@ -112,12 +112,12 @@ const Course = () => {
                 <div className="course-options" style={
                     profileRole === "User" || "Commandant" ? {display: "none"} : null
                 }>
-                    <button className="option-button" role="button" onClick={handleDeleteClick}
+                    <button className="option-button" onClick={handleDeleteClick}
                             style={{backgroundImage: "linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%)"}}
                     >
                         Delete
                     </button>
-                    <button className="option-button" role="button" onClick={handleUpdateClick}
+                    <button className="option-button" onClick={handleUpdateClick}
                             style={{backgroundImage: "linear-gradient(45deg, #2fffe7 0%, #1996f0 51%, #2fffe7  100%)"}}
                     >
                         Modify

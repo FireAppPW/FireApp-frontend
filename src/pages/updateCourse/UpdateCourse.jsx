@@ -5,7 +5,6 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import {Button} from "@mui/material";
-import userEvent from "@testing-library/user-event";
 
 const NewCourse = () => {
 
@@ -73,7 +72,7 @@ const NewCourse = () => {
             .catch((error) => console.log(error))
 
 
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

@@ -13,14 +13,15 @@ const NewEmergency = () => {
     const[fireDepartmentId,setFireDepartmentId]=useState(null)
     const[fireDepartmentName,setFireDepartmentName]=useState('')
     const[dangerousLevel,setDangerousLevel]=useState(null)
-    const[authorId,setAuthorId]=useState('')
-    const[dateTimeCreated,setDateTimeCreated]=useState('')
     const[addressLine1,setAddressLine1]=useState('')
     const[addressLine2,setAddressLine2]=useState('')
     const[city,setCity]=useState('')
     const[country,setCountry]=useState('')
     const[description,setDescription]=useState('')
     const[departmentData, setDepartmentData] = useState([]);
+
+    const profileUser = JSON.parse(localStorage.getItem("user"))
+    const profileUserId = profileUser.userId
 
     const token = JSON.parse(Cookies.get('token')).accessToken;
     const config = {
@@ -36,6 +37,7 @@ const NewEmergency = () => {
                 setDepartmentData(response.data.data);
             })
             .catch((error) => console.log(error))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
@@ -49,7 +51,7 @@ const NewEmergency = () => {
                 "classField": "1",
                 "classDescription": "fire"
             },
-            "authorId": 2,
+            "authorId": parseInt(profileUserId),
             "dateTimeCreated": new Date().toJSON(),
             dangerousLevel,
             addressLine1,

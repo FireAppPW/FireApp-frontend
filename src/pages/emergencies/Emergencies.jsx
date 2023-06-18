@@ -49,7 +49,7 @@ const Emergencies = () => {
                 setEmergencyData(response.data.sort(sortNull()));
             })
             .catch((error) => console.log(error))
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -97,7 +97,7 @@ const Emergencies = () => {
                                                   <p>{emergency.dateTimeCreated.slice(0, 10)}</p>
                                               </div>
                                           </div>
-                                          <a href="#target-content" className="e-right"
+                                          <a href="/#target-content" className="e-right"
                                              style={
                                                  profileRole === "User" ?
                                                      {display: "none"}
@@ -116,7 +116,7 @@ const Emergencies = () => {
                                               }</p>
                                           </a>
                                           <div id="target-content">
-                                              <a href="#" className="close"></a>
+                                              <a href="/#" className="close"> </a>
                                               <div id="target-inner">
                                                   <div className="target-inner__content">
                                                       <p>{modalData.dateTimeClosed === null ?
@@ -131,7 +131,7 @@ const Emergencies = () => {
                                                                    :
                                                                    {display: "none"}
                                                            }>
-                                                          <a href="#" className="e-right">
+                                                          <a href="/#" className="e-right">
                                                               <p>No</p>
                                                           </a>
                                                           <div className="e-right" style={

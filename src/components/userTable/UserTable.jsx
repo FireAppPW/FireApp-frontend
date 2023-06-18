@@ -57,7 +57,9 @@ const Table = () => {
           navigate("/error")
         }
 
-    }, []
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    , []
   );
 
   const filteredUsers = userData.filter((user) =>

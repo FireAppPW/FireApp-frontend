@@ -2,23 +2,20 @@ import React, {useEffect} from "react";
 import "./emergency.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import Grid3x3OutlinedIcon from '@mui/icons-material/Grid3x3Outlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import InsertInvitationOutlinedIcon from '@mui/icons-material/InsertInvitationOutlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import axios from "axios";
-import Cookies from "js-cookie";
 
 const Emergency = () => {
     let location = useLocation();
     const emergencyId = location.pathname.split('/')[2]
-    const navigate = useNavigate();
     //const [emergencyData, setEmergencyData] = useState([])
 
     const emergencyData =     {
@@ -52,18 +49,8 @@ const Emergency = () => {
             })
             .catch((error) => console.log(error))
 
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const handleDeleteClick=(e)=>{
-        e.preventDefault()
-        console.log(emergencyId)
-        axios
-            .delete("https://emergency.fireapp.website/emergency/"+ emergencyId)
-            .then(res => navigate("/manageuser"))
-            .catch(err => console.log(err))
-
-    }
 
     return (
         <div className="wrapper">

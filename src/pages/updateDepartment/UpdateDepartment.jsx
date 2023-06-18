@@ -19,7 +19,6 @@ const UpdateDepartment = () => {
   const[picture,setPicture]=useState('')
   let location = useLocation();
   const departmentId = location.pathname.split('/')[3]
-  const [departmentData, setDepartmentData] = useState([]);
 
   const handleClick=(e)=>{
     e.preventDefault()
@@ -45,7 +44,6 @@ const UpdateDepartment = () => {
     axios
         .get('https://department.fireapp.website/department/' + departmentId)
         .then((response) => {
-          setDepartmentData(response.data.data);
           setName(response.data.data.name)
           setAddressLine1(response.data.data.addressLine1)
           setAddressLine2(response.data.data.addressLine2)
@@ -57,7 +55,7 @@ const UpdateDepartment = () => {
 
         })
         .catch((error) => console.log(error))
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
