@@ -5,6 +5,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
+import {CONFIG} from "../../constants";
 
 const UpdateDepartment = () => {
 
@@ -34,7 +35,7 @@ const UpdateDepartment = () => {
     }
     console.log(department)
     axios
-        .put("https://department.fireapp.website/department/" + departmentId, department)
+        .put("https://department.fireapp.website/department/" + departmentId, department, CONFIG)
         .then(navigate("/managedepartment"))
         .catch(err => console.log(err))
 
@@ -42,7 +43,7 @@ const UpdateDepartment = () => {
 
   useEffect(() => {
     axios
-        .get('https://department.fireapp.website/department/' + departmentId)
+        .get('https://department.fireapp.website/department/' + departmentId, CONFIG)
         .then((response) => {
           setName(response.data.data.name)
           setAddressLine1(response.data.data.addressLine1)

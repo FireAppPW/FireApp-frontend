@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
-import Cookies from "js-cookie";
+import {CONFIG} from "../../constants";
 
 const NewUser = () => {
 
@@ -23,16 +23,10 @@ const NewUser = () => {
   const[profilePicture,setProfilePicture]=useState('')
   const[departmentData, setDepartmentData] = useState([]);
 
-  const token = JSON.parse(Cookies.get('token')).accessToken;
-  const config = {
-    headers: {
-      Authorization : `Bearer ${token}`
-    }
-  }
   useEffect(() => {
 
     axios
-        .get('https://department.fireapp.website/department',  config)
+        .get('https://department.fireapp.website/department',  CONFIG)
         .then((response) => {
           setDepartmentData(response.data.data);
           console.log(response.data.data)
@@ -66,7 +60,7 @@ const NewUser = () => {
     }
     console.log(user)
     axios
-        .post("https://account.fireapp.website/account", user, config)
+        .post("https://account.fireapp.website/account", user, CONFIG)
         .then(navigate("/manageuser"))
         .catch(err => console.log(err))
 

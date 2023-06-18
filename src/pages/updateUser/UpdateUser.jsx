@@ -5,7 +5,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
-import Cookies from "js-cookie";
+import {CONFIG, PROFILE_DEPARTMENT_ID} from "../../constants";
 
 const UpdateUser = () => {
 
@@ -25,27 +25,16 @@ const UpdateUser = () => {
   let location = useLocation();
   const userId = location.pathname.split('/')[3]
 
-  const profileUser = JSON.parse(localStorage.getItem("user"))
-  const profileDepartmentId = profileUser.departmentId
-
-
-  const token = JSON.parse(Cookies.get('token')).accessToken;
-  const config = {
-    headers: {
-      Authorization : `Bearer ${token}`
-    }
-  }
-
   useEffect(() => {
 
     axios
-        .get('https://department.fireapp.website/department', config)
+        .get('https://department.fireapp.website/department', CONFIG)
         .then((response) => {
           setDepartmentData(response.data.data);
         })
         .catch((error) => console.log(error))
     axios
-        .get(`https://account.fireapp.website/account/${profileDepartmentId}/${userId}`, config)
+        .get(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${userId}`, CONFIG)
         .then((response) => {
           setEmail(response.data.email)
           setFirstName(response.data.firstName)
@@ -85,7 +74,7 @@ const UpdateUser = () => {
       }
     }
     axios
-        .put("https://account.fireapp.website/account/" + userId, user, config)
+        .put(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${userId}`, user, CONFIG)
         .then(navigate("/manageuser"))
         .catch(err => console.log(err))
 

@@ -5,26 +5,18 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {useLocation, useNavigate} from 'react-router-dom';
 import coursePicture from  "../../assets/images/firefighter1.jpg"
 import axios from "axios";
-import Cookies from "js-cookie";
+import {CONFIG} from "../../constants";
 
 const Course = () => {
     let location = useLocation();
     const courseId = location.pathname.split('/')[2]
     const navigate = useNavigate();
     const [courseData, setCourseData] = useState([])
-    const profileRole = localStorage.getItem("role")
-
-    const token = JSON.parse(Cookies.get('token')).accessToken
-    const config = {
-        headers: {
-            Authorization : `Bearer ${token}`
-        }
-    }
 
     useEffect(() => {
 
         axios
-            .get('https://course.fireapp.website/course/' + courseId, config)
+            .get('https://course.fireapp.website/course/' + courseId, CONFIG)
             .then((response) => {
                 setCourseData(response.data);
                 console.log(response.data)
@@ -40,7 +32,7 @@ const Course = () => {
         console.log(courseId)
 
         axios
-            .delete("https://course.fireapp.website/course/"+ courseId)
+            .delete("https://course.fireapp.website/course/"+ courseId, CONFIG)
             .then(() => navigate("/courses"))
             .catch(err => console.log(err))
 

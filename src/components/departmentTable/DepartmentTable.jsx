@@ -8,9 +8,9 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import department1 from "../../assets/images/department1.jpg";
 import department2 from "../../assets/images/department2.jpg";
 import department3 from "../../assets/images/department3.jpg";
+import {CONFIG, PROFILE_DEPARTMENT_ID, PROFILE_ROLE} from "../../constants"
 
 import EditIcon from "@mui/icons-material/Edit";
-import Cookies from "js-cookie";
 
 const CreateDepartment = Link
 const UpdateDepartment = Link
@@ -21,20 +21,10 @@ const DepartmentTable = () => {
   const [departmentData, setDepartmentData] = useState([]);
   const departmentPictures = [department1, department2, department3]
 
-  const profileUser = JSON.parse(localStorage.getItem("user"))
-  const profileRole = profileUser.roles
-
-  const token = JSON.parse(Cookies.get('token')).accessToken
-  const config = {
-    headers: {
-      Authorization : `Bearer ${token}`
-    }
-  }
-
   useEffect(() => {
 
     axios
-        .get('https://department.fireapp.website/department', config)
+        .get('https://department.fireapp.website/department', CONFIG)
         .then((response) => {
           setDepartmentData(response.data.data);
         })
@@ -55,7 +45,7 @@ const DepartmentTable = () => {
   const handleDeleteClick=(e, id)=>{
     e.preventDefault()
     axios
-        .delete("https://department.fireapp.website/department/"+ id, config)
+        .delete("https://department.fireapp.website/department/"+ id, CONFIG)
         .then(() => window.location.reload())
         .catch(err => console.log(err))
 
@@ -78,7 +68,7 @@ const DepartmentTable = () => {
                 <SearchIcon className="searchIcon"/>
               </div>
               <CreateDepartment to="/newDepartment" className="depAdd" style={
-                profileRole === ("User" || "Commandant") ?
+                ["User", "Commandant"].includes(PROFILE_ROLE) ?
                     {display: "none"}
                     : null
               }>
@@ -109,7 +99,10 @@ const DepartmentTable = () => {
                         <td className="departmentCell">{department.id}</td>
                         <td className="departmentCell">{department.email}</td>
                         <td className="departmentCell">{department.phone}</td>
-                        <td className="departmentCell departmentOptions">
+                        <td className="departmentCell departmentOptions" style={
+                          PROFILE_DEPARTMENT_ID !== department.id ?
+                              {display: "none"}:null
+                        }>
                           <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
                             (e) => {
                               handleDeleteClick(e, department.id)

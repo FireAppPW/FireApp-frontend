@@ -5,6 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Button} from "@mui/material";
 import axios from "axios";
+import {CONFIG} from "../../constants";
 
 const NewDepartment = () => {
 
@@ -22,7 +23,7 @@ const NewDepartment = () => {
         const department={name,addressLine1, city, country, phone, email, picture}
         console.log(department)
         axios
-            .post("https://department.fireapp.website/department", department)
+            .post("https://department.fireapp.website/department", department, CONFIG)
             .then(navigate("/department"))
             .catch(err => console.log(err))
     }

@@ -5,7 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import {Button} from "@mui/material";
-import Cookies from "js-cookie";
+import {CONFIG, PROFILE_USER_ID} from "../../constants";
 
 const NewEmergency = () => {
 
@@ -20,19 +20,9 @@ const NewEmergency = () => {
     const[description,setDescription]=useState('')
     const[departmentData, setDepartmentData] = useState([]);
 
-    const profileUser = JSON.parse(localStorage.getItem("user"))
-    const profileUserId = profileUser.userId
-
-    const token = JSON.parse(Cookies.get('token')).accessToken;
-    const config = {
-        headers: {
-            Authorization : `Bearer ${token}`
-        }
-    }
-
     useEffect(() => {
         axios
-            .get('https://department.fireapp.website/department', config)
+            .get('https://department.fireapp.website/department', CONFIG)
             .then((response) => {
                 setDepartmentData(response.data.data);
             })
@@ -51,7 +41,7 @@ const NewEmergency = () => {
                 "classField": "1",
                 "classDescription": "fire"
             },
-            "authorId": parseInt(profileUserId),
+            "authorId": parseInt(PROFILE_USER_ID),
             "dateTimeCreated": new Date().toJSON(),
             dangerousLevel,
             addressLine1,

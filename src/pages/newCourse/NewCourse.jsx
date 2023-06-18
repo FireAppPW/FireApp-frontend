@@ -5,6 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import {Button} from "@mui/material";
+import {CONFIG} from "../../constants";
 
 const NewCourse = () => {
 
@@ -42,7 +43,7 @@ const NewCourse = () => {
         }
         console.log(course)
         axios
-            .post("https://course.fireapp.website/course", course)
+            .post("https://course.fireapp.website/course", course, CONFIG)
             .then(navigate("/courses"))
             .catch(err => console.log(err))
 

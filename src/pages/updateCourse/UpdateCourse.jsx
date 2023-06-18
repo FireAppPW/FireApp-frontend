@@ -5,6 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import axios from "axios";
 import {Button} from "@mui/material";
+import {CONFIG} from "../../constants";
 
 const NewCourse = () => {
 
@@ -46,14 +47,14 @@ const NewCourse = () => {
         }
         console.log(course)
         axios
-            .put("https://course.fireapp.website/course/" + courseId, course)
+            .put(`https://course.fireapp.website/course/${courseId}`, course, CONFIG)
             .then(navigate("/courses"))
             .catch(err => console.log(err))
     }
 
     useEffect(() => {
         axios
-            .get('https://course.fireapp.website/course/' + courseId)
+            .get(`https://course.fireapp.website/course/${courseId}`, CONFIG)
             .then((response) => {
                 console.log("COURSE: ",response.data)
                 setTitle(response.data.title)

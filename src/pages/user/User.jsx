@@ -11,7 +11,7 @@ import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import axios from "axios";
-import Cookies from "js-cookie";
+import {CONFIG, PROFILE_DEPARTMENT_ID} from "../../constants";
 
 const User = () => {
     let location = useLocation();
@@ -20,20 +20,10 @@ const User = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState([])
 
-    const profileUser = JSON.parse(localStorage.getItem("user"))
-    const profileDepartmentId = profileUser.departmentId
-
-    const token = JSON.parse(Cookies.get('token')).accessToken
-    const config = {
-        headers: {
-            Authorization : `Bearer ${token}`
-        }
-    }
-
     useEffect(() => {
 
         axios
-            .get(`https://account.fireapp.website/account/${profileDepartmentId}/${userId}`, config)
+            .get(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${userId}`, CONFIG)
             .then((response) => {
                 setUserData(response.data);
                 setUserRole(response.data.role)
@@ -48,7 +38,7 @@ const User = () => {
         e.preventDefault()
         console.log(userId)
         axios
-            .delete(`https://account.fireapp.website/account/${profileDepartmentId}/${userId}`, config)
+            .delete(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${userId}`, CONFIG)
             .then(() => navigate("/manageuser"))
             .catch(err => console.log(err))
 

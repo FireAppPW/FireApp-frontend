@@ -10,7 +10,8 @@ import course3 from  "../../assets/images/course3.jpg"
 import course4 from  "../../assets/images/course4.jpg"
 import {Link} from 'react-router-dom';
 import axios from "axios";
-import Cookies from "js-cookie";
+
+import {CONFIG} from "../../constants";
 
 const CreateCourse = Link
 const Course = Link
@@ -20,14 +21,7 @@ const Courses = () => {
     const [courseData, setCourseData] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [isRemoteQuery, setIsRemoteQuery] = useState(false);
-    const token = JSON.parse(Cookies.get('token')).accessToken
     const coursesPictures = [course1, course2, course3, course4]
-    const profileRole = localStorage.getItem("role")
-    const config = {
-        headers: {
-            Authorization : `Bearer ${token}`
-        }
-    }
 
     const filteredCourses = courseData.filter((course) => {
         console.log(isRemoteQuery)
@@ -42,7 +36,7 @@ const Courses = () => {
 
     useEffect(() => {
         axios
-            .get('https://course.fireapp.website/course', config)
+            .get('https://course.fireapp.website/course', CONFIG)
             .then((response) => {
                 setCourseData(response.data);
             })

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./userTable.scss";
 import AddIcon from "@mui/icons-material/Add";
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -9,54 +9,29 @@ import person1 from "../../assets/images/person1.jpg";
 import person2 from "../../assets/images/person2.jpg";
 import person3 from "../../assets/images/person3.jpg";
 import axios from "axios";
-import Cookies from "js-cookie";
+import {CONFIG, PROFILE_DEPARTMENT_ID, PROFILE_ROLE} from "../../constants";
 
 const CreateUser = Link
 const UpdateUser = Link
 const User = Link
 
 const Table = () => {
-  const navigate = useNavigate();
+
   const [searchQuery, setSearchQuery] = useState("");
   let location = useLocation();
   const departmentId = location.pathname.split('/')[2]
   const profileImages = [person1, person2, person3]
 
-  const profileUser = JSON.parse(localStorage.getItem("user"))
-  const profileRole = profileUser.roles
-  const profileDepartmentId = profileUser.departmentId
-
   const [userData, setUserData] = useState([]);
-
-  const token = JSON.parse(Cookies.get('token')).accessToken;
-  //const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGFuZWoudm92Y2FrQGdtYWlsLmNvbSIsInJvbGVzIjoiU3lzQWRtaW4iLCJkZXBhcnRtZW50SWQiOjIsImlzcyI6IkZpcmVBcHAiLCJpYXQiOjE2ODY5MTgzMzEsImV4cCI6MTY4NzAwNDczMX0.C9BHspB4a5061eKTBiJf-2twx752LqX9xewyldLQRPwg_5xjkdBCnxeNrRMDFLp64D0jISx8VWjB-iq8nVeZPw"
-  const config = {
-    headers: {
-      Authorization : `Bearer ${token}`
-    }
-  }
 
   useEffect(
       () => {
-
-        if (profileRole === "SysAdmin"){
-          axios
-              .get(`https://account.fireapp.website/account`, config)
-              .then((response) => {
-                setUserData(response.data);
-              })
-              .catch((error) => console.log(error))
-        }else if (profileRole === "FireAdmin"){
-            axios
-                .get(`https://account.fireapp.website/account/${profileDepartmentId}`, config)
-                .then((response) => {
-                  setUserData(response.data);
-                })
-                .catch((error) => console.log(error))
-          }else{
-          navigate("/error")
-        }
-
+      axios
+          .get(`https://account.fireapp.website/account`, CONFIG)
+          .then((response) => {
+            setUserData(response.data);
+          })
+          .catch((error) => console.log(error))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     , []
@@ -81,7 +56,7 @@ const Table = () => {
   const handleDeleteClick=(e, id)=>{
     e.preventDefault()
     axios
-        .delete(`https://account.fireapp.website/account/${profileDepartmentId}/${id}`, config)
+        .delete(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${id}`, CONFIG)
         .then(() => window.location.reload())
         .catch(err => console.log(err))
 
@@ -104,7 +79,7 @@ const Table = () => {
                 <SearchIcon className="searchIcon"/>
               </div>
               <CreateUser to="/newUser" className="userAdd" style={
-                profileRole === ("User" || "Commandant") ?
+                ["User", "Commandant"].includes(PROFILE_ROLE) ?
                     {display: "none"}
                     :
                     null
@@ -125,7 +100,7 @@ const Table = () => {
               <th className="userTh">Role</th>
               <th className="userTh"
                   style={
-                    profileRole === ("User" || "Commandant ") ?
+                    ["User", "Commandant"].includes(PROFILE_ROLE) ?
                         {display: "none"}
                         :
                         null
@@ -137,7 +112,7 @@ const Table = () => {
               return (
                   <tr className="userRow" key={user.id}>
                     <User to={
-                      profileRole !== "User" ?
+                      PROFILE_ROLE !== "User" ?
                         "/manageuser/" + user.id
                         :
                         null
@@ -151,7 +126,7 @@ const Table = () => {
                     <td className="widgetLgAmount">{user.role.name}</td>
                     <td className="widgetLgStatus"
                         style={
-                          profileRole === ("User" || "Commandant") ?
+                          ["User", "Commandant"].includes(PROFILE_ROLE) ?
                               {display: "none"}
                               :
                               null
