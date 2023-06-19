@@ -102,7 +102,8 @@ const Course = () => {
                     </div>
                 </div>
                 <div className="course-options" style={
-                    PROFILE_ROLE === "User" || "Commandant" ? {display: "none"} : null
+                    PROFILE_ROLE === "User" || "Commandant" ?
+                        {display: "none"} : null
                 }>
                     <button className="option-button" onClick={handleDeleteClick}
                             style={{backgroundImage: "linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%)"}}

@@ -5,8 +5,10 @@ import google_logo from "../../assets/icons/google-logo.svg";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
-import axios from "axios";
 import jwt from "jwt-decode";
+import {PROFILE_DEPARTMENT_ID} from "../../constants";
+import {getGoogleProfile, getJWT} from "../../services/LoginService";
+import {getUserById, putUser} from "../../services/UserService";
 
 
 
@@ -17,18 +19,48 @@ const Login = () => {
 
     const login = useGoogleLogin({
         onSuccess: async tokenResponse => {
-            Cookies.set('google-auth', JSON.stringify(tokenResponse),{ expires: 1 });
-            axios
-                .post("https://api.fireapp.website/account/login", {"code": tokenResponse.access_token})
+            // GENERATE JWT
+            getJWT(tokenResponse)
                 .then((response) => {
-                    Cookies.set('token', JSON.stringify(response.data), { expires: 1 });
-                    console.log(jwt(response.data.accessToken))
-                    localStorage.setItem("user", JSON.stringify(jwt(response.data.accessToken)))
-                    console.log(response.data.accessToken)
-                    navigate("/emergencies")
-                })
-                .catch(err => console.log(err))
+                    const token = response.data
+                    const jwt_user = jwt(response.data.accessToken)
 
+                    Cookies.set('token', JSON.stringify(token), { expires: 1 });
+                    localStorage.setItem("user", JSON.stringify(jwt_user))
+
+                    // TAKE GOOGLE PROFILE
+                    getGoogleProfile(tokenResponse)
+                        .then((res) => {
+                            const google_profile = res.data
+
+                            getUserById(PROFILE_DEPARTMENT_ID,jwt_user.userId).then((user) => {
+                                const user2=
+                                    {
+                                        "activationCode": user.activationCode,
+                                        "addressLine1": user.addressLine1,
+                                        "addressLine2": user.addressLine2,
+                                        "birthDate": user.birthDate,
+                                        "city": user.city,
+                                        "country": user.country,
+                                        "email": user.email,
+                                        "fireDepartmentId": parseInt(user.fireDepartmentId),
+                                        "firstName": user.firstName,
+                                        "lastName": user.lastName,
+                                        "isActivated": user.isActivated,
+                                        "isDeleted": user.isDeleted,
+                                        "position": user.position,
+                                        "shift": user.shift,
+                                        "role": {
+                                            "id": parseInt(user.role.id)
+                                        },
+                                        "profilePicture": google_profile.picture
+                                    }
+                                putUser(PROFILE_DEPARTMENT_ID, jwt_user.userId, user2)
+                            })
+                            localStorage.setItem("google-profile", JSON.stringify(google_profile))
+                            navigate("/emergencies")
+                        })
+                })
         },
         onError: (error) => console.log('Login Failed:', error)
     });

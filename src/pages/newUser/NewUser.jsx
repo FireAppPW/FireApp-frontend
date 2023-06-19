@@ -6,6 +6,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
 import {CONFIG} from "../../constants";
+import {postUser} from "../../services/UserService";
 
 const NewUser = () => {
 
@@ -58,12 +59,7 @@ const NewUser = () => {
         "id": parseInt(role)
       }
     }
-    console.log(user)
-    axios
-        .post("https://account.fireapp.website/account", user, CONFIG)
-        .then(navigate("/manageuser"))
-        .catch(err => console.log(err))
-
+    postUser(user).then(navigate("/manageuser"))
   }
 
   return (

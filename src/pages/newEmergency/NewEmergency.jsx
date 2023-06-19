@@ -53,7 +53,7 @@ const NewEmergency = () => {
         console.log(emergency)
 
         axios
-            .post("https://emergency.fireapp.website/emergency", emergency)
+            .post("https://emergency.fireapp.website/emergency", emergency, CONFIG)
             .then(navigate("/emergencies"))
             .catch(err => console.log(err))
 

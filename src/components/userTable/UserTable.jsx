@@ -5,11 +5,8 @@ import {Link, useLocation} from 'react-router-dom';
 import SearchIcon from "@mui/icons-material/Search";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import person1 from "../../assets/images/person1.jpg";
-import person2 from "../../assets/images/person2.jpg";
-import person3 from "../../assets/images/person3.jpg";
-import axios from "axios";
-import {CONFIG, PROFILE_DEPARTMENT_ID, PROFILE_ROLE} from "../../constants";
+import {PROFILE_ROLE} from "../../constants";
+import {getAllUsers, deleteUserById} from "../../services/UserService";
 
 const CreateUser = Link
 const UpdateUser = Link
@@ -20,19 +17,12 @@ const Table = () => {
   const [searchQuery, setSearchQuery] = useState("");
   let location = useLocation();
   const departmentId = location.pathname.split('/')[2]
-  const profileImages = [person1, person2, person3]
-
   const [userData, setUserData] = useState([]);
 
   useEffect(
       () => {
-      axios
-          .get(`https://account.fireapp.website/account`, CONFIG)
-          .then((response) => {
-            setUserData(response.data);
-          })
-          .catch((error) => console.log(error))
-    }
+        getAllUsers().
+        then((users) => {setUserData(users)})}
     // eslint-disable-next-line react-hooks/exhaustive-deps
     , []
   );
@@ -53,12 +43,9 @@ const Table = () => {
   };
 
 
-  const handleDeleteClick=(e, id)=>{
+  const handleDeleteClick=(e, id, departmentId)=>{
     e.preventDefault()
-    axios
-        .delete(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${id}`, CONFIG)
-        .then(() => window.location.reload())
-        .catch(err => console.log(err))
+    deleteUserById(departmentId,id).then(() => window.location.reload())
 
   }
 
@@ -117,7 +104,7 @@ const Table = () => {
                         :
                         null
                     } className="userName">
-                      <img src={profileImages[Math.floor(Math.random() * profileImages.length)]} alt="" className="userImg" />
+                      <img src={user.profilePicture} alt="" className="userImg" />
                       <span>{user.firstName}</span>
                     </User>
                     <td className="widgetLgDate">{user.id}</td>
@@ -133,7 +120,7 @@ const Table = () => {
                         }>
                       <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
                         (e) => {
-                          handleDeleteClick(e, user.id)
+                          handleDeleteClick(e, user.id, user.fireDepartmentId)
                         }}>
                         <DeleteForeverIcon className="deleteIcon"/>
                       </div>

@@ -6,6 +6,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import axios from "axios";
 import {Button} from "@mui/material";
 import {CONFIG, PROFILE_DEPARTMENT_ID} from "../../constants";
+import {getUserById, putUser} from "../../services/UserService";
 
 const UpdateUser = () => {
 
@@ -20,7 +21,6 @@ const UpdateUser = () => {
   const[city,setCity]=useState('')
   const[country,setCountry]=useState('')
   const[role,setRole]=useState('')
-  const[profilePicture,setProfilePicture]=useState('')
   const[departmentData, setDepartmentData] = useState([]);
   let location = useLocation();
   const userId = location.pathname.split('/')[3]
@@ -33,21 +33,19 @@ const UpdateUser = () => {
           setDepartmentData(response.data.data);
         })
         .catch((error) => console.log(error))
-    axios
-        .get(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${userId}`, CONFIG)
-        .then((response) => {
-          setEmail(response.data.email)
-          setFirstName(response.data.firstName)
-          setLastName(response.data.lastName)
-          setBirthDate(response.data.birthDate)
-          setFireDepartmentId(response.data.fireDepartmentId)
-          setAddressLine1(response.data.addressLine1)
-          setAddressLine2(response.data.addressLine2)
-          setCity(response.data.city)
-          setCountry(response.data.country)
-          setRole(response.data.role.id)
+    getUserById(PROFILE_DEPARTMENT_ID ,userId)
+        .then((user) => {
+              setEmail(user.email)
+              setFirstName(user.firstName)
+              setLastName(user.lastName)
+              setBirthDate(user.birthDate)
+              setFireDepartmentId(user.fireDepartmentId)
+              setAddressLine1(user.addressLine1)
+              setAddressLine2(user.addressLine2)
+              setCity(user.city)
+              setCountry(user.country)
+              setRole(user.role.id)
         })
-        .catch((error) => console.log(error))
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -71,12 +69,12 @@ const UpdateUser = () => {
       "shift": 1,
       "role": {
         "id": parseInt(role)
-      }
+      },
+      "profilePicture" : "https://lh3.googleusercontent.com/a/AAcHTtcwDSOi9Na0rMvzaNEj4NCA40TtTysn7-rls15Z=s96-c"
     }
-    axios
-        .put(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${userId}`, user, CONFIG)
-        .then(navigate("/manageuser"))
-        .catch(err => console.log(err))
+    putUser(PROFILE_DEPARTMENT_ID,userId, user).then(
+        navigate("/manageuser")
+    )
 
 
   }
@@ -177,13 +175,6 @@ const UpdateUser = () => {
                   <option value="4">Commandant</option>
                 </select>
               </div>
-            </div>
-            <div className="userPhoto">
-              <p>Photo</p>
-              <input type="file" id="images" accept="image/*" value={profilePicture}
-                     onChange={
-                       (e)=>setProfilePicture(e.target.value)
-                     } required />
             </div>
           </div>
         </form>

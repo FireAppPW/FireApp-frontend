@@ -3,15 +3,14 @@ import "./user.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {useLocation, useNavigate} from 'react-router-dom';
-import coursePicture from  "../../assets/images/firefighter1.jpg"
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import ApartmentOutlinedIcon from '@mui/icons-material/ApartmentOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
-import axios from "axios";
-import {CONFIG, PROFILE_DEPARTMENT_ID} from "../../constants";
+import {PROFILE_DEPARTMENT_ID} from "../../constants";
+import {deleteUserById, getUserById} from "../../services/UserService";
 
 const User = () => {
     let location = useLocation();
@@ -22,33 +21,22 @@ const User = () => {
 
     useEffect(() => {
 
-        axios
-            .get(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${userId}`, CONFIG)
-            .then((response) => {
-                setUserData(response.data);
-                setUserRole(response.data.role)
-
-            })
-            .catch((error) => console.log(error))
-
+        getUserById(PROFILE_DEPARTMENT_ID, userId).then((response) => {
+            setUserData(response);
+            setUserRole(response.role)
+        })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleDeleteClick=(e)=>{
         e.preventDefault()
-        console.log(userId)
-        axios
-            .delete(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${userId}`, CONFIG)
-            .then(() => navigate("/manageuser"))
-            .catch(err => console.log(err))
+        deleteUserById(PROFILE_DEPARTMENT_ID, userId).then(() => navigate("/manageuser"))
 
     }
-
     const handleUpdateClick=(e)=>{
         e.preventDefault()
         navigate("/manageuser/update/"+userId)
     }
-
 
     return (
         <div className="wrapper">
@@ -65,7 +53,7 @@ const User = () => {
                         <div className="user-info__top">
                             <div className="user-info__small-data">
                                 <div className="user-info__image">
-                                    <img src={coursePicture} alt=""/>
+                                    <img src={userData.profilePicture} alt=""/>
                                 </div>
                                 <div className="user-info__name">
                                     <h2>{userData.firstName + " " + userData.lastName}</h2>

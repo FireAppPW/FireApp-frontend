@@ -5,6 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import {CONFIG} from "../../constants";
 
 const Emergency = Link
 
@@ -32,7 +33,7 @@ const Emergencies = () => {
         emergency.dateTimeClosed = new Date().toJSON()
         console.log(emergency)
         axios
-            .put("https://emergency.fireapp.website/emergency/" + emergency.id, emergency)
+            .put(`https://emergency.fireapp.website/emergency/${emergency.id}`, emergency, CONFIG)
             .then(res => {
                 console.log(res)
                 window.location.reload()
@@ -44,7 +45,7 @@ const Emergencies = () => {
 
     useEffect(() => {
         axios
-            .get('https://emergency.fireapp.website/emergency')
+            .get('https://emergency.fireapp.website/emergency', CONFIG)
             .then((response) => {
                 setEmergencyData(response.data.sort(sortNull()));
             })
@@ -97,7 +98,7 @@ const Emergencies = () => {
                                                   <p>{emergency.dateTimeCreated.slice(0, 10)}</p>
                                               </div>
                                           </div>
-                                          <a href="/#target-content" className="e-right"
+                                          <a href="#target-content" className="e-right"
                                              style={
                                                  profileRole === "User" ?
                                                      {display: "none"}
@@ -116,7 +117,7 @@ const Emergencies = () => {
                                               }</p>
                                           </a>
                                           <div id="target-content">
-                                              <a href="/#" className="close"> </a>
+                                              <a href="#" className="close"> </a>
                                               <div id="target-inner">
                                                   <div className="target-inner__content">
                                                       <p>{modalData.dateTimeClosed === null ?
@@ -145,6 +146,7 @@ const Emergencies = () => {
                                           </div>
                                       </div>
                                       <div className="e-bottom" style={{display: emergency.dateTimeClosed === null ? "block":"none"}}>
+                                        <p>{`Fire Department ID: ${emergency.fireDepartmentId}`}</p>
                                         <p>{emergency.description}</p>
                                       </div>
                                   </div>

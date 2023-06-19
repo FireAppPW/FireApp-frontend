@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import {googleLogout} from "@react-oauth/google";
 import {Link, useNavigate} from 'react-router-dom';
 import Cookies from 'js-cookie';
+import {CONFIG} from "../../constants";
 
 
 const CreateNotification = Link
@@ -18,7 +19,8 @@ const User = Link
 const RightSidebar = () => {
 
     const navigate = useNavigate();
-    const [ profile, setProfile ] = useState([])
+
+    const [profile, setProfile] = useState({})
 
     const profileUser = JSON.parse(localStorage.getItem("user"))
     const profileRole = profileUser.roles
@@ -27,36 +29,15 @@ const RightSidebar = () => {
 
     const [departmentData, setDepartmentData] = useState([]);
 
-    const token = JSON.parse(Cookies.get('token')).accessToken;
-    //const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxLGFuZWoudm92Y2FrQGdtYWlsLmNvbSIsInJvbGVzIjoiU3lzQWRtaW4iLCJkZXBhcnRtZW50SWQiOjIsImlzcyI6IkZpcmVBcHAiLCJpYXQiOjE2ODY5MTgzMzEsImV4cCI6MTY4NzAwNDczMX0.C9BHspB4a5061eKTBiJf-2twx752LqX9xewyldLQRPwg_5xjkdBCnxeNrRMDFLp64D0jISx8VWjB-iq8nVeZPw"
-    const config = {
-        headers: {
-            Authorization : `Bearer ${token}`
-        }
-    }
-
   useEffect(
       () => {
-        const cookieValue = JSON.parse(Cookies.get('google-auth'));
+          setProfile(JSON.parse(localStorage.getItem("google-profile")))
           axios
-              .get(`https://department.fireapp.website/department/${profileDepartmentId}`, config)
+              .get(`https://department.fireapp.website/department/${profileDepartmentId}`, CONFIG)
               .then((response) => {
                   setDepartmentData(response.data.data);
               })
               .catch((error) => console.log(error))
-        if (cookieValue) {
-          axios
-              .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${cookieValue.access_token}`, {
-                headers: {
-                  Authorization: `Bearer ${cookieValue.access_token}`,
-                  Accept: 'application/json'
-                }
-              })
-              .then((res) => {
-                setProfile(res.data);
-              })
-              .catch((err) => console.log(err));
-        }
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
@@ -65,7 +46,6 @@ const RightSidebar = () => {
     Cookies.remove('token')
     Cookies.remove('google-auth')
       localStorage.clear()
-    setProfile(null);
     navigate("/")
   };
 
