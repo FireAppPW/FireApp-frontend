@@ -4,8 +4,8 @@ import LeftSidebar from "../../components/leftSidebar/LeftSidebar.jsx";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import {Link} from "react-router-dom";
-import axios from "axios";
-import {CONFIG} from "../../constants";
+import {getAllEmergencies, putEmergency} from "../../services/EmergencyService";
+import {PROFILE_DEPARTMENT_ID} from "../../constants";
 
 const Emergency = Link
 
@@ -28,28 +28,16 @@ const Emergencies = () => {
         };
     }
 
+
     const handleClick=(e, emergency)=>{
         e.preventDefault()
         emergency.dateTimeClosed = new Date().toJSON()
         console.log(emergency)
-        axios
-            .put(`https://emergency.fireapp.website/emergency/${emergency.id}`, emergency, CONFIG)
-            .then(res => {
-                console.log(res)
-                window.location.reload()
-
-            })
-            .catch(err => console.log(err))
-
+        putEmergency(emergency.id, emergency, PROFILE_DEPARTMENT_ID).then(() => window.location.reload())
     }
 
     useEffect(() => {
-        axios
-            .get('https://emergency.fireapp.website/emergency', CONFIG)
-            .then((response) => {
-                setEmergencyData(response.data.sort(sortNull()));
-            })
-            .catch((error) => console.log(error))
+        getAllEmergencies().then((response) => setEmergencyData(response.sort(sortNull())))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -132,7 +120,7 @@ const Emergencies = () => {
                                                                    :
                                                                    {display: "none"}
                                                            }>
-                                                          <a href="/#" className="e-right">
+                                                          <a href="#" className="e-right">
                                                               <p>No</p>
                                                           </a>
                                                           <div className="e-right" style={

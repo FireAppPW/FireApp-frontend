@@ -15,4 +15,4 @@ export const CONFIG = {
 const profileUser = JSON.parse(localStorage.getItem("user"))
 export const PROFILE_DEPARTMENT_ID = profileUser.departmentId
 export const PROFILE_ROLE = profileUser.roles
-export const PROFILE_USER_ID = profileUser.roles
+export const PROFILE_USER_ID = profileUser.userId

@@ -3,9 +3,10 @@ import "./newemergency.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Link, useNavigate} from 'react-router-dom';
-import axios from "axios";
 import {Button} from "@mui/material";
-import {CONFIG, PROFILE_USER_ID} from "../../constants";
+import {PROFILE_USER_ID} from "../../constants";
+import {postEmergency} from "../../services/EmergencyService";
+import {getAllDepartments} from "../../services/DepartmentService";
 
 const NewEmergency = () => {
 
@@ -21,12 +22,7 @@ const NewEmergency = () => {
     const[departmentData, setDepartmentData] = useState([]);
 
     useEffect(() => {
-        axios
-            .get('https://department.fireapp.website/department', CONFIG)
-            .then((response) => {
-                setDepartmentData(response.data.data);
-            })
-            .catch((error) => console.log(error))
+        getAllDepartments().then((response) => setDepartmentData(response))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -51,11 +47,7 @@ const NewEmergency = () => {
             description
         }
         console.log(emergency)
-
-        axios
-            .post("https://emergency.fireapp.website/emergency", emergency, CONFIG)
-            .then(navigate("/emergencies"))
-            .catch(err => console.log(err))
+        postEmergency(emergency).then(navigate("/emergencies"))
 
     }
 
