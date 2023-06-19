@@ -9,9 +9,9 @@ import course2 from  "../../assets/images/course2.jpg"
 import course3 from  "../../assets/images/course3.jpg"
 import course4 from  "../../assets/images/course4.jpg"
 import {Link} from 'react-router-dom';
-import axios from "axios";
 
-import {CONFIG, PROFILE_ROLE} from "../../constants";
+import {PROFILE_ROLE} from "../../constants";
+import {getAllCourses} from "../../services/CourseService";
 
 const CreateCourse = Link
 const Course = Link
@@ -35,13 +35,7 @@ const Courses = () => {
 
 
     useEffect(() => {
-        axios
-            .get('https://course.fireapp.website/course', CONFIG)
-            .then((response) => {
-                setCourseData(response.data);
-            })
-            .catch((error) => console.log(error))
-
+        getAllCourses().then((response) => setCourseData(response))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

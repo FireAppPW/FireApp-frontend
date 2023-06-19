@@ -4,8 +4,8 @@ import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {useLocation, useNavigate} from 'react-router-dom';
 import coursePicture from  "../../assets/images/firefighter1.jpg"
-import axios from "axios";
-import {CONFIG, PROFILE_ROLE} from "../../constants";
+import {PROFILE_ROLE} from "../../constants";
+import {deleteCourseById, getCourseById} from "../../services/CourseService";
 
 const Course = () => {
     let location = useLocation();
@@ -14,28 +14,14 @@ const Course = () => {
     const [courseData, setCourseData] = useState([])
 
     useEffect(() => {
-
-        axios
-            .get('https://course.fireapp.website/course/' + courseId, CONFIG)
-            .then((response) => {
-                setCourseData(response.data);
-                console.log(response.data)
-
-            })
-            .catch((error) => console.log(error))
+        getCourseById(courseId).then((response) => setCourseData(response))
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleDeleteClick=(e)=>{
         e.preventDefault()
-        console.log(courseId)
-
-        axios
-            .delete("https://course.fireapp.website/course/"+ courseId, CONFIG)
-            .then(() => navigate("/courses"))
-            .catch(err => console.log(err))
-
+        deleteCourseById(courseId).then(() => navigate("/courses"))
     }
 
     const handleUpdateClick=(e)=>{
@@ -102,7 +88,7 @@ const Course = () => {
                     </div>
                 </div>
                 <div className="course-options" style={
-                    PROFILE_ROLE === "User" || "Commandant" ?
+                    ["User", "Commandant"].includes(PROFILE_ROLE) ?
                         {display: "none"} : null
                 }>
                     <button className="option-button" onClick={handleDeleteClick}

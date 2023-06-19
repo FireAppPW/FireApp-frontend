@@ -3,9 +3,8 @@ import "./newcourse.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Link, useNavigate} from 'react-router-dom';
-import axios from "axios";
 import {Button} from "@mui/material";
-import {CONFIG} from "../../constants";
+import {postCourse} from "../../services/CourseService";
 
 const NewCourse = () => {
 
@@ -42,12 +41,7 @@ const NewCourse = () => {
             "isDeleted": true
         }
         console.log(course)
-        axios
-            .post("https://course.fireapp.website/course", course, CONFIG)
-            .then(navigate("/courses"))
-            .catch(err => console.log(err))
-
-
+        postCourse(course).then(navigate("/courses"))
     }
 
 

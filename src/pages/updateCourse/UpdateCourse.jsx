@@ -3,9 +3,8 @@ import "./updatecourse.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-import axios from "axios";
 import {Button} from "@mui/material";
-import {CONFIG} from "../../constants";
+import {getCourseById, putCourse} from "../../services/CourseService";
 
 const NewCourse = () => {
 
@@ -45,34 +44,23 @@ const NewCourse = () => {
             picture,
             "isDeleted": true
         }
-        console.log(course)
-        axios
-            .put(`https://course.fireapp.website/course/${courseId}`, course, CONFIG)
-            .then(navigate("/courses"))
-            .catch(err => console.log(err))
+        putCourse(courseId, course).then(navigate("/courses"))
     }
 
     useEffect(() => {
-        axios
-            .get(`https://course.fireapp.website/course/${courseId}`, CONFIG)
-            .then((response) => {
-                console.log("COURSE: ",response.data)
-                setTitle(response.data.title)
-                setDescription(response.data.description)
-                setIsPublic(response.data.isPublic)
-                setDateTimeApplicationDeadline(response.data.dateTimeApplicationDeadline)
-                setDateTimeStart(response.data.dateTimeStart)
-                setPlaces(response.data.places)
-                setAddressLine1(response.data.addressLine1)
-                setAddressLine2(response.data.addressLine2)
-                setCity(response.data.city)
-                setCountry(response.data.country)
-                setCourseData(response.data);
-
-            })
-            .catch((error) => console.log(error))
-
-
+        getCourseById(courseId).then((response) => {
+            setTitle(response.title)
+            setDescription(response.description)
+            setIsPublic(response.isPublic)
+            setDateTimeApplicationDeadline(response.dateTimeApplicationDeadline)
+            setDateTimeStart(response.dateTimeStart)
+            setPlaces(response.places)
+            setAddressLine1(response.addressLine1)
+            setAddressLine2(response.addressLine2)
+            setCity(response.city)
+            setCountry(response.country)
+            setCourseData(response);
+        })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
