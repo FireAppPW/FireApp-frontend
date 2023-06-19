@@ -105,7 +105,7 @@ const Emergencies = () => {
                                               }</p>
                                           </a>
                                           <div id="target-content">
-                                              <a href="#" className="close"> </a>
+                                              <a href="/emergencies" className="close"> </a>
                                               <div id="target-inner">
                                                   <div className="target-inner__content">
                                                       <p>{modalData.dateTimeClosed === null ?
@@ -120,7 +120,7 @@ const Emergencies = () => {
                                                                    :
                                                                    {display: "none"}
                                                            }>
-                                                          <a href="#" className="e-right">
+                                                          <a href="/emergencies" className="e-right">
                                                               <p>No</p>
                                                           </a>
                                                           <div className="e-right" style={
