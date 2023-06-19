@@ -3,32 +3,28 @@ import "./departmentTable.scss";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import {Link} from "react-router-dom";
-import axios from "axios";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import department1 from "../../assets/images/department1.jpg";
 import department2 from "../../assets/images/department2.jpg";
 import department3 from "../../assets/images/department3.jpg";
-import {CONFIG, PROFILE_DEPARTMENT_ID, PROFILE_ROLE} from "../../constants"
+import {PROFILE_DEPARTMENT_ID, PROFILE_ROLE} from "../../constants"
 
 import EditIcon from "@mui/icons-material/Edit";
+import {deleteDepartmentById, getAllDepartments} from "../../services/DepartmentService";
 
 const CreateDepartment = Link
 const UpdateDepartment = Link
 const Department = Link
 
 const DepartmentTable = () => {
+
   const [searchQuery, setSearchQuery] = useState("");
   const [departmentData, setDepartmentData] = useState([]);
   const departmentPictures = [department1, department2, department3]
 
   useEffect(() => {
 
-    axios
-        .get('https://department.fireapp.website/department', CONFIG)
-        .then((response) => {
-          setDepartmentData(response.data.data);
-        })
-        .catch((error) => console.log(error))
+    getAllDepartments().then((res) => setDepartmentData(res))
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -44,11 +40,7 @@ const DepartmentTable = () => {
 
   const handleDeleteClick=(e, id)=>{
     e.preventDefault()
-    axios
-        .delete("https://department.fireapp.website/department/"+ id, CONFIG)
-        .then(() => window.location.reload())
-        .catch(err => console.log(err))
-
+    deleteDepartmentById(id).then(() => window.location.reload())
   }
 
   return (
@@ -100,8 +92,12 @@ const DepartmentTable = () => {
                         <td className="departmentCell">{department.email}</td>
                         <td className="departmentCell">{department.phone}</td>
                         <td className="departmentCell departmentOptions" style={
-                          PROFILE_DEPARTMENT_ID !== department.id ?
-                              {display: "none"}:null
+                          PROFILE_ROLE === "SysAdmin" ?
+                              null
+                              :
+                              PROFILE_DEPARTMENT_ID !== department.id ?
+                                  {display: "none"}
+                                  :null
                         }>
                           <div className="borderIcon" style={{outlineColor: "#F65B4F"}} onClick={
                             (e) => {

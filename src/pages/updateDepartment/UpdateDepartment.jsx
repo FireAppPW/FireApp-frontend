@@ -3,9 +3,8 @@ import "./updatedepartment.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
-import axios from "axios";
 import {Button} from "@mui/material";
-import {CONFIG} from "../../constants";
+import {getDepartmentById, putDepartment} from "../../services/DepartmentService";
 
 const UpdateDepartment = () => {
 
@@ -34,28 +33,20 @@ const UpdateDepartment = () => {
       phone
     }
     console.log(department)
-    axios
-        .put("https://department.fireapp.website/department/" + departmentId, department, CONFIG)
-        .then(navigate("/managedepartment"))
-        .catch(err => console.log(err))
+    putDepartment(departmentId, department).then(navigate("/managedepartment"))
 
   }
 
   useEffect(() => {
-    axios
-        .get('https://department.fireapp.website/department/' + departmentId, CONFIG)
-        .then((response) => {
-          setName(response.data.data.name)
-          setAddressLine1(response.data.data.addressLine1)
-          setAddressLine2(response.data.data.addressLine2)
-          setCity(response.data.data.city)
-          setCountry(response.data.data.country)
-          setPhone(response.data.data.phone)
-          setEmail(response.data.data.email)
-          console.log(response.data.data)
-
-        })
-        .catch((error) => console.log(error))
+    getDepartmentById(departmentId).then((response) =>{
+      setName(response.name)
+      setAddressLine1(response.addressLine1)
+      setAddressLine2(response.addressLine2)
+      setCity(response.city)
+      setCountry(response.country)
+      setPhone(response.phone)
+      setEmail(response.email)
+    })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
