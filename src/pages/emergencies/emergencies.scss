@@ -80,11 +80,18 @@
 
       .card {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        row-gap: 40px;
+        align-items: center;
+        justify-content: flex-start;
         width: 33%;
         background-color: white;
         border-radius: 5px;
         padding-top: 20px;
+
+        .card__total-emergencies{
+          font-size: 40px;
+        }
       }
     }
 
@@ -188,7 +195,7 @@
                 top: 50%;
                 left: 50%;
                 transform: translateX(-50%) translateY(-50%);
-                box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
                 background: white;
                 color: #34495E;
               }

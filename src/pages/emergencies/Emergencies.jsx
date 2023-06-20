@@ -57,12 +57,11 @@ const Emergencies = () => {
         <div className="smallCards">
           <div className="card">
               <h2>Monthly Emergencies</h2>
+              <h2 className="card__total-emergencies">30</h2>
           </div>
           <div className="card">
               <h2>Yearly Emergencies</h2>
-          </div>
-          <div className="card">
-              <h2>Graph</h2>
+              <h2 className="card__total-emergencies">50</h2>
           </div>
         </div>
         <div className="emergenciesTable">

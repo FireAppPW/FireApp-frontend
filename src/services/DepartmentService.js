@@ -5,7 +5,7 @@ import {CONFIG} from "../constants";
 export const getAllDepartments = () =>
     axios
         .get('https://department.fireapp.website/department', CONFIG)
-        .then((response) => response.data.data)
+        .then((response) => response.data)
         .catch((error) => console.log(error))
 
 export const getDepartmentById = (id) =>
