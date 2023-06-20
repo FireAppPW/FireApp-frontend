@@ -14,12 +14,12 @@ const NewUser = () => {
   const[firstName,setFirstName]=useState('')
   const[lastName,setLastName]=useState('')
   const[birthDate,setBirthDate]=useState('')
-  const[fireDepartmentId,setFireDepartmentId]=useState('')
+  const[fireDepartmentId,setFireDepartmentId]=useState(1)
   const[addressLine1,setAddressLine1]=useState('')
   const[addressLine2,setAddressLine2]=useState('')
   const[city,setCity]=useState('')
   const[country,setCountry]=useState('')
-  const[role,setRole]=useState('')
+  const[role,setRole]=useState(3)
   const[profilePicture,setProfilePicture]=useState('')
   const[departmentData, setDepartmentData] = useState([]);
 

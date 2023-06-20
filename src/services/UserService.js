@@ -1,5 +1,5 @@
 import axios from "axios";
-import {CONFIG} from "../constants";
+import {CONFIG, PROFILE_DEPARTMENT_ID} from "../constants";
 
 export const getAllUsers = () =>
     axios
@@ -28,7 +28,7 @@ export const postUser = (user) =>
 
 export const deleteUserById = (departmentId,id) =>
     axios
-        .delete(`https://account.fireapp.website/account/${departmentId}/${id}`, CONFIG)
+        .delete(`https://account.fireapp.website/account/${PROFILE_DEPARTMENT_ID}/${id}`, CONFIG)
         .then()
         .catch(err => console.log(err))
 

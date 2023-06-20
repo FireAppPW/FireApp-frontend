@@ -37,7 +37,7 @@ const User = () => {
         e.preventDefault()
         navigate("/manageuser/update/"+userId)
     }
-
+    console.log(userData)
     return (
         <div className="wrapper">
             <LeftSidebar/>
