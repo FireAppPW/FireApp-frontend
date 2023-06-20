@@ -49,28 +49,35 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
-        <Route exact path="/manageuser" element={<UserManagement />} />
-        <Route path="/manageuser/:userId" element={<User />} />
-        <Route exact path="/manageuser/update/:userId" element={<UpdateUser />} />
-        <Route exact path="/emergencies" element={<Emergencies />} />
-        <Route exact path="/emergencies/:emergencyId" element={<Emergency />} />
-        <Route exact path="/managedepartment" element={<DepartmentManagement />}/>
-        <Route exact path="/managedepartment/update/:departmentId" element={<UpdateDepartment />}/>
+        <Route exact path="/error" element={<Error />} />
+        <Route element={<Auth allowedRoles={["SysAdmin", "FireAdmin", "Commandant", "User"]} />}>
+          <Route exact path="/manageuser/update/:userId" element={<UpdateUser />} />
+          <Route exact path="/emergencies" element={<Emergencies />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/manageuser" element={<UserManagement />} />
+          <Route exact path="/emergencies/:emergencyId" element={<Emergency />} />
+          <Route exact path="/managedepartment" element={<DepartmentManagement />}/>
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:courseId" element={<Course />} />
+        </Route>
+        <Route element={<Auth allowedRoles={["SysAdmin", "FireAdmin", "Commandant"]} />}>
+          <Route exact path="/newNotification" element={<NewNotification />} />
+          <Route path="/courses/update/:courseId" element={<UpdateCourse />} />
+          <Route path="/newCourse" element={<NewCourse />} />
+          <Route path="/newEmergency" element={<NewEmergency />} />
+        </Route>
+        <Route element={<Auth allowedRoles={["SysAdmin", "FireAdmin"]} />}>
+          <Route path="/manageuser/:userId" element={<User />} />
+          <Route exact path="/newUser" element={<NewUser />} />
+          <Route exact path="/managedepartment/update/:departmentId" element={<UpdateDepartment />}/>
+        </Route>
+        <Route element={<Auth allowedRoles={["SysAdmin"]} />}>
+          <Route exact path="/newDepartment" element={<NewDepartment />} />
+        </Route>
+
         <Route exact path="/managedepartment/:departmentId" element={<Department />}/>
-        <Route exact path="/newDepartment" element={<NewDepartment />} />
         <Route exact path="/departmentnotification" element={<PostNotificationDepartment />}/>
         <Route path="/usernotification" element={<PostNotificationUser />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/courses/:courseId" element={<Course />} />
-        <Route path="/courses/update/:courseId" element={<UpdateCourse />} />
-        <Route path="/newCourse" element={<NewCourse />} />
-        <Route path="/newEmergency" element={<NewEmergency />} />
-        <Route element={<Auth allowedRoles={["SysAdmin", "FireAdmin"]} />}>
-          <Route exact path="/newUser" element={<NewUser />} />
-        </Route>
-        <Route exact path="/newNotification" element={<NewNotification />} />
-        <Route exact path="/error" element={<Error />} />
       </Routes>
       {showPopup && <Popup message={popupMessage} onClose={closePopup} />}
     </BrowserRouter>
