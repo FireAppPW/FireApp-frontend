@@ -3,10 +3,10 @@ import "./updateuser.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
-import axios from "axios";
 import {Button} from "@mui/material";
-import {CONFIG, PROFILE_DEPARTMENT_ID} from "../../constants";
+import {PROFILE_DEPARTMENT_ID} from "../../constants";
 import {getUserById, putUser} from "../../services/UserService";
+import {getAllDepartments} from "../../services/DepartmentService";
 
 const UpdateUser = () => {
 
@@ -26,15 +26,12 @@ const UpdateUser = () => {
   const userId = location.pathname.split('/')[3]
 
   useEffect(() => {
-
-    axios
-        .get('https://department.fireapp.website/department', CONFIG)
-        .then((response) => {
-          setDepartmentData(response.data.data);
-        })
-        .catch((error) => console.log(error))
+    getAllDepartments().then((response) => {
+      setDepartmentData(response.data.data);
+    })
     getUserById(PROFILE_DEPARTMENT_ID ,userId)
         .then((user) => {
+          console.log(user)
               setEmail(user.email)
               setFirstName(user.firstName)
               setLastName(user.lastName)
