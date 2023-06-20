@@ -146,7 +146,6 @@ const NewUser = () => {
                   <option value="3">User</option>
                   <option value="1">SysAdmin</option>
                   <option value="2">FireAdmin</option>
-                  <option value="4">Commandant</option>
                 </select>
               </div>
             </div>

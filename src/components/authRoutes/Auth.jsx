@@ -13,7 +13,8 @@ const Auth = ({ allowedRoles }) => {
         }else if ((location.pathname.split('/')[1] === "manageuser")){
             setUserId(location.pathname.split('/')[3])
         }
-    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
 
     function permissions (){
