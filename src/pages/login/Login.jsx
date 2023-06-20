@@ -61,6 +61,7 @@ const Login = () => {
                             navigate("/emergencies")
                         })
                 })
+                .catch(() => alert("You don't have permission to access FireApp, you are not yet our user."))
         },
         onError: (error) => console.log('Login Failed:', error)
     });
