@@ -29,6 +29,7 @@ function App() {
   const [popupMessage, setPopupMessage] = useState("");
 
   useEffect(() => {
+    /*
     const socket = new WebSocket("ws://localhost:8080/emergency");
     socket.onmessage = (event) => {
       setShowPopup(true);
@@ -38,6 +39,12 @@ function App() {
     return () => {
       socket.close();
     };
+
+     */
+    const timeoutID = window.setTimeout(() => {
+      setShowPopup(true);
+      window.clearTimeout(timeoutID);
+    }, 20000); // runs the function after 2000ms = 2 seconds
   }, []);
 
   const closePopup = () => {
