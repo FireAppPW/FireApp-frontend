@@ -59,13 +59,13 @@ const Course = () => {
                         </div>
                         <div className="short-info-card" style={{backgroundColor: "#FFDD71BD"}}>
                             <div className="card-content">
-                                <p>Date Time start</p>
+                                <p>Course Start</p>
                                 <h2>{courseData.dateTimeStart}</h2>
                             </div>
                         </div>
                         <div className="short-info-card" style={{backgroundColor: "rgba(4,191,138,0.49)"}}>
                             <div className="card-content">
-                                <p>Date Time End</p>
+                                <p>Deadline to Apply</p>
                                 <h2>{courseData.dateTimeApplicationDeadline}</h2>
                             </div>
                         </div>
