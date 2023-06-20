@@ -60,7 +60,7 @@ const DepartmentTable = () => {
                 <SearchIcon className="searchIcon"/>
               </div>
               <CreateDepartment to="/newDepartment" className="depAdd" style={
-                ["User", "Commandant"].includes(PROFILE_ROLE) ?
+                ["User", "Commandant", "FireAdmin"].includes(PROFILE_ROLE) ?
                     {display: "none"}
                     : null
               }>

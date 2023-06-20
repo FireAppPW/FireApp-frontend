@@ -15,11 +15,10 @@ const NewDepartment = () => {
     const[country,setCountry]=useState('')
     const[phone,setPhone]=useState('')
     const[email,setEmail]=useState('')
-    const[picture,setPicture]=useState('')
 
     const handleClick=(e)=>{
         e.preventDefault()
-        const department={name,addressLine1, city, country, phone, email, picture}
+        const department={name,addressLine1, city, country, phone, email}
         console.log(department)
         postDepartment(department).then(navigate("/managedepartment"))
     }
@@ -53,43 +52,37 @@ const NewDepartment = () => {
                           <p>Name</p>
                           <input type="text" value={name} onChange={
                               (e) => setName(e.target.value)
-                          }/>
+                          } maxLength="30" required/>
                       </div>
                       <div className="fillCard">
                           <p>Address</p>
                           <input type="text" value={addressLine1} onChange={
                               (e) => setAddressLine1(e.target.value)
-                          }/>
+                          } maxLength="30" required/>
                       </div>
                       <div className="fillCard">
                           <p>City</p>
                           <input type="text" value={city} onChange={
                               (e)=>setCity(e.target.value)
-                          }/>
+                          }  maxLength="30" required/>
                       </div>
                       <div className="fillCard">
                           <p>Country</p>
                           <input type="text" value={country} onChange={
                               (e) => setCountry(e.target.value)
-                          }/>
+                          } maxLength="30" required/>
                       </div>
                       <div className="fillCard">
                           <p>Phone</p>
                           <input type="number" value={phone} onChange={
                               (e)=>setPhone(e.target.value)
-                          }/>
+                          } required/>
                       </div>
                       <div className="fillCard">
                           <p>Email</p>
-                          <input type="text" value={email} onChange={
+                          <input type="email" value={email} onChange={
                               (e)=>setEmail(e.target.value)
                           }/>
-                      </div>
-                      <div className="userPhoto">
-                          <p>Photo</p>
-                          <input type="file" id="images" accept="image/*" value={picture} onChange={
-                              (e)=>setPicture(e.target.value)
-                          } required/>
                       </div>
                   </div>
               </form>

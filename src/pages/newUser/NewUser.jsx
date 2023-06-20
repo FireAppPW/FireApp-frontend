@@ -20,7 +20,6 @@ const NewUser = () => {
   const[city,setCity]=useState('')
   const[country,setCountry]=useState('')
   const[role,setRole]=useState(3)
-  const[profilePicture,setProfilePicture]=useState('')
   const[departmentData, setDepartmentData] = useState([]);
 
   useEffect(() => {
@@ -77,52 +76,52 @@ const NewUser = () => {
         <form action="" className="formSection">
           <div className="container">
             <div className="fillCard">
-              <p>Name</p>
+              <p>First Name</p>
               <input type="text" value={firstName} onChange={
                 (e)=> setFirstName(e.target.value)
-              }/>
+              } maxLength="15" required/>
+            </div>
+            <div className="fillCard">
+              <p>Last Name</p>
+              <input type="text" value={lastName} onChange={
+                (e)=> setLastName(e.target.value)
+              } maxLength="15" required/>
             </div>
             <div className="fillCard">
               <p>Email</p>
-              <input type="text" value={email} onChange={
+              <input type="email" value={email} onChange={
                 (e)=> setEmail(e.target.value)
-              }/>
-            </div>
-            <div className="fillCard">
-              <p>Surname</p>
-              <input type="text" value={lastName} onChange={
-                (e)=> setLastName(e.target.value)
               }/>
             </div>
             <div className="fillCard">
               <p>Date of Birth</p>
               <input type="date" value={birthDate} onChange={
                 (e)=> setBirthDate(e.target.value)
-              }/>
+              } required/>
             </div>
             <div className="fillCard">
               <p>Address Line 1</p>
               <input type="text" value={addressLine1} onChange={
                 (e)=> setAddressLine1(e.target.value)
-              }/>
+              } maxLength="50" required/>
             </div>
             <div className="fillCard">
               <p>Address Line 2</p>
               <input type="text" value={addressLine2} onChange={
                 (e)=> setAddressLine2(e.target.value)
-              }/>
+              } />
             </div>
             <div className="fillCard">
               <p>City</p>
               <input type="text" value={city} onChange={
                 (e)=> setCity(e.target.value)
-              }/>
+              } maxLength="30" required/>
             </div>
             <div className="fillCard">
               <p>Country</p>
               <input type="text" value={country} onChange={
                 (e)=> setCountry(e.target.value)
-              }/>
+              } maxLength="30" required/>
             </div>
             <div className="fillCard">
               <p>Fire Department</p>
@@ -148,13 +147,6 @@ const NewUser = () => {
                   <option value="2">FireAdmin</option>
                 </select>
               </div>
-            </div>
-            <div className="userPhoto">
-              <p>Photo</p>
-              <input type="file" id="images" accept="image/*" value={profilePicture}
-                     onChange={
-                       (e)=>setProfilePicture(e.target.value)
-                     } required />
             </div>
           </div>
         </form>

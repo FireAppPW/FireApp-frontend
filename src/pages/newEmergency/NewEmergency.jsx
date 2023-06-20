@@ -95,37 +95,37 @@ const NewEmergency = () => {
                             <p>Dangerous Level</p>
                             <input type="number" value={dangerousLevel} onChange={
                                 (e)=> setDangerousLevel(parseInt(e.target.value))
-                            }/>
+                            } required/>
                         </div>
                         <div className="fillCard">
                             <p>Address Line 1</p>
                             <input type="text" value={addressLine1} onChange={
                                 (e)=> setAddressLine1(e.target.value)
-                            }/>
+                            } maxLength="30" required/>
                         </div>
                         <div className="fillCard">
                             <p>Address Line 2 (Optional)</p>
                             <input type="text" value={addressLine2} onChange={
                                 (e)=> setAddressLine2(e.target.value)
-                            }/>
+                            } maxLength="30"/>
                         </div>
                         <div className="fillCard">
                             <p>City</p>
                             <input type="text" value={city} onChange={
                                 (e)=> setCity(e.target.value)
-                            }/>
+                            } maxLength="30" required/>
                         </div>
                         <div className="fillCard">
                             <p>Country</p>
                             <input type="text" value={country} onChange={
                                 (e)=> setCountry(e.target.value)
-                            }/>
+                            } maxLength="30" required/>
                         </div>
                         <div className="fillCard">
                             <p>Description</p>
                             <input type="text" value={description} onChange={
                                 (e)=> setDescription(e.target.value)
-                            }/>
+                            } maxLength="30" required/>
                         </div>
                         <div className="fillCard">
                             <p>Notify: </p>

@@ -113,6 +113,14 @@
             height: 40px;
             width: 40%;
           }
+          input:valid{
+            color: #4caf50;
+          }
+
+
+          input:invalid{
+            background-color: #F65B4F;
+          }
         }
         .userSelect {
           position: relative;

@@ -73,43 +73,43 @@ const NewCourse = () => {
                             <p>Title</p>
                             <input type="text" value={title} onChange={
                                 (e)=> setTitle(e.target.value)
-                            }/>
+                            } maxLength="15" required/>
                         </div>
                         <div className="fillCard">
                             <p>Description</p>
                             <input type="text" value={description} onChange={
                                 (e)=> setDescription(e.target.value)
-                            }/>
+                            } maxLength="30" required/>
                         </div>
                         <div className="fillCard">
                             <p>Address Line 1</p>
                             <input type="text" value={addressLine1} onChange={
                                 (e)=>setAddressLine1(e.target.value)
-                            }/>
+                            } maxLength="30" required/>
                         </div>
                         <div className="fillCard">
                             <p>Address Line 2</p>
                             <input type="text" value={addressLine2} onChange={
                                 (e)=> setAddressLine2(e.target.value)
-                            }/>
+                            } maxLength="30"/>
                         </div>
                         <div className="fillCard">
                             <p>Country</p>
                             <input type="text" value={country} onChange={
                                 (e)=>setCountry(e.target.value)
-                            }/>
+                            } maxLength="30" required/>
                         </div>
                         <div className="fillCard">
                             <p>City</p>
                             <input type="text" value={city} onChange={
                                 (e)=>setCity(e.target.value)
-                            }/>
+                            } maxLength="30" required/>
                         </div>
                         <div className="fillCard">
                             <p>Places</p>
                             <input type="number" value={places} onChange={
                                 (e)=>setPlaces(e.target.value)
-                            }/>
+                            } maxLength="10" required/>
                         </div>
                         <div className="fillCard">
                             <p>Public/private</p>

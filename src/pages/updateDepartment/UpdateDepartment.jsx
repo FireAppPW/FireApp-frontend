@@ -57,7 +57,7 @@ const UpdateDepartment = () => {
         <div className="mid">
           <div className="top">
             <div className="texts">
-              <h2>User Management > Update Department</h2>
+              <h2>Department Management > Update Department</h2>
               <p>Update the Department</p>
             </div>
           </div>
