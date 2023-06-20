@@ -20,7 +20,9 @@ const Table = () => {
   const [userData, setUserData] = useState([]);
 
   useEffect(
-      () => {getAllUsers().then((users) => {setUserData(users)})}
+      () => {getAllUsers().then((users) => {
+        setUserData(users)
+      })}
       // eslint-disable-next-line react-hooks/exhaustive-deps
     , []);
 

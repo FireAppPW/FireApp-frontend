@@ -3,10 +3,9 @@ import "./newuser.scss";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar";
 import {Link, useNavigate} from "react-router-dom";
 import RightSidebar from "../../components/rightSidebar/RightSidebar";
-import axios from "axios";
 import {Button} from "@mui/material";
-import {CONFIG} from "../../constants";
 import {postUser} from "../../services/UserService";
+import {getAllDepartments} from "../../services/DepartmentService";
 
 const NewUser = () => {
 
@@ -25,15 +24,7 @@ const NewUser = () => {
   const[departmentData, setDepartmentData] = useState([]);
 
   useEffect(() => {
-
-    axios
-        .get('https://department.fireapp.website/department',  CONFIG)
-        .then((response) => {
-          setDepartmentData(response.data.data);
-          console.log(response.data.data)
-
-        })
-        .catch((error) => console.log(error))
+    getAllDepartments().then((response) => {setDepartmentData(response)})
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

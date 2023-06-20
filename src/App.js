@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import User from "./pages/user/User";
 import Emergency from "./pages/emergency/Emergency";
 import Error from "./pages/error/Error";
+import Auth from "./components/authRoutes/Auth";
 
 function App() {
   const [showPopup, setShowPopup] = useState(false);
@@ -54,34 +55,20 @@ function App() {
         <Route exact path="/manageuser/update/:userId" element={<UpdateUser />} />
         <Route exact path="/emergencies" element={<Emergencies />} />
         <Route exact path="/emergencies/:emergencyId" element={<Emergency />} />
-        <Route
-          exact
-          path="/managedepartment"
-          element={<DepartmentManagement />}
-        />
-        <Route
-          exact
-          path="/managedepartment/update/:departmentId"
-          element={<UpdateDepartment />}
-        />
-        <Route
-          exact
-          path="/managedepartment/:departmentId"
-          element={<Department />}
-        />
+        <Route exact path="/managedepartment" element={<DepartmentManagement />}/>
+        <Route exact path="/managedepartment/update/:departmentId" element={<UpdateDepartment />}/>
+        <Route exact path="/managedepartment/:departmentId" element={<Department />}/>
         <Route exact path="/newDepartment" element={<NewDepartment />} />
-        <Route
-          exact
-          path="/departmentnotification"
-          element={<PostNotificationDepartment />}
-        />
+        <Route exact path="/departmentnotification" element={<PostNotificationDepartment />}/>
         <Route path="/usernotification" element={<PostNotificationUser />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/:courseId" element={<Course />} />
         <Route path="/courses/update/:courseId" element={<UpdateCourse />} />
         <Route path="/newCourse" element={<NewCourse />} />
         <Route path="/newEmergency" element={<NewEmergency />} />
-        <Route exact path="/newUser" element={<NewUser />} />
+        <Route element={<Auth allowedRoles={["SysAdmin", "FireAdmin"]} />}>
+          <Route exact path="/newUser" element={<NewUser />} />
+        </Route>
         <Route exact path="/newNotification" element={<NewNotification />} />
         <Route exact path="/error" element={<Error />} />
       </Routes>
