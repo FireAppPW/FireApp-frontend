@@ -84,6 +84,7 @@ const NewEmergency = () => {
                                         setFireDepartmentName(e.target.value.split(":")[1])
                                     }
                                 }>
+                                    <option value="None" >None</option>
                                     {departmentData.map((department, index) => {
                                         return (<option key={index} value={department.id + ":" + department.name} >{"Name: " +department.name + ", Id:" + department.id}</option>)
                                     })}

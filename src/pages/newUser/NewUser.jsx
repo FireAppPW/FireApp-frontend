@@ -129,6 +129,7 @@ const NewUser = () => {
                 <select value={fireDepartmentId} name="department" id="department" onChange={
                   (e)=> setFireDepartmentId(e.target.value)
                 }>
+                  <option value="None" >None</option>
                   {departmentData.map((department, index) => {
                     return (<option key={index} value={department.id} >{"Name: " +department.name + ", Id:" + department.id}</option>)
                   })}

@@ -5,7 +5,7 @@ import RightSidebar from "../../components/rightSidebar/RightSidebar";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import {Link} from "react-router-dom";
 import {getAllEmergencies, putEmergency} from "../../services/EmergencyService";
-import {PROFILE_DEPARTMENT_ID} from "../../constants";
+import {PROFILE_DEPARTMENT_ID, PROFILE_ROLE} from "../../constants";
 
 const Emergency = Link
 
@@ -15,7 +15,6 @@ const Emergencies = () => {
     const emergencyColors = ["#96FF71BD", "#FFDD71BD", "#FF7971BD"]
     const emergencyIconColors = ["#5AFD21", "#F9BE00", "#FE564C"]
     const [modalData, setModalData] = useState({})
-    const profileRole = localStorage.getItem("role")
 
     function sortNull() {
         return function (a, b) {
@@ -50,7 +49,10 @@ const Emergencies = () => {
             <h2>Emergencies</h2>
             <p>List of all emergencies</p>
           </div>
-          <Link to="/newEmergency" className="create" style={profileRole === ("User") ? {display: "none"} : null}>
+          <Link to="/newEmergency" className="create" style={
+              ["User"].includes(PROFILE_ROLE) ?
+                  {display: "none"}
+                  : null}>
             <p>Create Emergency</p>
           </Link>
         </div>
@@ -87,7 +89,7 @@ const Emergencies = () => {
                                           </div>
                                           <a href="#target-content" className="e-right"
                                              style={
-                                                 profileRole === "User" ?
+                                                 PROFILE_ROLE === "User" ?
                                                      {display: "none"}
                                                      :
                                                       emergency.dateTimeClosed === null ?

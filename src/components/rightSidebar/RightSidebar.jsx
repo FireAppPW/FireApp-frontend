@@ -20,7 +20,7 @@ const RightSidebar = () => {
 
     const navigate = useNavigate();
     const [emergencyData, setEmergencyData] = useState([]);
-    const [profile, setProfile] = useState({})
+    const profile = JSON.parse(localStorage.getItem("google-profile"))
 
     const emergencyColors = ["#96FF71BD", "#FFDD71BD", "#FF7971BD","#FF7971BD"]
     const emergencyIconColors = ["#5AFD21", "#F9BE00", "#FE564C", "#FE564C"]
@@ -40,7 +40,6 @@ const RightSidebar = () => {
 
   useEffect(
       () => {
-          setProfile(JSON.parse(localStorage.getItem("google-profile")))
           getDepartmentById(PROFILE_DEPARTMENT_ID).then((response) => setDepartmentData(response))
           getAllEmergencies().then((response) => setEmergencyData(response.sort(sortNull())))
       // eslint-disable-next-line react-hooks/exhaustive-deps
