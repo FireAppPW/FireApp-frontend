@@ -26,7 +26,7 @@ const NewEmergency = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-
+    //
     const handleClick=(e)=>{
         e.preventDefault()
         const emergency={
