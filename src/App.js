@@ -41,13 +41,12 @@ function App() {
     };
 
      */
-    /*
+
     const timeoutID = window.setTimeout(() => {
       setShowPopup(true);
       window.clearTimeout(timeoutID);
     }, 60000); // runs the function after 2000ms = 2 seconds
 
-     */
   }, []);
 
   const closePopup = () => {
